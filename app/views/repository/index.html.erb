@@ -1,0 +1,22 @@
+<header class="row row-header">
+	<div class="row-content buffer even">
+
+		<h1 class="squeeze-top">Lay it out</h1>
+
+		<p class="buffer-right buffer-left">Create layouts with <em>your</em> look. Fast and fluid.</p>
+
+	</div>
+</header>
+
+<p><%= params[:user_name] %></p>
+
+<% @languages.each do |language| %>
+	<h3><%= language %></h3>
+	<hr />
+	<% @repositories.each do |repo| %>
+		<% if repo[:language] == language %>
+			<%= repo[:name] %><br />
+			<%= repo[:description] %>
+		<% end %>
+	<% end %>
+<% end %>
