@@ -1,10 +1,9 @@
 class Repository < ActiveRecord::Base
 	def self.get_repos(username)
-		user_name = username
-		response = JSON.load(RestClient.get("https://api.github.com/users/#{user_name}/repos"))
-		response.each { |repo| if repo["language"] == nil then repo["language"] = "Other" end }
-		repositories = response.inject(Array.new) { |repositories, response| repositories << { name: response['name'], language: response['language'], description: response['description'], avatar: "#{response['owner']['avatar_url']}&s=300" } }
-		repositories
+		client = Octokit::Client.new access_token: current_user.github_access_token
+  		user = Octokit.user(username)
+  		repositories = user.rels[:repos].get.data
+  		parsed_repositories = repositories.inject(Array.new) { |array, repo| array << { name: repo[:name], description: repo[:description], language: repo[:language], owner: repo[:owner][:login], avatar: repo[:owner][:gravatar_id] } }
 	end
 
 	def self.sort_repos(repositories)

@@ -1,0 +1,11 @@
+class WelcomeController < ApplicationController
+  def index
+  end
+
+  def callback
+  	response = RestClient.post("https://github.com/login/oauth/access_token", {client_id: GITHUB_CLIENT_ID, client_secret: GITHUB_CLIENT_SECRET, code: params["code"]}, { accept: :json })
+  	parsed_response = JSON.parse(response)
+  	current_user.github_access_token = parsed_response["access_token"]
+  	redirect_to root_path
+  end
+end
