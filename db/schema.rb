@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131030013324) do
+ActiveRecord::Schema.define(version: 20131030184902) do
 
   create_table "repositories", force: true do |t|
     t.string   "name"
@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(version: 20131030013324) do
     t.string   "language"
     t.string   "owner"
     t.string   "avatar"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "github_access_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
