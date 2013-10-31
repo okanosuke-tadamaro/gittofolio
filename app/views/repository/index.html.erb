@@ -17,10 +17,10 @@
 
 <div class="row">
 	<div class="row-content">
-		<div class="column twelve center">
+		<div class="column twelve">
 		<% @languages.each do |language| %>
 				<h3 class=><%= language %></h3>
-				<div id="container" class="column twelve center js-masonry" data-masonry-options='{"columnWidth": 200,"itemSelector": ".item", "gutter": 10}'>
+				<div id="container" class="column twelve js-masonry" data-masonry-options='{"columnWidth": 200,"itemSelector": ".item", "gutter": 10, "isFitWidth": "True"}'>
 				<% @repositories.each do |repo| %>
 					<% if repo[:language] == language %>
 						<div class="item">
@@ -30,7 +30,7 @@
 					<% end %>
 				<% end %>
 				</div>
-				<div class="clear"></div>	
+				<div class="clear"></div>
 		<% end %>
 		</div>
 	</div>
