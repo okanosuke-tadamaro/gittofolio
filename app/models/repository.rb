@@ -5,13 +5,8 @@ class Repository < ActiveRecord::Base
   		repositories = user.rels[:repos].get.data  		
   		parsed_repositories = repositories.inject(Array.new) { |array, repo| array << { name: repo[:name], description: repo[:description], language: repo[:language], owner: repo[:owner][:login], avatar: repo[:owner][:gravatar_id] } }
 
-		parsed_repositories.each do |replace|
-			if replace[:language] == nil
-				replace[:language] == "Other"
-			end
-		end
-
-		parsed_repositories
+		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
+		
 	end
 
 	def self.sort_repos(repositories)
