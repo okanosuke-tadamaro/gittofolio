@@ -5,7 +5,7 @@ class RepositoryController < ApplicationController
 
 		# Save the user repo info to Repository model (cache it)
   		@repositories.each do |fetched_repository|
-  			repository.create(name: fetched_repository[:name], description: fetched_repository[:description], owner: fetched_repository[:owner])
+  			Repository.create(name: fetched_repository[:name], description: fetched_repository[:description], language: fetched_repository[:language], owner: fetched_repository[:owner], avatar: fetched_repository[:avatar])
   		end
   		
 		@languages = Repository.sort_repos(@repositories)

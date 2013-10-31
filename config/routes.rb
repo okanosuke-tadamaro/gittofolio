@@ -1,5 +1,7 @@
 Gittofolio::Application.routes.draw do
-
+  
+  resources :repositories
+  resources :users
   get "welcome/index"
   root 'welcome#index'
   get '/repository' => 'repository#index'
