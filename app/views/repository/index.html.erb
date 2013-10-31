@@ -1,18 +1,43 @@
-<header class="row row-header">
+<%= render 'header' %>
+
+<div class="row row-header">
 	<div class="row-content buffer even">
-		<p>test</p>
+		<div class="column four">
+			<p>First column</p>
+		</div>
+		<div class="column third">
+			<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=250", :class => "avatar") %>
+		</div>
+		<div class="column four last">
+			<canvas id="language_pie" width="250" height="250"></canvas>
+		</div>
+		<div class="clear"></div>
 	</div>
-</header>
+</div>
 
-<p><%= params[:user_name] %></p>
-
-<% @languages.each do |language| %>
-	<h3><%= language %></h3>
-	<hr />
-	<% @repositories.each do |repo| %>
-		<% if repo[:language] == language %>
-			<%= repo[:name] %><br />
-			<%= repo[:description] %>
+<div class="row">
+	<div class="row-content">
+		<div class="column twelve center">
+		<% @languages.each do |language| %>
+				<h3 class=><%= language %></h3>
+				<div id="container" class="column twelve center js-masonry" data-masonry-options='{"columnWidth": 200,"itemSelector": ".item", "gutter": 10}'>
+				<% @repositories.each do |repo| %>
+					<% if repo[:language] == language %>
+						<div class="item">
+						<p><%= repo[:name] %><br />
+						<%= repo[:description] %></p>
+						</div>
+					<% end %>
+				<% end %>
+				</div>
+				<div class="clear"></div>	
 		<% end %>
-	<% end %>
+		</div>
+	</div>
+</div>
+
+<%= javascript_tag do %>
+	var ctx = document.getElementById("language_pie").getContext("2d");
+	var myNewChart = new Chart(ctx).Doughnut(data);
+	var data = [  ]
 <% end %>

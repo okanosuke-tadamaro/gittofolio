@@ -8,6 +8,8 @@ class RepositoryController < ApplicationController
   			Repository.create(name: fetched_repository[:name], description: fetched_repository[:description], language: fetched_repository[:language], owner: fetched_repository[:owner], avatar: fetched_repository[:avatar])
   		end
   		
+  		@pie_data = Repository.get_pie_data(@repositories)
+ 
 		@languages = Repository.sort_repos(@repositories)
 	end
 
