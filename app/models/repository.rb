@@ -1,6 +1,5 @@
 class Repository < ActiveRecord::Base
-	def self.get_repos(username)
-		client = Octokit::Client.new access_token: @github_access_token
+	def self.get_repos(username, github_access_token)
   		user = Octokit.user(username)
   		repositories = user.rels[:repos].get.data
   		parsed_repositories = repositories.inject(Array.new) { |array, repo| array << { name: repo[:name], description: repo[:description], language: repo[:language], owner: repo[:owner][:login], avatar: repo[:owner][:gravatar_id] } }

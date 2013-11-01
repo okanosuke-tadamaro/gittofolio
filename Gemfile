@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 gem 'json'
 gem 'rest-client'
+gem 'dotenv-rails', groups: [:development, :test]
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

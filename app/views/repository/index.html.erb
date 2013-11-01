@@ -39,5 +39,5 @@
 <%= javascript_tag do %>
 	var ctx = document.getElementById("language_pie").getContext("2d");
 	var myNewChart = new Chart(ctx).Doughnut(data);
-	var data = [  ]
+	var data = [ <%= @pie_data.each { |data| puts data }.to_s.html_safe %> ]
 <% end %>

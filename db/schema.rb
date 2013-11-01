@@ -24,6 +24,10 @@ ActiveRecord::Schema.define(version: 20131030184902) do
   end
 
   create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "login"
+    t.string   "email"
+    t.string   "location"
     t.string   "github_access_token"
     t.datetime "created_at"
     t.datetime "updated_at"
