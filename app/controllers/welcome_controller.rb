@@ -4,7 +4,6 @@ class WelcomeController < ApplicationController
   end
 
   def callback
-  	# Get access token from code param
     response = RestClient.post("https://github.com/login/oauth/access_token", {client_id: ENV['GITHUB_CLIENT_ID'], client_secret: ENV['GITHUB_CLIENT_SECRET'], code: params["code"]}, { accept: :json })
   	parsed_response = JSON.parse(response)
     client = Octokit::Client.new :access_token => parsed_response["access_token"]

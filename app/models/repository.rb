@@ -6,6 +6,17 @@ class Repository < ActiveRecord::Base
 		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
 	end
 
+	def self.get_cached_repos(username)
+		fetched_repo_data = Repository.where("owner = '#{username}'")
+		fetched_repo_data.inject(Array.new) { |array, repo| array << { name: repo.name, description: repo.description, language: repo.language, owner: repo.owner, avatar: repo.avatar } }
+	end
+
+	def self.check_cache(username)
+		if Repository.exists?(owner: username).class == Fixnum
+			return true
+		end
+	end
+
 	def self.sort_repos(repositories)
 		language_list = repositories.map { |language| language[:language] }
 		counts = language_list.inject(Hash.new(0)) {|hash,language| hash[language] += 1; hash}
