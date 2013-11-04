@@ -1,4 +1,15 @@
-.row-header {
+.logo {
+	padding-bottom: 15px;
+}
+
+.logo h1 {
+	font-weight: 200;
+	font-size: 20px;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+}
+
+.user_window {
 	background-color: lightblue;
 }
 
@@ -15,4 +26,5 @@
 	width: 200px;
 	height: 200px;
 	margin-bottom: 10px;
+	border-radius: 10px;
 }

@@ -1,6 +1,6 @@
 <%= render 'header' %>
 
-<div class="row row-header">
+<div class="row user_window">
 	<div class="row-content buffer even">
 		<div class="column four">
 			<p>First column</p>
@@ -9,7 +9,7 @@
 			<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=250", :class => "avatar") %>
 		</div>
 		<div class="column four last">
-			<canvas id="language_pie" width="250" height="250"></canvas>
+			<canvas id="languagepie" width="250" height="250"></canvas>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -37,7 +37,6 @@
 </div>
 
 <%= javascript_tag do %>
-	var ctx = document.getElementById("language_pie").getContext("2d");
-	var myNewChart = new Chart(ctx).Doughnut(data);
-	var data = [ <%= @pie_data.each { |data| puts data }.to_s.html_safe %> ]
+	var data = <%=raw @pie_data.each { |data| puts data }.to_s.gsub('"', '') %>;
+	var myDoughnut = new Chart(document.getElementById("languagepie").getContext("2d")).Doughnut(data);
 <% end %>
