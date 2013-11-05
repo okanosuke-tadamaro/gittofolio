@@ -6,7 +6,7 @@ class Repository < ActiveRecord::Base
 		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
 	end
 
-	def self.get_full_name(username)
+	def self.get_full_name(username, github_access_token)
 		client = Octokit::Client.new(access_token: github_access_token)
 		user_attributes = client.user(username)
 		user_attributes[:name]
@@ -38,5 +38,10 @@ class Repository < ActiveRecord::Base
 		ordered_counts = Hash[counts.sort_by {|k,v| v}.reverse]
 		color_data = ['#1abc9c','#f1c40f','#3498db','#e74c3c','#2c3e50','#bdc3c7','#e67e22','#2ecc71','#ecf0f1','#8e44ad']
 		pie_data = ordered_counts.values.map {|data| "{" + "value: #{data}, color: '#{color_data.delete_at(rand(color_data.length))}'" + "}"}
+	end
+
+	def self.get_pie_label(data,language)
+		colors = data.map { |color| color.scan(/(?<=#)(?<!^)(\h{6}|\h{3})/).first.first }
+		bundled_data = language.zip(colors)
 	end
 end

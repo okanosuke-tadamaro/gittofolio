@@ -55,11 +55,37 @@ body {
 }
 
 .avatar {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 	border-radius: 50%;
 }
 
-.color_ref li {
-	display: inline;
+.language_pie {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 30px;
+}
+
+.label_wrap {
+	margin: 0 auto;
+}
+
+.color_each {
+	font-size: 10px;
+	line-height: 20px;
+	text-align: center;
+	min-width: 75px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	color: white;
+	text-transform: uppercase;
+	border: solid 2px white;
+}
+
+.list_color {
+	color: black;
 }
 
 #container {

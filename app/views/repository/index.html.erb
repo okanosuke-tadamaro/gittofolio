@@ -9,10 +9,12 @@
 			<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300", :class => "avatar") %>
 		</div>
 		<div class="column four last">
-			<canvas id="languagepie" width="300" height="300"></canvas>
-			<ul class="color_ref">
-				
-			</ul>
+			<canvas id="languagepie" class="language_pie" width="300" height="300"></canvas>
+			<div id="container" class="js-masonry center" data-masonry-options='{"itemSelector": ".color_each", "gutter": 10, "isFitWidth": "True"}'>
+				<% @label.each do |label| %>
+					<td><%=raw '<div class="color_each column" style="background-color:#' + "#{label.last}" + ';">' + "#{label.first}" + '</div>' %></td>
+				<% end %>
+			</div>
 		</div>
 		<div class="clear"></div>
 	</div>
