@@ -1,9 +1,15 @@
 class Repository < ActiveRecord::Base
 	def self.get_repos(username, github_access_token)
-  		user = Octokit.user(username)
-  		repositories = user.rels[:repos].get.data
+		client = Octokit::Client.new(access_token: github_access_token)
+  		repositories = client.repositories(username)
   		parsed_repositories = repositories.inject(Array.new) { |array, repo| array << { name: repo[:name], description: repo[:description], language: repo[:language], owner: repo[:owner][:login], avatar: repo[:owner][:gravatar_id] } }
 		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
+	end
+
+	def self.get_full_name(username)
+		client = Octokit::Client.new(access_token: github_access_token)
+		user_attributes = client.user(username)
+		user_attributes[:name]
 	end
 
 	def self.get_cached_repos(username)

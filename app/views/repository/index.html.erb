@@ -1,15 +1,18 @@
 <%= render 'header' %>
 
 <div class="row user_window">
-	<div class="row-content buffer even">
+	<div class="row-content">
 		<div class="column four">
 			<p>First column</p>
 		</div>
 		<div class="column third">
-			<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=250", :class => "avatar") %>
+			<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300", :class => "avatar") %>
 		</div>
 		<div class="column four last">
-			<canvas id="languagepie" width="250" height="250"></canvas>
+			<canvas id="languagepie" width="300" height="300"></canvas>
+			<ul class="color_ref">
+				
+			</ul>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -23,10 +26,13 @@
 				<div id="container" class="column twelve js-masonry" data-masonry-options='{"columnWidth": 200,"itemSelector": ".item", "gutter": 10, "isFitWidth": "True"}'>
 				<% @repositories.each do |repo| %>
 					<% if repo[:language] == language %>
-						<div class="item">
-						<p><%= repo[:name] %><br />
-						<%= repo[:description] %></p>
-						</div>
+						<figure class="item cap-bot">
+							<%= link_to image_tag("place_holder.png") %>
+							<figcaption>
+								<h3><%= repo[:name] %></h3>
+								<p><%= repo[:description] %></p>
+							</figcaption>
+						</figure>
 					<% end %>
 				<% end %>
 				</div>
