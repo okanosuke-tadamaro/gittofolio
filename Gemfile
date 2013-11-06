@@ -5,9 +5,6 @@ gem 'rails', '4.0.0'
 gem 'json'
 gem 'rest-client'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -42,6 +39,7 @@ group :development, :test do
   	gem 'binding_of_caller'
   	gem 'pry'
 	gem 'dotenv-rails'
+	gem 'sqlite3'
 end
 
 group :doc do
