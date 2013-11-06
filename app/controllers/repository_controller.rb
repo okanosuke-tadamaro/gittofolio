@@ -24,7 +24,7 @@ class RepositoryController < ApplicationController
 	end
 
 	def detail
-		@data = Repository.get_repo_content(params[:user_name], params[:repo_name], session[:github_access_token])
+		# @data = Repository.get_repo_content(params[:user_name], params[:repo_name], session[:github_access_token])
 	end
 
 end

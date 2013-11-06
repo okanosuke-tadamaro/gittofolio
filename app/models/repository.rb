@@ -46,7 +46,7 @@ class Repository < ActiveRecord::Base
 	end
 
 	def self.get_repo_content(username, repo, github_access_token)
-		client = Octokit::Client.new(access_token: github_access_token)
-		data = client.contents("#{username}/#{repo}")
+		# client = Octokit::Client.new(access_token: github_access_token)
+		# data = client.contents("#{username}/#{repo}")
 	end
 end
