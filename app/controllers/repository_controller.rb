@@ -2,7 +2,7 @@ class RepositoryController < ApplicationController
 
 	def index
 		@full_name = Repository.get_full_name(params[:user_name], session[:github_access_token])
-		@repositories = Repository.get_repos(params[:user_name], session[:github_access_token])
+		# @repositories = Repository.get_repos(params[:user_name], session[:github_access_token])
   		# @repositories.each do |fetched_repository|
   		# 	Repository.create(name: fetched_repository[:name], description: fetched_repository[:description], language: fetched_repository[:language], owner: fetched_repository[:owner], avatar: fetched_repository[:avatar])
   		# end
@@ -24,7 +24,7 @@ class RepositoryController < ApplicationController
 	end
 
 	def detail
-		
+		@data = Repository.get_repo_content(params[:user_name], params[:repo_name], session[:github_access_token])
 	end
 
 end

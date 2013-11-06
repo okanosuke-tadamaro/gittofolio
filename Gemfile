@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 gem 'json'
 gem 'rest-client'
-gem 'dotenv-rails', groups: [:development, :test]
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -32,10 +31,17 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'octokit'
 
-group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'pry'
+group :production do
+	gem 'rails_12factor'
+	gem 'pg'
+	gem 'unicorn'
+end
+
+group :development, :test do
+  	gem 'better_errors'
+  	gem 'binding_of_caller'
+  	gem 'pry'
+	gem 'dotenv-rails'
 end
 
 group :doc do
@@ -54,3 +60,5 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+ruby "2.0.0"
