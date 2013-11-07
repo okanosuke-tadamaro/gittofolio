@@ -1,4 +1,11 @@
 class Repository < ActiveRecord::Base
+	
+	def self.check_cache(username)
+		if Repository.exists?(owner: username).class == Fixnum
+			return true
+		end
+	end
+
 	def self.get_repos(username, github_access_token)
 		client = Octokit::Client.new(access_token: github_access_token)
   		repositories = client.repositories(username)
@@ -6,21 +13,19 @@ class Repository < ActiveRecord::Base
 		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
 	end
 
-	def self.get_full_name(username, github_access_token)
+	def self.get_full_name_data(username, github_access_token)
 		client = Octokit::Client.new(access_token: github_access_token)
 		user_attributes = client.user(username)
 		user_attributes[:name]
 	end
 
-	def self.get_cached_repos(username)
-		fetched_repo_data = Repository.where("owner = '#{username}'")
-		fetched_repo_data.inject(Array.new) { |array, repo| array << { name: repo.name, description: repo.description, language: repo.language, owner: repo.owner, avatar: repo.avatar } }
+	def self.get_full_name(username)
+		Repository.find_by owner: username
 	end
 
-	def self.check_cache(username)
-		if Repository.exists?(owner: username).class == Fixnum
-			return true
-		end
+	def self.get_cached_repos(username)
+		fetched_repo_data = Repository.where("owner = '#{username}'")
+		fetched_repo_data.inject(Array.new) { |array, repo| array << { name: repo.name, description: repo.description, language: repo.language, owner: repo.owner, avatar: repo.avatar, full_name: repo.full_name } }
 	end
 
 	def self.sort_repos(repositories)
@@ -46,7 +51,8 @@ class Repository < ActiveRecord::Base
 	end
 
 	def self.get_repo_content(username, repo, github_access_token)
-		# client = Octokit::Client.new(access_token: github_access_token)
-		# data = client.contents("#{username}/#{repo}")
+		client = Octokit::Client.new(access_token: github_access_token)
+		data = client.contents("#{username}/#{repo}")
 	end
+
 end

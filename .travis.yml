@@ -1,0 +1,4 @@
+deploy:
+  provider: heroku
+  app: gittofolio
+  api_key: secure: "kpjY2hny2gkmTEW0zE64hjiNgDXEKld6Va1Q/iRrq3l5Gq7K/5M6CFwu3EMY1gqG6b42VwsYxdt9AXaMqH0BTdgyih7W/W37nZKM8ZfjjjSTtnUqJWCpSUdGttWPJXOwqEV7/Ly4yZ99leNcUuF+t9/N20QDjcBawBZDrB5dDOc="

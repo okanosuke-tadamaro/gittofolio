@@ -1,0 +1,53 @@
+<%= render 'header' %>
+
+<div class="row">
+	<div class="row-content">
+		<div class="column twelve">
+			<h3 class="repo_name"><%= params[:repo_name] %></h3>
+			<div id="container" class="column twelve js-masonry" data-masonry-options='{"columnWidth": 100,"itemSelector": ".repo_file", "gutter": 10, "isFitWidth": "True"}'>
+				<% @data.each do |file| %>
+					<% if file[:type] == "file" then %>
+
+						<%= link_to("##{file[:name].downcase.gsub('.','')}") do %>
+
+							<div class="repo_file">
+								<div class="file_box"></div>
+								<h4 class="file_name"><%= file[:name] %></h4>
+							</div>
+						
+						<% end %>
+
+					<% else %>
+
+						<div class="repo_file">
+							<div class="file_box"></div>
+							<h4 class="file_name"><%= file[:name] %></h4>
+						</div>
+
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="modal">
+
+	<% @data.each do |file| %>
+		<% if file[:type] == "file" then %>
+
+			<%=raw '<div id ="' + "#{file[:name].downcase.gsub('.','')}" + '" class="each_modal">' %>
+				<a href="#" class="close_overlay">×</a>
+				<div class="modal_window">
+					<h2><%= file[:name] %></h2>
+					<pre><%= Base64.decode64(file.rels[:self].get.data[:content]) %></pre>
+				</div>
+			<%=raw '</div>' %>
+
+		<% end %>
+	<% end %>
+
+</div>
+
+<%= render 'footer' %>

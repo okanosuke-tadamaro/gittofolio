@@ -6,6 +6,7 @@ class CreateRepositories < ActiveRecord::Migration
       t.string :language
       t.string :owner
       t.string :avatar
+      t.string :full_name
 
       t.timestamps
     end

@@ -28,13 +28,15 @@
 				<div id="container" class="column twelve js-masonry" data-masonry-options='{"columnWidth": 200,"itemSelector": ".item", "gutter": 10, "isFitWidth": "True"}'>
 				<% @repositories.each do |repo| %>
 					<% if repo[:language] == language %>
-						<figure class="item cap-bot">
-							<%= link_to image_tag("place_holder.png") %>
-							<figcaption>
-								<h3><%= repo[:name] %></h3>
-								<p><%= repo[:description] %></p>
-							</figcaption>
-						</figure>
+						<%= link_to("/#{params[:user_name]}/#{repo[:name]}") do %>
+							<figure class="item cap-bot">
+								<%= image_tag("place_holder.png") %>
+								<figcaption>
+									<h3 class="repo_list"><%= repo[:name] %></h3>
+									<p><%= repo[:description] %></p>
+								</figcaption>
+							</figure>
+						<% end %>
 					<% end %>
 				<% end %>
 				</div>
@@ -43,6 +45,8 @@
 		</div>
 	</div>
 </div>
+
+<%= render 'footer' %>
 
 <%= javascript_tag do %>
 	var data = <%=raw @pie_data.each { |data| puts data }.to_s.gsub('"', '') %>;

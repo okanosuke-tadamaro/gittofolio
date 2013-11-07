@@ -1,5 +1,9 @@
-body {
+.bodywrap {
+	height: auto;
 	margin-top: 60px;
+	color: #1c1c1c;
+	display: none;
+	z-index: 0;
 }
 
 .fixed_header {
@@ -8,15 +12,15 @@ body {
   	position: fixed;
   	top: 0;
   	left: 0;
-  	background: #1c1c1c;
-  	z-index: 2;
-  	color: white;
+  	background-color: white;
+  	z-index: 1;
+  	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
 	margin: 0;
 	padding: 0;
-	font-size: 24px;
+	font-size: 20px;
 	text-transform: uppercase;
 	letter-spacing: 5px;
 	line-height: 60px;
@@ -31,13 +35,14 @@ body {
 }
 
 .nav li {
-	display: inline;
 	line-height: 60px;
+	display: inline;
 	margin-left: 15px;
 }
 
 .nav li a {
-	color: white;
+	color: #1c1c1c;
+	font-size: 14px;
 	text-decoration: none;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -48,10 +53,10 @@ body {
 }
 
 .user_window {
-	background-color: lightblue;
+	background: url('bg2.png');
 	padding-top: 70px;
 	padding-bottom: 70px;
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) inset, 0 3px 2px rgba(0, 0, 0, 0.2) inset;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) inset, 0 1px 5px rgba(0, 0, 0, 0.2) inset;
 }
 
 .avatar {
@@ -59,6 +64,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 50%;
+	border: solid 2px white;
 }
 
 .language_pie {
@@ -90,6 +96,11 @@ body {
 
 #container {
 	margin: 0 auto;
+}
+
+.repo_list {
+	font-weight: 200;
+	font-size: 18px;
 }
 
 .item {
@@ -154,3 +165,89 @@ figure:hover:before {
 .cap-bot:before { bottom: 10px; left: 10px; }
 .cap-bot figcaption { left: 0; bottom: -30%;}
 .cap-bot:hover figcaption { bottom: 0; }
+
+.show_login {
+	font-size: 12px;
+}
+
+.show_login_color {
+	color: lightblue;
+}
+
+/* ------ DETAIL PAGE ------ */
+.repo_name {
+	font-weight: 200;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+}
+
+.file_name {
+	font-weight: 200;
+	font-size: 12px;
+}
+
+/* ------ MODAL ------ */
+.each_modal {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: absolute;
+}
+
+.close_overlay {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+	text-indent: -9999px;
+	position: fixed;
+	background: #000;
+	opacity: 0.5;
+	z-index: 3;
+}
+
+.modal_window {
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 100px;
+	padding-bottom: 15px;
+	width: 70%;
+	display: block;
+	background: #fff;
+	position: relative;
+	z-index: 4;
+}
+
+.modal_window h2 {
+	text-indent: 15px;
+	font-size: 16px;
+	font-weight: 200;
+	letter-spacing: 1px;
+	line-height: 60px;
+	background: url('bg2.png');
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.modal_window pre {
+	padding: 25px;
+	font-size: 12px;
+	line-height: 20px;
+	text-align: left;
+}
+
+/* CSS3 ModalWindow SET-------------------------- */
+@-webkit-keyframes modalFadeIn {
+	0% {opacity:0;display:block;}
+	100% {opacity:1;}
+}
+div#modal div:target {
+	-webkit-animation-name: modalFadeIn; 
+  	-webkit-animation-duration: 1s;
+  	-webkit-animation-iteration-count: 1;
+	opacity: 1;
+	display:block;
+}
