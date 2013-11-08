@@ -8,14 +8,14 @@
 				<% @data.each do |file| %>
 					<% if file[:type] == "file" then %>
 
-						<%= link_to("##{file[:name].downcase.gsub('.','')}") do %>
+						<%=raw '<a href="' + "##{file[:name].downcase.gsub('.','')}" + '" rel="leanModal">' %>
 
 							<div class="repo_file">
 								<div class="file_box"></div>
 								<h4 class="file_name"><%= file[:name] %></h4>
 							</div>
 						
-						<% end %>
+						<%=raw '</a>' %>
 
 					<% else %>
 
@@ -31,23 +31,16 @@
 	</div>
 </div>
 
+<% @data.each do |file| %>
+	<% if file[:type] == "file" then %>
+		
+		<%=raw '<div id="' + "#{file[:name].downcase.gsub('.','')}" + '" class="hide_content show_content">' %>
+				<h2><%= file[:name] %></h2>
+				<pre><%= Base64.decode64(file.rels[:self].get.data[:content]) %></pre>
+		<%=raw '</div>' %>
 
-<div id="modal">
-
-	<% @data.each do |file| %>
-		<% if file[:type] == "file" then %>
-
-			<%=raw '<div id ="' + "#{file[:name].downcase.gsub('.','')}" + '" class="each_modal">' %>
-				<a href="#" class="close_overlay">×</a>
-				<div class="modal_window">
-					<h2><%= file[:name] %></h2>
-					<pre><%= Base64.decode64(file.rels[:self].get.data[:content]) %></pre>
-				</div>
-			<%=raw '</div>' %>
-
-		<% end %>
 	<% end %>
+<% end %>
 
-</div>
 
 <%= render 'footer' %>
