@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Gittofolio</title>
+  <link href="//fonts.googleapis.com/css?family=Source+Sans Pro:200italic,200,300italic,300,400italic,400,600italic,600,700italic,700,900italic,900" rel="stylesheet" type="text/css">
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -12,6 +13,11 @@
 	});
 	$(function() {
     	$('a[rel*=leanModal]').leanModal({ closeButton: ".modal_close" });		
+	});
+</script>
+<script>
+	$(function(){
+		$('#filterGrid').mixitup();
 	});
 </script>
 </head>

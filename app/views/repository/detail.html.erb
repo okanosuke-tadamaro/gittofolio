@@ -2,9 +2,14 @@
 
 <div class="row">
 	<div class="row-content">
-		<div class="column twelve">
 			<h3 class="repo_name"><%= params[:repo_name] %></h3>
-			<div id="container" class="column twelve js-masonry" data-masonry-options='{"columnWidth": 100,"itemSelector": ".repo_file", "gutter": 10, "isFitWidth": "True"}'>
+			
+			<% if @homepage[:homepage] != "not_available" %>
+				<img class="screenshot" src="http://s.wordpress.com/mshots/v1/<%= "#{@homepage[:homepage].to_s}" %>?w=1200">
+			<% end %>
+			
+			<div class="column twelve">
+
 				<% @data.each do |file| %>
 					<% if file[:type] == "file" then %>
 
@@ -19,15 +24,26 @@
 
 					<% else %>
 
-						<div class="repo_file">
-							<div class="file_box"></div>
-							<h4 class="file_name"><%= file[:name] %></h4>
-						</div>
+						<a href="<%= "/#{params[:user_name]}/#{params[:repo_name]}/#{file[:path].gsub('/','_')}" %>">
+							<div class="repo_directory">
+								<div class="directory_box"></div>
+								<h4 class="file_name"><%= file[:name] %></h4>
+							</div>
+						</a>
 
 					<% end %>
 				<% end %>
+
 			</div>
-		</div>
+
+			<div class="column twelve display_readme">
+				<% @data.each do |readme| %>
+					<% if readme[:name].downcase == "readme.md" then %>
+						<pre class="show_readme"><%= Base64.decode64(readme.rels[:self].get.data[:content]) %></pre>
+					<% end %>
+				<% end %>
+			</div>
+
 	</div>
 </div>
 

@@ -1,11 +1,18 @@
 .bodywrap {
 	height: auto;
+	font-family: 'Source Sans Pro';
+	font-weight: 300;
 	margin-top: 60px;
 	color: #1c1c1c;
 	display: none;
 	z-index: 0;
 }
 
+.bodywrap a {
+	text-decoration: none;
+}
+
+/* ------ HEADER ------ */
 .fixed_header {
   	width: 100%;
   	height: 60px;
@@ -21,13 +28,26 @@
 	margin: 0;
 	padding: 0;
 	font-size: 20px;
+	font-weight: 500;
 	text-transform: uppercase;
-	letter-spacing: 5px;
+	letter-spacing: 7px;
 	line-height: 60px;
+	color: lightblue;
+
 }
 
 .change_color {
-	color: lightblue;
+	color: darkblue;
+}
+
+.on_gittofolio {
+	font-size: 14px;
+	letter-spacing: 2px;
+	padding-left: 5px;
+	font-weight: 300;
+	color: gray;
+	vertical-align: top;
+	line-height: 56px;
 }
 
 .nav {
@@ -42,15 +62,16 @@
 
 .nav li a {
 	color: #1c1c1c;
-	font-size: 14px;
+	font-size: 16px;
 	text-decoration: none;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 }
 
 .nav li a:hover {
-	color: lightblue;
+	color: #CB1B45;
 }
+/* ------ END ------ */
 
 .user_window {
 	background: url('bg2.png');
@@ -63,7 +84,7 @@
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	border-radius: 50%;
+	border-radius: 10%;
 	border: solid 2px white;
 }
 
@@ -94,91 +115,194 @@
 	color: black;
 }
 
-#container {
-	margin: 0 auto;
+/* ------ FILTERING ------ */
+.filterControl {
+	margin: 0;
+	padding: 0;
+}
+
+.filterControl li {
+	margin-top: 30px;
+	margin-bottom: 20px;
+	margin-right: 15px;
+	display: inline-block;
+	cursor: pointer;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+#filterGrid{
+/*	width: 640px; 
+	text-align: justify;*/
+	margin: 0;
+	padding: 0px;
+	font-size: 0.1px;
+}
+
+#filterGrid:after{
+	content: '';
+	display: inline-block;
+	width: 100%;
+}
+
+#filterGrid .mix{
+	display: none;
+	opacity: 0;
+	width: 196px;
+	vertical-align: top;
+	margin: 10px;
+	background: lightblue;
+	color: #fff;
+	font-size: 14px;
+	border: solid 2px white;
+}
+
+#filterGrid .mix a {
+	text-decoration: none;
+}
+
+#filterGrid .mix h4 {
+	margin: 0;
+	padding-bottom: 5px;
+	color: white;
+	font-weight: 300;
+	line-height: 20px;
+	text-align: center;
+	text-decoration: none;
+}
+
+#filterGrid .gap{
+	display: inline-block;
+	width: 200px;
+}
+/* ------ END ------ */
+
+.index_language {
+	font-size: 16px;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 2px;
 }
 
 .repo_list {
 	font-weight: 200;
-	font-size: 18px;
+	font-size: 12px;
 }
 
 .item {
-	background-color: lightblue;
-	width: 200px;
-	height: 200px;
+	background-color: lightgray;
+	width: 215px;
 	margin-bottom: 10px;
 	font-size: 12px;
+	overflow: hidden;
 }
 
-figure {
-  display: block;
-  overflow: hidden;
+.item img {
+	height: 100px;
 }
 
-figcaption {
-  position: absolute;
-  background: black;
-  background: rgba(0,0,0,0.75);
-  color: white;
-  padding: 10px 20px;
-  opacity: 0;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition:    all 0.3s ease;
-  -o-transition:      all 0.3s ease;
+.item_description {
+	height: 30px;
 }
 
-figcaption h3 {
-	font-weight: 200;
-	text-transform: uppercase;
-	font-size: 14px;
+/* ------ DETAIL PAGE ------ */
+.repo_name {
+	padding-top: 25px;
 }
 
-figure:hover figcaption {
-  opacity: 1;
+.screenshot {
+	margin-bottom: 25px;
 }
 
-figure:before {
-  content: "?";
-  position: absolute;
-  font-weight: 800;
-  background: black;
-  background: rgba(255,255,255,0.75);
-  text-shadow: 0 0 5px white;
-  color: black;
-  width: 24px;
-  height: 24px;
-  -webkit-border-radius: 12px;
-  -moz-border-radius:    12px;
-  border-radius:         12px;
-  text-align: center;
-  font-size: 14px;
-  line-height: 24px;
-  -moz-transition: all 0.3s ease;
-  opacity: 0.75;
+.show_readme {
+	font-size: 16px;
+	font-family: 'Source Sans Pro';
 }
 
-figure:hover:before {
-  opacity: 0;
+.repo_file a {
+	text-decoration: none;
+	color: white;
 }
 
-.cap-bot:before { bottom: 10px; left: 10px; }
-.cap-bot figcaption { left: 0; bottom: -30%;}
-.cap-bot:hover figcaption { bottom: 0; }
+.repo_directory a {
+	text-decoration: none;
+	color: blue;
+}
+
+.repo_file,
+.repo_directory {
+	display: inline-block;
+	vertical-align: top;
+	width: 85px;
+	height: 85px;
+	border: solid 2px white;
+	margin: 2px;
+	padding: 0;
+	margin-bottom: 3px;
+	background-color: white;
+	text-align: center;
+}
+
+.repo_file h4 {
+	margin: 0;
+	padding: 0;
+}
+
+.repo_directory h4 {
+	margin: 0;
+	padding: 0;
+}
+
+.file_box {
+	height: 80%;
+	background-color: lightblue;
+}
+
+.directory_box {
+	height: 80%;
+	background-color: darkblue;
+}
+
+.show_dirs {
+	color: blue;
+}
+/* ------ END ------ */
+
+/* ------ FOOTER ------ */
+.footer {
+	padding-top: 50px;
+}
+
+.footer p {
+	text-align: right;
+}
 
 .show_login {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .show_login_color {
 	color: lightblue;
 }
+/* ------ END ------ */
 
 /* ------ DETAIL PAGE ------ */
 .repo_name {
 	font-weight: 200;
 	text-transform: uppercase;
 	letter-spacing: 3px;
+}
+
+.show_homepage {
+	-moz-transform: scale(1,1);
+	-webkit-transform: scale(1,1);
+	-o-transform: scale(1,1);
+	-ms-transform: scale(1,1);
+	overflow: hidden;
+	height: 500px;
+	width: 100%;
+	border: solid 1px lightgray;
 }
 
 .file_name {
@@ -221,6 +345,8 @@ figure:hover:before {
 }
 
 .show_content pre {
-	font-size: 11px;
+	font-size: 14px;
+	font-family: 'Source Sans Pro';
+	font-weight: 300;
 	padding: 30px;
 }

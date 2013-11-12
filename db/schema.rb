@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(version: 20131030184902) do
     t.string   "owner"
     t.string   "avatar"
     t.string   "full_name"
+    t.string   "location"
+    t.string   "company"
+    t.string   "blog"
+    t.string   "homepage"
+    t.time     "start_date"
+    t.time     "update_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -3,7 +3,8 @@
 <div class="row user_window">
 	<div class="row-content">
 		<div class="column four">
-			<p>First column</p>
+			<p>Name: <%= @full_name %></p>
+			<p>Location: <%= @location %></p>
 		</div>
 		<div class="column third">
 			<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300", :class => "avatar") %>
@@ -23,25 +24,30 @@
 <div class="row">
 	<div class="row-content">
 		<div class="column twelve">
-		<% @languages.each do |language| %>
-				<h3 class=><%= language %></h3>
-				<div id="container" class="column twelve js-masonry" data-masonry-options='{"columnWidth": 200,"itemSelector": ".item", "gutter": 10, "isFitWidth": "True"}'>
-				<% @repositories.each do |repo| %>
-					<% if repo[:language] == language %>
-						<%= link_to("/#{params[:user_name]}/#{repo[:name]}") do %>
-							<figure class="item cap-bot">
-								<%= image_tag("place_holder.png") %>
-								<figcaption>
-									<h3 class="repo_list"><%= repo[:name] %></h3>
-									<p><%= repo[:description] %></p>
-								</figcaption>
-							</figure>
-						<% end %>
-					<% end %>
-				<% end %>
-				</div>
-				<div class="clear"></div>
-		<% end %>
+
+		<ul class="filterControl">
+			<li class="filter" data-filter="all">Show All</li>
+			<% @languages.each do |control| %>
+				<%=raw '<li class="filter" data-filter="' + "#{control.downcase.gsub('#','')}" + '">' + "#{control}" + '</li>' %>
+			<% end %>
+		</ul>
+
+		<ul id="filterGrid">
+			<% @repositories.each do |filter| %>
+					<%=raw '<li class="mix ' + "#{filter[:language].downcase.gsub('#','')}" + '">' %>
+						<%=raw '<a href="' + "/#{params[:user_name]}/#{filter[:name]}" + '">' %>
+							<% if filter[:homepage] != "not_available" then %>
+								<%=raw '<img src="' + "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=196" + '">' %>
+							<% else %>
+								<%= image_tag("index_placeholder.png") %>
+							<% end %>
+							<h4><%= "#{filter[:name]}" %></h4>
+						<%=raw '</a>' %>
+					<%=raw '</li>' %>
+			<% end %>
+			<li class="gap"></li> <!-- "gap" elements fill in the gaps in justified grid -->
+		</ul>
+
 		</div>
 	</div>
 </div>

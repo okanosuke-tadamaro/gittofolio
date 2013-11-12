@@ -15,3 +15,5 @@
 //= require_tree .
 //= require chart
 //= require masonry
+//= require jquery.leanModal.min
+//= require jquery.mixitup.min
