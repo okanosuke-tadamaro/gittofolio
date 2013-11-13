@@ -39,7 +39,8 @@ class RepositoryController < ApplicationController
 							Repository.get_repo_content(params[:user_name], params[:repo_name], session[:github_access_token])
 						else
 							Repository.get_repo_directory(params[:user_name], params[:repo_name], params[:repo_directory], session[:github_access_token])
-						end	
+						end
+
 	end
 
 end

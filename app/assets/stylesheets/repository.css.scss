@@ -28,9 +28,9 @@
 	margin: 0;
 	padding: 0;
 	font-size: 20px;
-	font-weight: 500;
+	font-weight: 600;
 	text-transform: uppercase;
-	letter-spacing: 7px;
+	letter-spacing: 5px;
 	line-height: 60px;
 	color: lightblue;
 
@@ -43,7 +43,7 @@
 .on_gittofolio {
 	font-size: 14px;
 	letter-spacing: 2px;
-	padding-left: 5px;
+	margin-left: 5px;
 	font-weight: 300;
 	color: gray;
 	vertical-align: top;
@@ -78,14 +78,19 @@
 	padding-top: 70px;
 	padding-bottom: 70px;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) inset, 0 1px 5px rgba(0, 0, 0, 0.2) inset;
+	display: none;
 }
 
 .avatar {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	border-radius: 10%;
+	border-radius: 50%;
 	border: solid 2px white;
+}
+
+.pie_wrap {
+	display: none;
 }
 
 .language_pie {
@@ -99,7 +104,13 @@
 	margin: 0 auto;
 }
 
-.color_each {
+.color_hoge {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+.color_hoge li {
 	font-size: 10px;
 	line-height: 20px;
 	text-align: center;
@@ -109,7 +120,21 @@
 	color: white;
 	text-transform: uppercase;
 	border: solid 2px white;
+	display: inline-block;
 }
+
+/*.color_each {
+	font-size: 10px;
+	line-height: 20px;
+	text-align: center;
+	min-width: 75px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	color: white;
+	text-transform: uppercase;
+	border: solid 2px white;
+	display: inline-block;
+}*/
 
 .list_color {
 	color: black;
@@ -152,8 +177,6 @@
 	width: 196px;
 	vertical-align: top;
 	margin: 10px;
-	background: lightblue;
-	color: #fff;
 	font-size: 14px;
 	border: solid 2px white;
 }
@@ -165,7 +188,7 @@
 #filterGrid .mix h4 {
 	margin: 0;
 	padding-bottom: 5px;
-	color: white;
+	color: #1c1c1c;
 	font-weight: 300;
 	line-height: 20px;
 	text-align: center;
@@ -175,6 +198,18 @@
 #filterGrid .gap{
 	display: inline-block;
 	width: 200px;
+}
+
+.thumbalt {
+	width: 196px;
+	height: 147px;
+	margin-bottom: 4px;
+	line-height: 147px;
+	text-align: center;
+	color: white;
+	text-transform: uppercase;
+	font-weight: 500;
+	font-size: 18px;
 }
 /* ------ END ------ */
 
@@ -216,51 +251,61 @@
 }
 
 .show_readme {
+	margin-top: 25px;
 	font-size: 16px;
 	font-family: 'Source Sans Pro';
 }
 
-.repo_file a {
-	text-decoration: none;
-	color: white;
-}
-
-.repo_directory a {
-	text-decoration: none;
-	color: blue;
+.display_repo_content {
+	background: url('bg2.png');
+	padding: 25px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1) inset, 0 1px 5px rgba(0, 0, 0, 0.1) inset;
 }
 
 .repo_file,
 .repo_directory {
 	display: inline-block;
 	vertical-align: top;
-	width: 85px;
-	height: 85px;
+	width: 86px;
+	height: 86px;
 	border: solid 2px white;
-	margin: 2px;
+	margin: 7px;
 	padding: 0;
 	margin-bottom: 3px;
 	background-color: white;
 	text-align: center;
+	overflow: hidden;
 }
 
-.repo_file h4 {
-	margin: 0;
-	padding: 0;
-}
-
+.repo_file h4,
 .repo_directory h4 {
 	margin: 0;
 	padding: 0;
+	font-size: 12px;
+	color: #1c1c1c;
+	line-height: 20px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .file_box {
-	height: 80%;
+	height: 66px;
+	line-height: 66px;
+	font-size: 20px;
+	font-weight: 400;
+	text-transform: uppercase;
+	color: white;
+	height: 66px;
 	background-color: lightblue;
 }
 
 .directory_box {
-	height: 80%;
+	height: 66px;
+	line-height: 66px;
+	font-size: 20px;
+	font-weight: 400;
+	text-transform: uppercase;
+	color: white;
 	background-color: darkblue;
 }
 

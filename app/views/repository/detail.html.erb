@@ -8,7 +8,7 @@
 				<img class="screenshot" src="http://s.wordpress.com/mshots/v1/<%= "#{@homepage[:homepage].to_s}" %>?w=1200">
 			<% end %>
 			
-			<div class="column twelve">
+			<div class="column twelve display_repo_content" id="files">
 
 				<% @data.each do |file| %>
 					<% if file[:type] == "file" then %>
@@ -16,7 +16,7 @@
 						<%=raw '<a href="' + "##{file[:name].downcase.gsub('.','')}" + '" rel="leanModal">' %>
 
 							<div class="repo_file">
-								<div class="file_box"></div>
+								<div class="file_box"><%= if File.extname("#{file[:name]}") != "" then File.extname("#{file[:name]}").gsub('.','') else "txt" end %></div>
 								<h4 class="file_name"><%= file[:name] %></h4>
 							</div>
 						
@@ -24,9 +24,9 @@
 
 					<% else %>
 
-						<a href="<%= "/#{params[:user_name]}/#{params[:repo_name]}/#{file[:path].gsub('/','_')}" %>">
+						<a href="<%= "/#{params[:user_name]}/#{params[:repo_name]}/#{file[:path].gsub('/','_')}" %>#files">
 							<div class="repo_directory">
-								<div class="directory_box"></div>
+								<div class="directory_box">dir</div>
 								<h4 class="file_name"><%= file[:name] %></h4>
 							</div>
 						</a>

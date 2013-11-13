@@ -10,12 +10,15 @@
 			<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300", :class => "avatar") %>
 		</div>
 		<div class="column four last">
+			<div class="pie_wrap">
 			<canvas id="languagepie" class="language_pie" width="300" height="300"></canvas>
-			<div id="container" class="js-masonry center" data-masonry-options='{"itemSelector": ".color_each", "gutter": 10, "isFitWidth": "True"}'>
+			
+			<ul class="color_hoge">
 				<% @label.each do |label| %>
-					<td><%=raw '<div class="color_each column" style="background-color:#' + "#{label.last}" + ';">' + "#{label.first}" + '</div>' %></td>
+					<%=raw '<li style="background-color:#' + "#{label.last}" + ';">' + "#{label.first}" + '</li>' %>
 				<% end %>
-			</div>
+			</ul>
+		</div>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -38,6 +41,8 @@
 						<%=raw '<a href="' + "/#{params[:user_name]}/#{filter[:name]}" + '">' %>
 							<% if filter[:homepage] != "not_available" then %>
 								<%=raw '<img src="' + "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=196" + '">' %>
+							<% elsif %>
+								<div class="thumbalt" style="background-color: #<%= @label.select { |data| data.include?(filter[:language]) }.last.last %>;"><%= filter[:language] %></div>
 							<% else %>
 								<%= image_tag("index_placeholder.png") %>
 							<% end %>
