@@ -2,13 +2,22 @@
 
 <div class="row">
 	<div class="row-content">
-
-		<div class="welcome">
-			<h3>Because my eyes get tired looking at Github</h3>
-			<a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['GITHUB_CLIENT_ID'] %>" class="login_button">Log in with Github</a>
-<!-- 			<p>We're going to now talk to the GitHub API. Ready? <a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['GITHUB_CLIENT_ID'] %>">Click here</a> to begin!</a></p>
-			<p>If that link doesn't work, remember to provide your own <a href="http://developer.github.com/v3/oauth/#web-application-flow">Client ID</a>!</p> -->
-		</div>
+		
+		<% if session[:github_access_token] == nil then %>
+			<div class="welcome">
+				<h3>Because my eyes get tired looking at Github</h3>
+				<a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['GITHUB_CLIENT_ID'] %>" class="login_button">Log in with Github</a>
+			</div>
+		<% else %>
+			<div class="logged_in">
+				<h3>You're logged in!</h3>
+				<p>Enter a username or full name to start your search</p>
+				<%= form_tag search_path, method: "get" do %>
+					<%= text_field_tag :q, params[:q] %>
+					<%= submit_tag("Show Me") %>
+				<% end %>
+			</div>
+		<% end %>
 
 	</div>
 </div>

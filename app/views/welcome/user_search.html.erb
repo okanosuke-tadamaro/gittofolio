@@ -1,0 +1,21 @@
+<%= render 'header' %>
+
+<div class="row">
+	<div class="row-content">
+		<div class="column twelve search_results">
+			<h3 class="search_resulits_h3">Search Results</h3>
+			<div class="show_results">
+				<% @users["users"].each do |result| %>
+					<a href="<%= "/#{result["username"]}" %>">
+						<div class="each_result">
+							<img src="http://www.gravatar.com/avatar/<%= result["gravatar_id"] %>?s=196" class="result_avatar">
+							<p>Username: <%= result["username"] %></p>
+							<p>Name: <%= result["fullname"] %></p>
+							<p>Location: <%= result["location"] %></p>
+						</div>
+					</a>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

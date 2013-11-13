@@ -28,30 +28,30 @@
 	<div class="row-content">
 		<div class="column twelve">
 
-		<ul class="filterControl">
-			<li class="filter" data-filter="all">Show All</li>
-			<% @languages.each do |control| %>
-				<%=raw '<li class="filter" data-filter="' + "#{control.downcase.gsub('#','')}" + '">' + "#{control}" + '</li>' %>
-			<% end %>
-		</ul>
+			<ul class="filterControl">
+				<li class="filter" data-filter="all">Show All</li>
+				<% @languages.each do |control| %>
+					<%=raw '<li class="filter" data-filter="' + "#{control.downcase.gsub('#','')}" + '">' + "#{control}" + '</li>' %>
+				<% end %>
+			</ul>
 
-		<ul id="filterGrid">
-			<% @repositories.each do |filter| %>
-					<%=raw '<li class="mix ' + "#{filter[:language].downcase.gsub('#','')}" + '">' %>
-						<%=raw '<a href="' + "/#{params[:user_name]}/#{filter[:name]}" + '">' %>
-							<% if filter[:homepage] != "not_available" then %>
-								<%=raw '<img src="' + "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=196" + '">' %>
-							<% elsif %>
-								<div class="thumbalt" style="background-color: #<%= @label.select { |data| data.include?(filter[:language]) }.last.last %>;"><%= filter[:language] %></div>
-							<% else %>
-								<%= image_tag("index_placeholder.png") %>
-							<% end %>
-							<h4><%= "#{filter[:name]}" %></h4>
-						<%=raw '</a>' %>
-					<%=raw '</li>' %>
-			<% end %>
-			<li class="gap"></li> <!-- "gap" elements fill in the gaps in justified grid -->
-		</ul>
+			<ul id="filterGrid">
+				<% @repositories.each do |filter| %>
+						<%=raw '<li class="mix ' + "#{filter[:language].downcase.gsub('#','')}" + '">' %>
+							<%=raw '<a href="' + "/#{params[:user_name]}/#{filter[:name]}" + '">' %>
+								<% if filter[:homepage] != "not_available" then %>
+									<%=raw '<img src="' + "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=196" + '">' %>
+								<% elsif %>
+									<div class="thumbalt" style="background-color: #<%= @label.select { |data| data.include?(filter[:language]) }.last.last %>;"><%= filter[:language] %></div>
+								<% else %>
+									<%= image_tag("index_placeholder.png") %>
+								<% end %>
+								<h4><%= "#{filter[:name]}" %></h4>
+							<%=raw '</a>' %>
+						<%=raw '</li>' %>
+				<% end %>
+				<li class="gap"></li> <!-- "gap" elements fill in the gaps in justified grid -->
+			</ul>
 
 		</div>
 	</div>

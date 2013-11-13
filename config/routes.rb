@@ -4,6 +4,7 @@ Gittofolio::Application.routes.draw do
   resources :users
   get "welcome/index"
   root 'welcome#index'
+  get '/search' => 'welcome#user_search'
   get '/repository' => 'repository#index'
   get "/:user_name" => "repository#index"
   get 'github/callback' => 'welcome#callback'

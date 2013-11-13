@@ -2,10 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.welcome {
+.welcome,
+.logged_in {
 	text-align: center;
 	padding: 50px;
-	margin-top: 280px;
+	margin-top: 200px;
 }
 
 .welcome h3 {
@@ -22,4 +23,54 @@
 	border: solid 2px white;
 	color: white;
 	text-transform: uppercase;
+}
+
+.logged_in h3 {
+	font-size: 30px;
+	color: white;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	margin-bottom: 50px;
+}
+
+input[type='text'] {
+	line-height: 25px;
+	border: solid 2px white;
+	background-color: rgba(255,255,255,0.2);
+}
+
+input[type='submit'] {
+	background-color: rgba(0,0,0,0.2);
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	text-indent: 2px;
+	border: solid 2px white;
+	line-height: 20px;
+	margin-left: 10px;
+	position: relative;
+	top: -2px;
+}
+
+.search_results h3 {
+	font-weight: 300;
+	text-transform: uppercase;
+	font-family: 'Source Sans Pro';
+	letter-spacing: 2px;
+}
+
+.each_result {
+	display: inline-block;
+	width: 196px;
+	height: 255px;
+	margin: 10px;
+	border: solid 2px white;
+	background-color: white;
+	overflow: hidden;
+}
+
+.each_result p {
+	font-size: 14px;
+	margin: 0;
+	color: #1c1c1c;
 }

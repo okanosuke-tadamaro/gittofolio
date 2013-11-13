@@ -38,7 +38,7 @@
 
 			<div class="column twelve display_readme">
 				<% @data.each do |readme| %>
-					<% if readme[:name].downcase == "readme.md" then %>
+					<% if readme[:name].downcase.include?("readme") then %>
 						<pre class="show_readme"><%= Base64.decode64(readme.rels[:self].get.data[:content]) %></pre>
 					<% end %>
 				<% end %>
