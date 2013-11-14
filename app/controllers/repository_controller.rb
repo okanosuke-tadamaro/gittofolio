@@ -34,7 +34,7 @@ class RepositoryController < ApplicationController
 		
 		@user = User.show_login(session[:github_access_token])
 
-		@full_name = Repository.get_basic_data(params[:user_name]).full_name
+		@full_name = Repository.get_basic_data(params[:user_name])[:full_name]
 
 		@homepage = Repository.get_homepage(params[:repo_name])
 
