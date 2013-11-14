@@ -28,6 +28,9 @@ class RepositoryController < ApplicationController
 	end
 
 	def detail
+		if params[:format] != nil
+			params[:repo_name] = "#{params[:repo_name]}.#{params[:format]}"
+		end	
 		
 		@user = User.show_login(session[:github_access_token])
 

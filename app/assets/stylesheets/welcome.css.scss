@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.slogan {
+	margin: 0;
+	padding: 0;
+	line-height: 60px;
+	letter-spacing: 1px;
+	text-align: right;
+	text-transform: uppercase;
+	font-size: 14px;
+}
+
 .welcome,
 .logged_in {
 	text-align: center;

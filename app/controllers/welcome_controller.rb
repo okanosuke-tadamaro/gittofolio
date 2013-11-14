@@ -4,9 +4,13 @@ class WelcomeController < ApplicationController
   end
 
   def user_search
-    @users = User.search_users(params[:q], session[:github_access_token])
-    @users["users"].each { |replace| if replace["name"] == " " then replace["name"] = "Not Available" end }
-    @users["users"].each { |replace| if replace["location"] == nil then replace["location"] = "Not Available" end }
+      @users = User.search_users(params[:q], session[:github_access_token])
+      if @users == "No"
+        redirect_to root_path
+      else
+        @users["users"].each { |replace| if replace["name"] == " " then replace["name"] = "Not Available" end }
+        @users["users"].each { |replace| if replace["location"] == nil then replace["location"] = "Not Available" end }
+      end
   end
 
   def callback
