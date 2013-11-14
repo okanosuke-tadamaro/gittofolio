@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="row-content">
 		
-		<% if session[:github_access_token] == nil then %>
+		<% if session[:github_access_token] == nil %>
 			<div class="welcome">
 				<h3>Because my eyes get tired looking at Github</h3>
 				<a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['GITHUB_CLIENT_ID'] %>" class="login_button">Log in with Github</a>
