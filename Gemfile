@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 gem 'json'
 gem 'rest-client'
+gem 'redcarpet'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

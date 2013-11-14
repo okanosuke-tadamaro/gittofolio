@@ -102,6 +102,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (3.0.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     ruby_parser (3.2.2)
@@ -161,6 +162,7 @@ DEPENDENCIES
   pry
   rails (= 4.0.0)
   rails_12factor
+  redcarpet
   rest-client
   sass-rails (~> 4.0.0)
   sdoc
