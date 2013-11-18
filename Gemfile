@@ -5,10 +5,7 @@ gem 'rails', '4.0.0'
 gem 'json'
 gem 'rest-client'
 gem 'redcarpet'
-<<<<<<< HEAD
 gem 'github-markup'
-=======
->>>>>>> 6b332b78b3162da4a1546810fe10a0aa190397c5
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
