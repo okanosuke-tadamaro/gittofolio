@@ -38,6 +38,8 @@ class RepositoryController < ApplicationController
 
 		@homepage = Repository.get_homepage(params[:repo_name])
 
+		@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+
 		@data = if params[:repo_directory] == nil then
 							Repository.get_repo_content(params[:user_name], params[:repo_name], session[:github_access_token])
 						else

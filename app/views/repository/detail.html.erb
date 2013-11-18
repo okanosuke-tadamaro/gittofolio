@@ -39,7 +39,7 @@
 			<div class="column twelve display_readme">
 				<% @data.each do |readme| %>
 					<% if readme[:name].downcase.include?("readme") then %>
-						<pre class="show_readme"><%= Base64.decode64(readme.rels[:self].get.data[:content]) %></pre>
+						<div class="show_readme"><%=raw @markdown.render(Base64.decode64(readme.rels[:self].get.data[:content])) %></div>
 					<% end %>
 				<% end %>
 			</div>

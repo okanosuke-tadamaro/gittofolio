@@ -1,3 +1,20 @@
+ .new_content {
+ 	height: 300px;
+ 	width: 300px;
+ 	border-radius: 50%;
+ 	background-color: lightblue;
+ 	border: solid 2px white;
+ }
+
+ .new_content p {
+ 	margin: 0;
+ 	padding: 0;
+ 	text-transform: uppercase;
+	line-height: 300px;
+ 	text-align: center;
+ }
+
+
  body {
  	background: url("<%= asset_path 'bg2.png' %>");
  	background-attachment: fixed;
@@ -50,13 +67,13 @@
 	letter-spacing: 2px;
 	margin-left: 5px;
 	font-weight: 300;
-	color: lightgray;
+	color: white;
 	vertical-align: top;
 	line-height: 56px;
 }
 
 .nav {
-	float: right;
+	text-align: right;
 }
 
 .nav li {
@@ -66,7 +83,7 @@
 }
 
 .nav li a {
-	color: #1c1c1c;
+	color: white;
 	font-size: 16px;
 	text-decoration: none;
 	text-transform: uppercase;
@@ -74,7 +91,7 @@
 }
 
 .nav li a:hover {
-	color: #CB1B45;
+	color: lightblue;
 }
 /* ------ END ------ */
 
@@ -257,6 +274,7 @@
 .show_readme {
 	margin-top: 25px;
 	font-size: 16px;
+	font-weight: 300;
 	font-family: 'Source Sans Pro';
 }
 
