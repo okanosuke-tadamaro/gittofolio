@@ -11,8 +11,8 @@ class CreateRepositories < ActiveRecord::Migration
       t.string :company
       t.string :blog
       t.string :homepage
-      t.time :start_date
-      t.time :update_date
+      t.date :start_date
+      t.date :update_date
 
       t.timestamps
     end

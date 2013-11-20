@@ -10,6 +10,5 @@ Gittofolio::Application.routes.draw do
   get 'github/callback' => 'welcome#callback'
   get "/:user_name/:repo_name" => "repository#detail"
   get "/:user_name/:repo_name/:repo_directory" => "repository#detail"
-  # get "/:user_name/:language" => "repository#by_language"
 
 end
