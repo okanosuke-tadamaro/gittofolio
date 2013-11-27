@@ -22,6 +22,8 @@ class RepositoryController < ApplicationController
 	end
 
 	def detail
+		require 'github/markup'
+
 		if params[:format] != nil
 			params[:repo_name] = "#{params[:repo_name]}.#{params[:format]}"
 		end	
@@ -39,6 +41,13 @@ class RepositoryController < ApplicationController
 						else
 							Repository.get_repo_directory(params[:user_name], params[:repo_name], params[:repo_directory], session[:github_access_token])
 						end
+
+		@data.each do |readme|
+			if readme[:name].downcase.include?("readme")
+				@readme_name = readme[:name]
+				@readme_content = Base64.decode64(readme.rels[:self].get.data[:content])
+			end
+		end
 
 	end
 

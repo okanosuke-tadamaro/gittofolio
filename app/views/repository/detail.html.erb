@@ -36,13 +36,14 @@
 
 			</div>
 
-			<div class="column twelve display_readme">
-				<% @data.each do |readme| %>
-					<% if readme[:name].downcase.include?("readme") then %>
-						<div class="show_readme"><%=raw @markdown.render(Base64.decode64(readme.rels[:self].get.data[:content])) %></div>
-					<% end %>
+			
+			<% @data.each do |readme| %>
+				<% if readme[:name].downcase.include?("readme") %>
+					<div class="column twelve display_readme">
+						<div class="show_readme"><%=raw GitHub::Markup.render(readme[:name], Base64.decode64(readme.rels[:self].get.data[:content])) %></div>
+					</div>
 				<% end %>
-			</div>
+			<% end %>
 
 	</div>
 </div>
