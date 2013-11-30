@@ -24,7 +24,7 @@
   </script>
 
   <style type="text/css">
-    body { font-family: 'Source Sans Pro'; font-weight: 300; color: white; }
+    body { font-family: 'Source Sans Pro'; font-weight: 300; color: white; height: 100%; }
   </style>
 </head>
 <body>
@@ -67,7 +67,7 @@
 <div class="row">
   <div class="row-content">
     <div class="column twelve footer">
-      <% if session[:github_access_token] != nil %>
+      <% if session[:github_access_token] != nil && @user != nil%>
         <p class="show_login">Currently signed in as <span class="show_login_color"><%= @user.login %></span></p>
       <% end %>
       <p>Gittofolio by Tadashi Okazaki</p>
