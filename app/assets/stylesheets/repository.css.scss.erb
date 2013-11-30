@@ -27,9 +27,8 @@
 	z-index: 0;
 }
 
-.bodywrap a {
-	text-decoration: none;
-}
+.bodywrap a { text-decoration: none; }
+
 
 /* ------ HEADER ------ */
 .fixed_header {
@@ -160,7 +159,9 @@
 	color: black;
 }
 
-/* ------ FILTERING ------ */
+/* ------ MAIN CONTENT ON INDEX.HTML.ERB ------ */
+.main_content { margin-bottom: 50px; }
+
 .filterControl {
 	margin: 0;
 	padding: 0;
@@ -370,14 +371,15 @@
 
 /* ------ FOOTER ------ */
 .footer {
-	padding-top: 50px;
+	background-color: rgba(255,255,255,0.3);
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	padding: 10px;
 }
 
 .footer p {
+	margin: 0;
 	text-align: right;
-}
-
-.show_login {
 	font-size: 14px;
 }
 

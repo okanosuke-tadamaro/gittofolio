@@ -1,5 +1,6 @@
 <div class="row">
 	<div class="row-content">
+		<div class="column twelve main_content">
 			<h2 class="repo_name"><%= params[:repo_name] %></h2>
 			
 			<% if @homepage[:homepage] != "not_available" %>
@@ -43,6 +44,7 @@
 				<% end %>
 			<% end %>
 
+		</div>
 	</div>
 </div>
 
@@ -56,6 +58,3 @@
 
 	<% end %>
 <% end %>
-
-
-<%= render 'footer' %>

@@ -25,7 +25,7 @@
 
 <div class="row">
 	<div class="row-content">
-		<div class="column twelve">
+		<div class="column twelve main_content">
 
 			<ul class="filterControl">
 				<li class="filter" data-filter="all">Show All</li>
@@ -55,8 +55,6 @@
 		</div>
 	</div>
 </div>
-
-<%= render 'footer' %>
 
 <%= javascript_tag do %>
 	var data = <%=raw @pie_data.each { |data| puts data }.to_s.gsub('"', '') %>;
