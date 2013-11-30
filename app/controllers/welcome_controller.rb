@@ -28,4 +28,9 @@ class WelcomeController < ApplicationController
 
   	redirect_to root_path
   end
+
+  def signout
+    session[:github_access_token] = nil
+    redirect_to root_path
+  end
 end

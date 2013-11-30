@@ -1,8 +1,9 @@
-<%= render 'header' %>
-
 <div class="row">
 	<div class="row-content">
 		
+		<p class="notice"><%= notice %></p>
+		<p class="alert"><%= alert %></p>
+
 		<% if session[:github_access_token] == nil %>
 			<div class="welcome">
 				<h3>Because my eyes get tired looking at Github</h3>

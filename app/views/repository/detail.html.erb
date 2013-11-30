@@ -1,8 +1,6 @@
-<%= render 'header' %>
-
 <div class="row">
 	<div class="row-content">
-			<h3 class="repo_name"><%= params[:repo_name] %></h3>
+			<h2 class="repo_name"><%= params[:repo_name] %></h2>
 			
 			<% if @homepage[:homepage] != "not_available" %>
 				<img class="screenshot" src="http://s.wordpress.com/mshots/v1/<%= "#{@homepage[:homepage].to_s}" %>?w=1200">
