@@ -14,7 +14,7 @@
  	text-align: center;
  }
 
-
+/* ------ COMMON ------ */
  body {
  	background: url("<%= asset_path 'bg2.png' %>");
  	background-attachment: fixed;
@@ -28,6 +28,10 @@
 }
 
 .bodywrap a { text-decoration: none; }
+
+.main_content { margin-bottom: 40px; }
+/* ------ END ------ */
+
 
 
 /* ------ HEADER ------ */
@@ -54,9 +58,7 @@
 	text-shadow: 1px 2px 1px rgba(0,0,0,0.3);
 }
 
-.change_color {
-	color: lightblue;
-}
+.change_color { color: lightblue; }
 
 .on_gittofolio {
 	font-size: 14px;
@@ -68,9 +70,7 @@
 	line-height: 56px;
 }
 
-.nav {
-	text-align: right;
-}
+.nav { text-align: right; }
 
 .nav li {
 	line-height: 60px;
@@ -88,10 +88,10 @@
 	text-shadow: 1px 2px 1px rgba(0,0,0,0.3);
 }
 
-.nav li a:hover {
-	color: lightblue;
-}
+.nav li a:hover { color: lightblue; }
 /* ------ END ------ */
+
+
 
 /* ------ USER INFO WINDOW ------ */
 .user_window {
@@ -109,10 +109,6 @@
 	border: solid 2px white;
 }
 
-.pie_wrap {
-
-}
-
 .language_pie {
 	display: block;
 	margin-left: auto;
@@ -120,9 +116,7 @@
 	padding-bottom: 30px;
 }
 
-.label_wrap {
-	margin: 0 auto;
-}
+.label_wrap { margin: 0 auto; }
 
 .color_hoge {
 	margin: 0;
@@ -144,10 +138,11 @@
 }
 
 .list_color { color: black; }
+/* ------ END ------ */
+
+
 
 /* ------ MAIN CONTENT ON INDEX.HTML.ERB ------ */
-.main_content { margin-bottom: 30px; }
-
 .filterControl {
 	padding: 0;
 	margin-top: 40px;
@@ -189,9 +184,7 @@
 	border: solid 2px #f8f8f8;
 }
 
-#filterGrid .mix a {
-	text-decoration: none;
-}
+#filterGrid .mix a { text-decoration: none; }
 
 #filterGrid .mix h4 {
 	margin: 0;
@@ -200,6 +193,8 @@
 	font-family: 'Courier New';
 	font-weight: 300;
 	line-height: 20px;
+	height: 20px;
+	overflow: hidden;
 	text-align: center;
 	text-decoration: none;
 }
@@ -222,42 +217,16 @@
 }
 /* ------ END ------ */
 
-.index_language {
-	font-size: 16px;
-	font-weight: 300;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-}
 
-.repo_list {
-	font-weight: 200;
-	font-size: 12px;
-}
-
-.item {
-	background-color: lightgray;
-	width: 215px;
-	margin-bottom: 10px;
-	font-size: 12px;
-	overflow: hidden;
-}
-
-.item img {
-	height: 100px;
-}
-
-.item_description {
-	height: 30px;
-}
 
 /* ------ DETAIL PAGE ------ */
 .repo_name {
-	padding-top: 25px;
+	font-weight: 200;
+	text-transform: uppercase;
+	letter-spacing: 3px;
 }
 
-.screenshot {
-	margin-bottom: 25px;
-}
+.screenshot { margin-bottom: 25px; }
 
 .display_repo_content {
 	background-color: rgba(0,0,0,0.2);
@@ -285,8 +254,9 @@
 	margin: 0;
 	padding: 0;
 	font-size: 12px;
+	font-weight: 300;
 	color: #1c1c1c;
-	line-height: 20px;
+	line-height: 22px;
 	padding-left: 5px;
 	padding-right: 5px;
 }
@@ -312,10 +282,6 @@
 	background-color: darkblue;
 }
 
-.show_dirs {
-	color: blue;
-}
-
 .display_readme {
 	margin-top: 25px;
 	padding: 25px;
@@ -323,11 +289,7 @@
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1) inset, 0 1px 5px rgba(0, 0, 0, 0.1) inset;
 }
 
-.show_readme {
-	font-size: 16px;
-	font-weight: 300;
-	font-family: 'Source Sans Pro';
-}
+.show_readme {  }
 
 .show_readme h1,
 .show_readme h2,
@@ -339,9 +301,7 @@
 	margin: 0;
 }
 
-.show_readme img {
-	margin: 5px;
-}
+.show_readme img { margin: 5px; }
 
 .show_readme code {
 	display: block;
@@ -358,6 +318,8 @@
 }
 /* ------ END ------ */
 
+
+
 /* ------ FOOTER ------ */
 .footer {
 	background-color: rgba(255,255,255,0.1);
@@ -372,33 +334,10 @@
 	font-size: 14px;
 }
 
-.show_login_color {
-	color: lightblue;
-}
+.show_login_color { color: lightblue; }
 /* ------ END ------ */
 
-/* ------ DETAIL PAGE ------ */
-.repo_name {
-	font-weight: 200;
-	text-transform: uppercase;
-	letter-spacing: 3px;
-}
 
-.show_homepage {
-	-moz-transform: scale(1,1);
-	-webkit-transform: scale(1,1);
-	-o-transform: scale(1,1);
-	-ms-transform: scale(1,1);
-	overflow: hidden;
-	height: 500px;
-	width: 100%;
-	border: solid 1px lightgray;
-}
-
-.file_name {
-	font-weight: 200;
-	font-size: 12px;
-}
 
 /* ------ MODAL ------ */
 #lean_overlay {
@@ -412,9 +351,7 @@
     display: none;
 }
 
-.hide_content {
-	display: none;
-}
+.hide_content { display: none; }
 
 .show_content {
 	background-color: rgba(0,0,0,0.8);
@@ -440,3 +377,4 @@
 	font-weight: 300;
 	padding: 30px;
 }
+/* ------ END ------ */

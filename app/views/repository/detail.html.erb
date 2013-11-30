@@ -16,7 +16,7 @@
 
 							<div class="repo_file">
 								<div class="file_box"><%= if File.extname("#{file[:name]}") != "" then File.extname("#{file[:name]}").gsub('.','') else "txt" end %></div>
-								<h4 class="file_name"><%= file[:name] %></h4>
+								<h4><%= file[:name] %></h4>
 							</div>
 						
 						<%=raw '</a>' %>
@@ -26,7 +26,7 @@
 						<a href="<%= "/#{params[:user_name]}/#{params[:repo_name]}/#{file[:path].gsub('/','_')}" %>#files">
 							<div class="repo_directory">
 								<div class="directory_box">dir</div>
-								<h4 class="file_name"><%= file[:name] %></h4>
+								<h4><%= file[:name] %></h4>
 							</div>
 						</a>
 
