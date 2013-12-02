@@ -2,20 +2,20 @@
 	<div class="row-content">
 		<div class="column twelve search_results">
 			<h3 class="search_resulits_h3">Search Results</h3>
-			<div class="show_results">
-				<% @users["users"].each do |result| %>
-					<a href="<%= "/#{result["username"]}" %>">
-						<div class="each_result">
-							<img src="http://www.gravatar.com/avatar/<%= result["gravatar_id"] %>?s=196" class="result_avatar">
-							<div class="result_text">
-								<p><%= result["username"] %></p>
-								<p><%= result["fullname"] %></p>
-								<p><%= result["location"] %></p>
+				<div class="show_results">
+					<% @users["users"].each do |result| %>
+						<a href="<%= "/#{result["username"]}" %>">
+							<div class="each_result">
+								<img src="http://www.gravatar.com/avatar/<%= result["gravatar_id"] %>?s=196" class="result_avatar">
+								<div class="result_text">
+									<p><%= result["username"] %></p>
+									<p><%= result["fullname"] %></p>
+									<p><%= result["location"] %></p>
+								</div>
 							</div>
-						</div>
-					</a>
-				<% end %>
-			</div>
+						</a>
+					<% end %>
+				</div>
 		</div>
 	</div>
 </div>
