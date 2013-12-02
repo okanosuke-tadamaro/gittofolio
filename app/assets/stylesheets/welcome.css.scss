@@ -53,11 +53,13 @@
 input[type='text'] {
 	line-height: 25px;
 	border: solid 2px white;
-	background-color: rgba(255,255,255,0.2);
+	padding: 10px;
+	background-color: rgba(255,255,255,1);
 }
 
 input[type='submit'] {
 	background-color: rgba(0,0,0,0.2);
+	padding: 10px;
 	color: white;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -72,8 +74,11 @@ input[type='submit'] {
 .search_results h3 {
 	font-weight: 300;
 	text-transform: uppercase;
-	font-family: 'Source Sans Pro';
-	letter-spacing: 2px;
+	letter-spacing: 3px;
+}
+
+.show_results {
+	text-align: center;
 }
 
 .each_result {
@@ -81,31 +86,20 @@ input[type='submit'] {
 	width: 196px;
 	height: 255px;
 	margin: 10px;
-	border: solid 2px white;
-	background-color: white;
+	border: solid 2px #f8f8f8;
+	background-color: #f8f8f8;
 	overflow: hidden;
 }
 
-.each_result table {
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	font-size: 14px;
+.result_text {
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 2px;
 }
 
-.table_right {
-	text-transform: uppercase;
-	font-size: 10px;
-	vertical-align: top;
-	text-align: right;
-	width: 65px;
-	color: gray;
-}
-
-.each_result td {
+.result_text p {
 	margin: 0;
-	padding: 0;
-	text-indent: 5px;
-	line-height: 18px;
+	font-size: 12px;
+	font-family: 'Courier New';
 	color: #1c1c1c;
 }

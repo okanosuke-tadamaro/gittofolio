@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Gittofolio</title>
   <link href="//fonts.googleapis.com/css?family=Source+Sans Pro:200italic,200,300italic,300,400italic,400,600italic,600,700italic,700,900italic,900" rel="stylesheet" type="text/css">
@@ -64,6 +64,7 @@
 </div>
 
 <!-- FOOTER -->
+<% if params[:controller] != 'welcome' %>
 <div class="row">
   <div class="row-content">
     <div class="column twelve footer">
@@ -74,6 +75,7 @@
     </div>
   </div>
 </div>
+<% end %>
 <!-- END -->
 
 </body>

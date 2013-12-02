@@ -7,11 +7,11 @@
 					<a href="<%= "/#{result["username"]}" %>">
 						<div class="each_result">
 							<img src="http://www.gravatar.com/avatar/<%= result["gravatar_id"] %>?s=196" class="result_avatar">
-							<table>
-								<tr><td class="table_right">Username:</td><td><%= result["username"] %></td></tr>
-								<tr><td class="table_right">Name:</td><td><%= result["fullname"] %></td></tr>
-								<tr><td class="table_right">Location:</td><td><%= result["location"] %></td></tr>
-							</table>
+							<div class="result_text">
+								<p><%= result["username"] %></p>
+								<p><%= result["fullname"] %></p>
+								<p><%= result["location"] %></p>
+							</div>
 						</div>
 					</a>
 				<% end %>
