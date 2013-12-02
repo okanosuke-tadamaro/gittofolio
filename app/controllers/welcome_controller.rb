@@ -32,6 +32,7 @@ class WelcomeController < ApplicationController
 
   def signout
     session[:github_access_token] = nil
+    flash[:notice] = "You've successfully signed out. Thanks for using Gittofolio!"
     redirect_to root_path
   end
 end

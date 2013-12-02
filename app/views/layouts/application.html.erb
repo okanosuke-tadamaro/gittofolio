@@ -69,7 +69,7 @@
   <div class="row-content">
     <div class="column twelve footer">
       <% if session[:github_access_token] != nil && @user != nil%>
-        <p class="show_login">Currently signed in as <span class="show_login_color"><%= @user.login %></span></p>
+        <p class="show_login">Currently signed in as <span class="show_login_color"><%= @user.login %></span> | <%= link_to "Sign out", welcome_signout_path %></p>
       <% end %>
       <p>Gittofolio by Tadashi Okazaki</p>
     </div>

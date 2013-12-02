@@ -3,19 +3,21 @@
 
 		<% if session[:github_access_token] == nil %>
 			<div class="welcome">
+				<p class="notice"><%= notice %></p>
+				<p class="alert"><%= alert %></p>
 				<h3>Because my eyes get tired looking at Github</h3>
 				<a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['GITHUB_CLIENT_ID'] %>" class="login_button">Log in with Github</a>
 			</div>
 		<% else %>
 			<div class="logged_in">
+				<p class="notice"><%= notice %></p>
+				<p class="alert"><%= alert %></p>
 				<h3>You're logged in!</h3>
 				<p>Enter a username or full name to start your search</p>
 				<%= form_tag search_path, method: "get" do %>
 					<%= text_field_tag :q, params[:q] %>
 					<%= submit_tag("Show Me") %>
 				<% end %>
-				<p class="notice"><%= notice %></p>
-				<p class="alert"><%= alert %></p>
 			</div>
 		<% end %>
 
