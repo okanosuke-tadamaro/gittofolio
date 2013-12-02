@@ -12,8 +12,7 @@
 			<div class="logged_in">
 				<p class="notice"><%= notice %></p>
 				<p class="alert"><%= alert %></p>
-				<h3>You're logged in!</h3>
-				<p>Enter a username or full name to start your search</p>
+				<p class="direction">Enter a username or full name to start your search</p>
 				<%= form_tag search_path, method: "get" do %>
 					<%= text_field_tag :q, params[:q] %>
 					<%= submit_tag("Show Me") %>

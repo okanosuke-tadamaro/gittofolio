@@ -40,7 +40,7 @@
         <% if @full_name != nil then %>
           <%= @full_name.split(" ").first %><span class="change_color"><%= @full_name.split(" ").last %></span><span class="on_gittofolio">on Gittofolio</span>
         <% else %>
-          <%= params[:user_name] %>
+          <%= params[:user_name] %><span class="on_gittofolio">on Gittofolio</span>
         <% end %>
       <% end %>
     </div>
@@ -49,7 +49,8 @@
         <p class="slogan">Because my eyes get tired looking at Github</p>
       <% elsif params[:controller] == 'repository' %>
         <ul class="nav reset">
-          <li><%= link_to "Repository List", "/#{params[:user_name]}" %></li>
+          <li><%= link_to "Home", root_url %></li>
+          <li><%= link_to "Projects", "/#{params[:user_name]}" %></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
