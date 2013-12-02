@@ -1,8 +1,5 @@
 <div class="row">
 	<div class="row-content">
-		
-		<p class="notice"><%= notice %></p>
-		<p class="alert"><%= alert %></p>
 
 		<% if session[:github_access_token] == nil %>
 			<div class="welcome">
@@ -17,6 +14,8 @@
 					<%= text_field_tag :q, params[:q] %>
 					<%= submit_tag("Show Me") %>
 				<% end %>
+				<p class="notice"><%= notice %></p>
+				<p class="alert"><%= alert %></p>
 			</div>
 		<% end %>
 

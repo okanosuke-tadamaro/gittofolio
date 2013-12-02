@@ -6,6 +6,7 @@ class WelcomeController < ApplicationController
   def user_search
       @users = User.search_users(params[:q], session[:github_access_token])
       if @users == "No"
+        flash[:alert] = "Invalid search term. Please try again."
         redirect_to root_path
       else
         @users["users"].each { |replace| if replace["name"] == " " then replace["name"] = "Not Available" end }

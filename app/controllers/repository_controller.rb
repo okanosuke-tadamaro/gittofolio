@@ -3,6 +3,7 @@ class RepositoryController < ApplicationController
 	def index
 
 		if User.search_users(params[:user_name], session[:github_access_token]).fetch("users").empty? == true
+			flash[:alert] = "The user you searched for doesn't seem to exist. You might want to try searching by name."
 			redirect_to root_path
 		else
 			@user = User.show_login(session[:github_access_token])
