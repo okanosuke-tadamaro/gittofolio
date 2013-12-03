@@ -39,6 +39,12 @@ class RepositoryController < ApplicationController
 
 		@homepage = Repository.get_homepage(params[:repo_name])
 
+		if params[:repo_directory] != nil
+			@breadcrumb = params[:repo_directory].split('_')
+		else
+			@breadcrumb = []
+		end
+
 		@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 
 		@data = if params[:repo_directory] == nil then

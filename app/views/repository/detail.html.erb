@@ -2,12 +2,19 @@
 	<div class="row-content">
 		<div class="column twelve main_content">
 			<h2 class="repo_name"><%= params[:repo_name] %></h2>
-			
+
 			<% if @homepage[:homepage] != "not_available" %>
 				<img class="screenshot" src="http://s.wordpress.com/mshots/v1/<%= "#{@homepage[:homepage].to_s}" %>?w=1200">
 			<% end %>
 			
 			<div class="column twelve display_repo_content" id="files">
+				
+				<ul class="breadcrumb">
+					<li><%= link_to "#{params[:repo_name]}", "/#{params[:user_name]}" %></li>
+					<% @breadcrumb.each do |crumb| %>
+						<li><%= link_to "#{crumb}", "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("_") }#files" %></li>
+					<% end %>
+				</ul>
 
 				<% @data.each do |file| %>
 					<% if file[:type] == "file" then %>
