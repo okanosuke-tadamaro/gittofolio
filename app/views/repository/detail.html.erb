@@ -12,7 +12,12 @@
 				<ul class="breadcrumb">
 					<li><%= link_to "#{params[:repo_name]}", "/#{params[:user_name]}" %></li>
 					<% @breadcrumb.each do |crumb| %>
-						<li><%= link_to "#{crumb}", "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("_") }#files" %></li>
+						<li>></li>
+						<% if "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("_") }#files" != "/#{params[:user_name]}/#{params[:repo_name]}/#{params[:repo_directory]}#files" %>
+							<li><%= link_to "#{crumb}", "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("_") }#files" %></li>
+						<% else %>
+							<li><%= crumb %></li>
+						<% end %>
 					<% end %>
 				</ul>
 
