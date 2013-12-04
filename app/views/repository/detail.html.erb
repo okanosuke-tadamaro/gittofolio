@@ -13,8 +13,8 @@
 					<li><%= link_to "#{params[:repo_name]}", "/#{params[:user_name]}" %></li>
 					<% @breadcrumb.each do |crumb| %>
 						<li>></li>
-						<% if "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("_") }#files" != "/#{params[:user_name]}/#{params[:repo_name]}/#{params[:repo_directory]}#files" %>
-							<li><%= link_to "#{crumb}", "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("_") }#files" %></li>
+						<% if "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("/") }#files" != "/#{params[:user_name]}/#{params[:repo_name]}/#{params[:repo_directory]}#files" %>
+							<li><%= link_to "#{crumb}", "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("/") }#files" %></li>
 						<% else %>
 							<li><%= crumb %></li>
 						<% end %>
@@ -35,7 +35,7 @@
 
 					<% else %>
 
-						<a href="<%= "/#{params[:user_name]}/#{params[:repo_name]}/#{file[:path].gsub('/','_')}" %>#files">
+						<a href="<%= "/#{params[:user_name]}/#{params[:repo_name]}/#{file[:path]}" %>#files">
 							<div class="repo_directory">
 								<div class="directory_box">dir</div>
 								<h4><%= file[:name] %></h4>

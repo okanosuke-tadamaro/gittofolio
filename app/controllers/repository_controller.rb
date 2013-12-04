@@ -40,7 +40,7 @@ class RepositoryController < ApplicationController
 		@homepage = Repository.get_homepage(params[:repo_name])
 
 		if params[:repo_directory] != nil
-			@breadcrumb = params[:repo_directory].split('_')
+			@breadcrumb = params[:repo_directory].split('/')
 		else
 			@breadcrumb = []
 		end

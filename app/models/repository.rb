@@ -61,7 +61,7 @@ class Repository < ActiveRecord::Base
 
 	def self.get_repo_directory(username, repo, directory, github_access_token)
 		client = Octokit::Client.new(access_token: github_access_token)
-		data = client.contents("#{username}/#{repo}", :path => directory.gsub('_','/'))
+		data = client.contents("#{username}/#{repo}", :path => directory)
 	end
 
 end
