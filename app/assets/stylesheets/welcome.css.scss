@@ -88,13 +88,14 @@ input[type='submit'] {
 
 .each_result {
 	display: inline-block;
-	width: 196px;
-	height: 255px;
+	width: 176px;
+	height: 230px;
 	margin: 10px;
-	border: solid 2px #f8f8f8;
-	background-color: #f8f8f8;
 	overflow: hidden;
 	text-align: left;
+	outline: 1px solid #999;
+    padding: 10px;
+    background: #f0f0f0;
 }
 
 .result_text {
