@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
 
 	def self.search_users(term, github_access_token)
 		if term != ""
-			users = JSON.load(RestClient.get("https://api.github.com/legacy/user/search/" + term.gsub(' ','%20') + "?access_token=" + github_access_token))
+			users = JSON.load(RestClient.get("https://api.github.com/legacy/user/search/#{term.gsub(' ','%20')}?access_token=#{github_access_token}"))
 		else
-			"invalid_term"
+			'invalid_term'
 		end
 	end
 end

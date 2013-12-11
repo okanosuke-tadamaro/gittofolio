@@ -1,34 +1,33 @@
 class WelcomeController < ApplicationController
   def index
-    
   end
 
   def user_search
-      @users = User.search_users(params[:q], session[:github_access_token])
-      if @users == "invalid_term"
-        flash[:alert] = "Invalid search term. Please try again."
-        redirect_to root_path
-      elsif @users.fetch("users").empty? == true
-        flash[:notice] = "The user you searched for doesn't seem to exist. Try searching again using a different term."
-        redirect_to root_path  
-      else
-        @users["users"].each { |replace| if replace["name"] == " " then replace["name"] = "Not Available" end }
-        @users["users"].each { |replace| if replace["location"] == nil then replace["location"] = "Not Available" end }
-      end
+    @users = User.search_users(params[:q], session[:github_access_token])
+    if @users == 'invalid_term'
+      flash[:alert] = 'Invalid search term. Please try again.'
+      redirect_to root_path
+    elsif @users.fetch('users').empty?
+      flash[:notice] = 'The user you searched for doesn't seem to exist. Try searching again using a different term.''
+      redirect_to root_path  
+    else
+      @users['users'].each { |replace| if replace['name'] == ' ' then replace['name'] = 'Not Available' end }
+      @users['users'].each { |replace| if replace['location'] == nil then replace["location"] = 'Not Available' end }
+    end
   end
 
   def callback
-    response = RestClient.post("https://github.com/login/oauth/access_token", {client_id: ENV['GITHUB_CLIENT_ID'], client_secret: ENV['GITHUB_CLIENT_SECRET'], code: params["code"]}, { accept: :json })
+    response = RestClient.post('https://github.com/login/oauth/access_token', {client_id: ENV['GITHUB_CLIENT_ID'], client_secret: ENV['GITHUB_CLIENT_SECRET'], code: params['code']}, { accept: :json })
   	parsed_response = JSON.parse(response)
-    client = Octokit::Client.new :access_token => parsed_response["access_token"]
+    client = Octokit::Client.new :access_token => parsed_response['access_token']
     user = client.user
     user.login
 
-    if User.exists?(login: user.login) == nil
-      User.create(name: user.name, login: user.login, location: user.location, email: user.email, github_access_token: parsed_response["access_token"])
+    unless User.exists?(login: user.login)
+      User.create(name: user.name, login: user.login, location: user.location, email: user.email, github_access_token: parsed_response['access_token'])
     end
 
-    session[:github_access_token] = parsed_response["access_token"]
+    session[:github_access_token] = parsed_response['access_token']
 
     flash[:notice] = "You're signed in!"
   	redirect_to root_path
