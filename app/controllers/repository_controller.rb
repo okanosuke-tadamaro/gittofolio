@@ -18,7 +18,6 @@ class RepositoryController < ApplicationController
 
 			@full_name = Repository.get_basic_data(params[:user_name]).full_name
 			@location = Repository.get_basic_data(params[:user_name]).location
-			
 			@pie_data = Repository.get_pie_data(@repositories)
 			@languages = Repository.sort_repos(@repositories)
 			@label = Repository.get_pie_label(@pie_data, @languages)
@@ -46,10 +45,10 @@ class RepositoryController < ApplicationController
 		@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 
 		@data = if params[:repo_directory] == nil then
-							Repository.get_repo_content(params[:user_name], params[:repo_name], session[:github_access_token])
-						else
-							Repository.get_repo_directory(params[:user_name], params[:repo_name], params[:repo_directory], session[:github_access_token])
-						end
+					Repository.get_repo_content(params[:user_name], params[:repo_name], session[:github_access_token])
+				else
+					Repository.get_repo_directory(params[:user_name], params[:repo_name], params[:repo_directory], session[:github_access_token])
+				end
 
 		@data.each do |readme|
 			if readme[:name].downcase.include?("readme")

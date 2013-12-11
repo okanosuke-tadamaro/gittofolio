@@ -29,7 +29,6 @@
 
 .welcome h3 {
 	font-size: 30px;
-	color: white;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	margin-bottom: 50px;
@@ -38,9 +37,9 @@
 .login_button {
 	padding: 20px;
 	background-color: lightblue;
-	border: solid 2px white;
 	color: white;
 	text-transform: uppercase;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .logged_in h3 {
@@ -57,9 +56,10 @@
 
 input[type='text'] {
 	line-height: 25px;
-	border: solid 2px white;
+	border: solid 1px white;
 	padding: 10px;
 	background-color: rgba(255,255,255,1);
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2) inset, 0 0 2px rgba(0, 0, 0, 0.2) inset;
 }
 
 input[type='submit'] {
@@ -74,12 +74,13 @@ input[type='submit'] {
 	margin-left: 10px;
 	position: relative;
 	top: -2px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .search_results h3 {
 	font-weight: 300;
 	text-transform: uppercase;
-	letter-spacing: 3px;
+	letter-spacing: 2px;
 }
 
 .show_results {
@@ -88,25 +89,24 @@ input[type='submit'] {
 
 .each_result {
 	display: inline-block;
-	width: 176px;
-	height: 230px;
+	width: 200px;
+	height: 260px;
 	margin: 10px;
 	overflow: hidden;
 	text-align: left;
-	outline: 1px solid #999;
-    padding: 10px;
-    background: #f0f0f0;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .result_text {
 	padding-left: 10px;
 	padding-right: 10px;
-	padding-top: 2px;
 }
 
 .result_text p {
 	margin: 0;
 	font-size: 12px;
-	font-family: 'Courier New';
+	font-weight: 400;
 	color: #1c1c1c;
 }
