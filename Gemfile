@@ -6,6 +6,7 @@ gem 'json'
 gem 'rest-client'
 gem 'redcarpet'
 gem 'github-markup'
+gem 'mad_chatter', github: 'madchatter/mad_chatter'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

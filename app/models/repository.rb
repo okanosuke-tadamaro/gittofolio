@@ -50,6 +50,10 @@ class Repository < ActiveRecord::Base
 		bundled_data = language.zip(colors)
 	end
 
+	# def self.get_repo_stats
+		
+	# end
+
 	def self.get_homepage(repo_name)
 		homepage = Repository.find_by name: repo_name
 	end
