@@ -1,61 +1,42 @@
-<div class="row user_window">
-	<div class="row-content">
-		<div class="column four">
-			<div class="new_content">
-				<p>Some new content here....soon</p>
-			</div>
+<div class="small-12 columns">
+
+	<div class="row collapse user_window">
+		<div class="large-4 columns user_avatar">
+			<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300", :class => "avatar th") %>
 		</div>
-		<div class="column third">
-			<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300", :class => "avatar") %>
-		</div>
-		<div class="column four last">
-			<div class="pie_wrap">
-			<canvas id="languagepie" class="language_pie" width="300" height="300"></canvas>
-			
-			<ul class="color_hoge">
-				<% @label.each do |label| %>
-					<%=raw '<li style="background-color:#' + "#{label.last}" + ';">' + "#{label.first}" + '</li>' %>
-				<% end %>
+		<div class="large-4 columns">
+			<ul data-pie-id="pie_chart">
+				<%= pie_chart(@pie_data, :id => "pie_chart",:library => {:backgroundColor => "#f5f5f5",:chartArea => {:width => "100%"}}) %>
 			</ul>
 		</div>
+		<div class="large-4 columns">
+			<ul data-pie-id="pie_chart2">
+				<%= pie_chart(@pie_data, :id => "pie_chart2",:library => {:backgroundColor => "#f5f5f5",:chartArea => {:width => "100%"}}) %>
+			</ul>
 		</div>
-		<div class="clear"></div>
 	</div>
-</div>
 
-<div class="row">
-	<div class="row-content">
-		<div class="column twelve main_content">
+	<div class="row">
+		<div class="small-12 columns">
 
-			<ul class="filterControl">
-				<li class="filter" data-filter="all">Show All</li>
-				<% @languages.each do |control| %>
-					<%=raw '<li class="filter" data-filter="' + "#{control.downcase.gsub('#','')}" + '">' + "#{control}" + '</li>' %>
-				<% end %>
-			</ul>
-
-			<ul id="filterGrid">
+			<ul class="small-block-grid-2 medium-block-grid-5 large-block-grid-5">
 				<% @repositories.each do |filter| %>
-						<%=raw '<li class="mix ' + "#{filter[:language].downcase.gsub('#','')}" + '">' %>
-							<%=raw '<a href="' + "/#{params[:user_name]}/#{filter[:name]}" + '">' %>
-								<% if filter[:homepage] != "not_available" then %>
-									<%=raw '<img src="' + "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=196" + '">' %>
-								<% elsif %>
-									<div class="thumbalt" style="background-color: #<%= @label.select { |data| data.include?(filter[:language]) }.last.last %>;"><%= filter[:language] %></div>
-								<% else %>
-									<%= image_tag("index_placeholder.png") %>
-								<% end %>
-								<h4><%= "#{filter[:name]}" %></h4>
-							<%=raw '</a>' %>
-						<%=raw '</li>' %>
+						<li>
+							<div class="each_repo">
+								<a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>'>
+									<% if filter[:homepage] != "not_available" then %>
+										<img src="<%= "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=300" %>">
+									<% else %>
+										<%= image_tag("index_placeholder.png", :width => 300) %>
+									<% end %>
+								</a>
+								<p><%= if filter[:name].size > 17 then filter[:name][0,17] + "..." else filter[:name] end %></p>
+							</div>
+						</li>
 				<% end %>
 			</ul>
 
 		</div>
 	</div>
-</div>
 
-<%= javascript_tag do %>
-	var data = <%=raw @pie_data.each { |data| puts data }.to_s.gsub('"', '') %>;
-	var myDoughnut = new Chart(document.getElementById("languagepie").getContext("2d")).Doughnut(data);
-<% end %>
+</div>

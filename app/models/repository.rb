@@ -41,8 +41,8 @@ class Repository < ActiveRecord::Base
 		value_list = values.map { |value| value[:language] }
 		counts = value_list.inject(Hash.new(0)) {|hash,language| hash[language] += 1; hash}
 		ordered_counts = Hash[counts.sort_by {|k,v| v}.reverse]
-		color_data = ['#1abc9c','#f1c40f','#3498db','#e74c3c','#2c3e50','#bdc3c7','#e67e22','#2ecc71','#ecf0f1','#8e44ad']
-		pie_data = ordered_counts.values.map {|data| "{" + "value: #{data}, color: '#{color_data.delete_at(rand(color_data.length))}'" + "}"}
+		# color_data = ['#1abc9c','#f1c40f','#3498db','#e74c3c','#2c3e50','#bdc3c7','#e67e22','#2ecc71','#ecf0f1','#8e44ad']
+		# pie_data = ordered_counts.values.map {|data| "{" + "value: #{data}, color: '#{color_data.delete_at(rand(color_data.length))}'" + "}"}
 	end
 
 	def self.get_pie_label(data,language)

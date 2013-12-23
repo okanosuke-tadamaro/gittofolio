@@ -2,6 +2,8 @@ class RepositoryController < ApplicationController
 
 	def index
 
+		@current_user = User.find_by github_access_token: session[:github_access_token]
+
 		if User.search_users(params[:user_name], session[:github_access_token]).fetch("users").empty? == true
 			flash[:alert] = "The user you searched for doesn't seem to exist. You might want to try searching by name."
 			redirect_to root_path
@@ -20,13 +22,14 @@ class RepositoryController < ApplicationController
 			@location = Repository.get_basic_data(params[:user_name]).location
 			@pie_data = Repository.get_pie_data(@repositories)
 			@languages = Repository.sort_repos(@repositories)
-			@label = Repository.get_pie_label(@pie_data, @languages)
 		end
 
 	end
 
 	def detail
 		require 'github/markup'
+
+		@current_user = User.find_by github_access_token: session[:github_access_token]
 
 		if params[:format] != nil
 			params[:repo_name] = "#{params[:repo_name]}.#{params[:format]}"
