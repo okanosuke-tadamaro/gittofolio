@@ -1,8 +1,8 @@
 class RepositoryController < ApplicationController
 
 	def index
-
 		@current_user = User.find_by github_access_token: session[:github_access_token]
+		client = Repository.new_request(session[:github_access_token])
 
 		if User.search_users(params[:user_name], session[:github_access_token]).fetch("users").empty? == true
 			flash[:alert] = "The user you searched for doesn't seem to exist. You might want to try searching by name."
@@ -22,6 +22,7 @@ class RepositoryController < ApplicationController
 			@location = Repository.get_basic_data(params[:user_name]).location
 			@pie_data = Repository.get_pie_data(@repositories)
 			@languages = Repository.sort_repos(@repositories)
+			@line_chart = Repository.get_event_data(params[:user_name], session[:github_access_token])
 		end
 
 	end

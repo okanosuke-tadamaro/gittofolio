@@ -6,6 +6,10 @@ class Repository < ActiveRecord::Base
 		end
 	end
 
+	def self.new_request(github_access_token)
+		client = Octokit::Client.new(access_token: github_access_token)
+	end
+
 	def self.get_repos(username, github_access_token)
 		client = Octokit::Client.new(access_token: github_access_token)
   		repositories = client.repositories(username)
@@ -37,6 +41,14 @@ class Repository < ActiveRecord::Base
 		languages = language_unordered.push("Other")
 	end
 
+	def self.get_event_data(username, github_access_token)
+		event_data = JSON.load(RestClient.get("https://github.com/users/" + username + "/contributions_calendar_data?access_token=" + "#{github_access_token}"))
+		filter_line_chart_data = event_data.select {|x| x[0].to_date >= Date.today - 8.weeks}
+		dates = filter_line_chart_data.map {|date| date.first.to_date}.in_groups_of(7,false).map {|date| date.last}
+		graph_data = filter_line_chart_data.map {|graph| graph.last}.in_groups_of(7,false).map {|graph| graph.sum}
+		all_data = dates.zip(graph_data)
+	end
+
 	def self.get_pie_data(values)
 		value_list = values.map { |value| value[:language] }
 		counts = value_list.inject(Hash.new(0)) {|hash,language| hash[language] += 1; hash}
@@ -49,10 +61,6 @@ class Repository < ActiveRecord::Base
 		colors = data.map { |color| color.scan(/(?<=#)(?<!^)(\h{6}|\h{3})/).first.first }
 		bundled_data = language.zip(colors)
 	end
-
-	# def self.get_repo_stats
-		
-	# end
 
 	def self.get_homepage(repo_name)
 		homepage = Repository.find_by name: repo_name
