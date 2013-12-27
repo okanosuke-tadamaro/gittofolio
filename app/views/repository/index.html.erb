@@ -1,22 +1,24 @@
 <div class="small-12 columns">
 
 	<div class="row collapse user_window">
-		<div class="large-4 columns user_avatar">
-			<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300", :class => "avatar th") %>
-		</div>
-		<div class="large-4 columns">
-			<ul data-pie-id="pie_chart">
-				<%= pie_chart(@pie_data, :id => "pie_chart", :library => {:backgroundColor => "#f5f5f5", :chartArea => {:width => "100%"}}) %>
-			</ul>
+		<div class="large-4 columns small-centered large-uncentered user_avatar">
+			<div class="text-center">
+				<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300", :class => "avatar") %>
+			</div>
 		</div>
 		<div class="large-4 columns">
 			<ul data-pie-id="line_chart">
-				<%= line_chart(@line_chart, :id => "line_chart", :library => {:backgroundColor => "f5f5f5", :chartArea => {:width => "87%"}}) %>
+				<%= line_chart(@line_chart, :id => "line_chart", :height => "250px", :library => {:backgroundColor => "f5f5f5", :chartArea => {:top => 35, :width => "90%"}, :vAxis => {:textPosition => "in"}, :hAxis => {:format => 'MMM d'}}) %>
+			</ul>
+		</div>
+		<div class="large-4 columns line_chart">
+			<ul data-pie-id="pie_chart">
+				<%= pie_chart(@pie_data, :id => "pie_chart", :height => "250px", :library => {:backgroundColor => "#f5f5f5", :chartArea => {:top => 25, :width => "90%"}}) %>
 			</ul>
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row top_margin">
 		<div class="small-12 columns">
 
 			<ul class="small-block-grid-2 medium-block-grid-5 large-block-grid-5">
