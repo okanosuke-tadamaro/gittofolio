@@ -1,4 +1,4 @@
-.top_margin { padding-top: 20px; }
+.top_padding { padding-top: 20px; }
 
 .h1_user {
 	.change_color {
@@ -14,14 +14,21 @@
 .user_window {
 	.user_avatar{
 		img.avatar { height: 250px; }
-		background-color: white;
 	}
-	background-color: lightblue;
-	padding: 20px 20px 0 20px;
+	/*padding: 20px 20px 5px 20px;*/
 }
 
 .each_repo {
-	p { font-size: 14px; font-weight: 400; text-align: center; margin: 0; }
+	p {
+		.updated_at { font-size: 10px; color: 	gray; }
+		line-height: 16px; font-size: 14px; font-weight: 400; margin: 0; padding: 3px;
+	}
 	background-color: rgba(255,255,255,0.5);
 	padding: 5px;
+}
+
+.breadcrumbs { margin-top: 20px; }
+
+.file_box {
+	i { margin-right: 10px; color: lightblue; }
 }

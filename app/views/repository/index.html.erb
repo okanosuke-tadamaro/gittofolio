@@ -18,7 +18,7 @@
 		</div>
 	</div>
 
-	<div class="row top_margin">
+	<div class="row top_padding">
 		<div class="small-12 columns">
 
 			<ul class="small-block-grid-2 medium-block-grid-5 large-block-grid-5">
@@ -32,7 +32,10 @@
 										<%= image_tag("index_placeholder.png", :width => 300) %>
 									<% end %>
 								</a>
-								<p><%= if filter[:name].size > 17 then filter[:name][0,17] + "..." else filter[:name] end %></p>
+								<p>
+									<%= if filter[:name].size > 17 then filter[:name][0,17] + "..." else filter[:name] end %><br />
+									<span class="updated_at">Updated: <%= l filter[:update_date], format: :long %></span>
+								</p>
 							</div>
 						</li>
 				<% end %>

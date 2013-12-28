@@ -1,72 +1,58 @@
 <div class="row">
-	<div class="row-content">
-		<div class="column twelve main_content">
-			<h3 class="repo_name"><%= params[:repo_name] %></h3>
+	<div class="small-12 columns">
+		
+		<h3 class="repo_name"><%= params[:repo_name] %></h3>
+		<% if @homepage[:homepage] != "not_available" %>
+			<img class="screenshot" src="http://s.wordpress.com/mshots/v1/<%= "#{@homepage[:homepage].to_s}" %>?w=1200">
+		<% end %>
 
-			<% if @homepage[:homepage] != "not_available" %>
-				<img class="screenshot" src="http://s.wordpress.com/mshots/v1/<%= "#{@homepage[:homepage].to_s}" %>?w=1200">
+		<ul class="breadcrumbs">
+			<li><%= link_to "#{params[:repo_name]}", "/#{params[:user_name]}/#{params[:repo_name]}" %></li>
+			<% @breadcrumb.each do |crumb| %>
+				<% if "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("/") }#files" != "/#{params[:user_name]}/#{params[:repo_name]}/#{params[:repo_directory]}#files" %>
+					<li><%= link_to "#{crumb}", "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("/") }#files" %></li>
+				<% else %>
+					<li><%= crumb %></li>
+				<% end %>
 			<% end %>
-			
-			<div class="column twelve display_repo_content" id="files">
-				
-				<ul class="breadcrumb">
-					<li><%= link_to "#{params[:repo_name]}", "/#{params[:user_name]}/#{params[:repo_name]}" %></li>
-					<% @breadcrumb.each do |crumb| %>
-						<li>></li>
-						<% if "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("/") }#files" != "/#{params[:user_name]}/#{params[:repo_name]}/#{params[:repo_directory]}#files" %>
-							<li><%= link_to "#{crumb}", "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("/") }#files" %></li>
+		</ul>
+
+		<div class="row collapse">
+			<div class="large-3 columns">
+
+				<ul class="file_box" id="files">
+					<% @data.each do |file| %>
+						<% if file[:type] == "file" then %>
+							<li><i class="fa fa-file"></i><a href="#" data-reveal-id="<%= file[:name].downcase.gsub('.','') %>"><%= file[:name] %></a></li>
 						<% else %>
-							<li><%= crumb %></li>
+							<li><i class="fa fa-folder"></i><a href="<%= "/#{params[:user_name]}/#{params[:repo_name]}/#{file[:path]}" %>#files"><%= file[:name] %></a></li>
 						<% end %>
 					<% end %>
 				</ul>
 
-				<% @data.each do |file| %>
-					<% if file[:type] == "file" then %>
+			</div>
+			<div class="large-9 columns">
 
-						<%=raw '<a href="' + "##{file[:name].downcase.gsub('.','')}" + '" rel="leanModal">' %>
-
-							<div class="repo_file">
-								<div class="file_box"><%= if File.extname("#{file[:name]}") != "" then File.extname("#{file[:name]}").gsub('.','') else "txt" end %></div>
-								<h4><%= file[:name] %></h4>
-							</div>
-						
-						<%=raw '</a>' %>
-
-					<% else %>
-
-						<a href="<%= "/#{params[:user_name]}/#{params[:repo_name]}/#{file[:path]}" %>#files">
-							<div class="repo_directory">
-								<div class="directory_box">dir</div>
-								<h4><%= file[:name] %></h4>
-							</div>
-						</a>
-
+				<% @data.each do |readme| %>
+					<% if readme[:name].downcase.include?("readme") %>
+						<div class="column twelve display_readme">
+							<div class="show_readme"><%=raw GitHub::Markup.render(readme[:name], Base64.decode64(readme.rels[:self].get.data[:content])) %></div>
+						</div>
 					<% end %>
 				<% end %>
 
 			</div>
-
-			
-			<% @data.each do |readme| %>
-				<% if readme[:name].downcase.include?("readme") %>
-					<div class="column twelve display_readme">
-						<div class="show_readme"><%=raw GitHub::Markup.render(readme[:name], Base64.decode64(readme.rels[:self].get.data[:content])) %></div>
-					</div>
-				<% end %>
-			<% end %>
-
 		</div>
+
 	</div>
 </div>
 
 <% @data.each do |file| %>
 	<% if file[:type] == "file" then %>
-		
-		<%=raw '<div id="' + "#{file[:name].downcase.gsub('.','')}" + '" class="hide_content show_content">' %>
-				<h2><%= file[:name] %></h2>
-				<pre><%= Base64.decode64(file.rels[:self].get.data[:content]) %></pre>
-		<%=raw '</div>' %>
-
+		<div id="<%= file[:name].downcase.gsub('.','') %>" class="reveal-modal" data-reveal>
+			<h2><%= file[:name] %></h2>
+			<pre><%= Base64.decode64(file.rels[:self].get.data[:content]) %></pre>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
 	<% end %>
 <% end %>
