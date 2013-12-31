@@ -1,4 +1,7 @@
-.top_padding { padding-top: 20px; }
+.top_padding { padding-top: 25px; }
+.shadow { box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
+.border_bottom { border-bottom: solid 1px lightgray; margin-bottom: 20px; }
+.yield { h1, h2, h3, h4, h5, h6 { padding: 5px 5px 5px 5px; margin-bottom: 0; font-weight: 400; } }
 
 .h1_user {
 	.change_color {
@@ -13,22 +16,44 @@
 
 .user_window {
 	.user_avatar{
-		img.avatar { height: 250px; }
+		.avatar_box { padding: 5px; background-color: #f9f9f9; }
 	}
-	/*padding: 20px 20px 5px 20px;*/
+	.line_chart, .pie_chart { margin: 0; }
+	.info_box {
+		height: 50px;
+		background-color: rgba(255,255,255,0.5);
+	}
 }
 
 .each_repo {
+	i { width: 12px; }
+	img { margin-bottom: 5px; }
 	p {
-		.updated_at { font-size: 10px; color: 	gray; }
+		.updated_at {
+			i { margin-left: 1px; }
+			font-size: 10px; color: gray;
+		}
 		line-height: 16px; font-size: 14px; font-weight: 400; margin: 0; padding: 3px;
 	}
-	background-color: rgba(255,255,255,0.5);
+	background-color: #f9f9f9;
 	padding: 5px;
 }
 
+
+/* ------ repository#detail ------ */
 .breadcrumbs { margin-top: 20px; }
 
 .file_box {
-	i { margin-right: 10px; color: lightblue; }
+	i { width: 20px; color: lightblue; }
+	margin: 0;
+	padding: 15px;
+	font-size: 14px;
+	background-color: #f9f9f9;
+	list-style-type: none;
+}
+
+.display_readme {
+	code { display: block; padding: 15px; font-family: 'Source Code Pro'; font-size: 12px; background-color: gray; color: white; }
+	background-color: #f9f9f9;
+	padding: 15px;
 }

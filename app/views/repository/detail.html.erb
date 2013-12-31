@@ -17,7 +17,7 @@
 			<% end %>
 		</ul>
 
-		<div class="row collapse">
+		<div class="row">
 			<div class="large-3 columns">
 
 				<ul class="file_box" id="files">
@@ -32,15 +32,13 @@
 
 			</div>
 			<div class="large-9 columns">
-
-				<% @data.each do |readme| %>
-					<% if readme[:name].downcase.include?("readme") %>
-						<div class="column twelve display_readme">
+				<div class="display_readme">
+					<% @data.each do |readme| %>
+						<% if readme[:name].downcase.include?("readme") %>
 							<div class="show_readme"><%=raw GitHub::Markup.render(readme[:name], Base64.decode64(readme.rels[:self].get.data[:content])) %></div>
-						</div>
+						<% end %>
 					<% end %>
-				<% end %>
-
+				</div>
 			</div>
 		</div>
 
@@ -49,7 +47,7 @@
 
 <% @data.each do |file| %>
 	<% if file[:type] == "file" then %>
-		<div id="<%= file[:name].downcase.gsub('.','') %>" class="reveal-modal" data-reveal>
+		<div id="<%= file[:name].downcase.gsub('.','') %>" class="reveal-modal medium" data-reveal>
 			<h2><%= file[:name] %></h2>
 			<pre><%= Base64.decode64(file.rels[:self].get.data[:content]) %></pre>
 			<a class="close-reveal-modal">&#215;</a>
