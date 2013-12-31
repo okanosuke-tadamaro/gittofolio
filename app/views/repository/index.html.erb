@@ -22,7 +22,7 @@
 				<div class="large-6 columns">
 					<h6><i class="fa fa-bar-chart-o"></i>Language Composition</h6>
 					<ul data-pie-id="pie_chart" class="pie_chart shadow">
-						<%= pie_chart(@pie_data, :id => "pie_chart", :height => "190px", :library => {:backgroundColor => "#f9f9f9", :chartArea => {:width => "90%"}}) %>
+						<%= pie_chart(@pie_data, :id => "pie_chart", :height => "190px", :library => {:colors => @pie_colors, :backgroundColor => "#f9f9f9", :chartArea => {:width => "90%"}}) %>
 					</ul>
 				</div>
 			</div>	
@@ -32,7 +32,7 @@
 	<div class="row top_padding">
 		<div class="small-12 columns top_padding">
 			<div class="border_bottom"><h6><i class="fa fa-leaf"></i>Repositories</h6></div>
-			<ul class="small-block-grid-2 medium-block-grid-5 large-block-grid-5">
+			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
 				<% @repositories.each do |filter| %>
 						<li>
 							<div class="each_repo shadow">
