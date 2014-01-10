@@ -48,7 +48,7 @@
 	<div class="row top_padding">
 		<div class="small-12 columns top_padding">
 			<div class="border_bottom"><h6><i class="fa fa-leaf"></i>Repositories</h6></div>
-			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
+			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 				<% @repositories.each do |filter| %>
 					<% if filter[:homepage] != "not_available" %>
 						<li>
@@ -57,7 +57,7 @@
 									<img src="<%= "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=300" %>">
 								</a>
 								<p>
-									<i class="fa fa-github"></i><%= if filter[:name].size > 16 then filter[:name][0,16] + "..." else filter[:name] end %><br />
+									<i class="fa fa-github"></i><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>'><%= if filter[:name].size > 16 then filter[:name][0,16] + "..." else filter[:name] end %></a><br />
 									<span class="updated_at"><i class="fa fa-calendar"></i><%= l filter[:update_date], format: :long %></span>
 								</p>
 							</div>
@@ -77,7 +77,7 @@
 						<li>
 							<div class="each_repo shadow">
 								<p>
-									<i class="fa fa-github"></i><%= if filter[:name].size > 16 then filter[:name][0,16] + "..." else filter[:name] end %><br />
+									<i class="fa fa-github"></i><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>'><%= if filter[:name].size > 16 then filter[:name][0,16] + "..." else filter[:name] end %></a><br />
 									<span class="updated_at"><i class="fa fa-calendar"></i><%= l filter[:update_date], format: :long %></span>
 								</p>
 							</div>

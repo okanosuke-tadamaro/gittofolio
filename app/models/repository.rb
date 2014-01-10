@@ -10,7 +10,7 @@ class Repository < ActiveRecord::Base
 		Octokit::Client.new(access_token: github_access_token)
 	end
 
-	def self.get_repos(client, username, github_access_token)
+	def self.get_repos(client, username)
   		repositories = client.repositories(username)
   		parsed_repositories = repositories.inject(Array.new) { |array, repo| array << { name: repo[:name], description: repo[:description], language: repo[:language], owner: repo[:owner][:login], avatar: repo[:owner][:gravatar_id], homepage: repo[:homepage], start_date: repo[:created_at], update_date: repo[:updated_at] } }
 		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
@@ -26,8 +26,46 @@ class Repository < ActiveRecord::Base
 		Repository.find_by owner: username
 	end
 
-	def self.get_cached_repos(username)
-		fetched_repo_data = Repository.where("owner = '#{username}'")
+	def self.get_cached_repos(client, user_data, username)
+		if user_data[:updated_at].to_date > Repository.where(:owner => username).sort_by { |date| date.update_date }.reverse.first.update_date
+			repositories = Repository.get_repos(client, username)
+			repositories.each do |repo|
+				if Repository.where(:owner => username, :name => repo[:name]).exists? == nil
+					Repository.create(
+						name: repo[:name],
+						description: repo[:description],
+						language: repo[:language],
+						owner: repo[:owner],
+						avatar: repo[:avatar],
+						full_name: user_data[:name],
+						location: user_data[:location],
+						company: user_data[:company],
+						blog: user_data[:blog],
+						homepage: repo[:homepage],
+						start_date: repo[:start_date].to_date,
+						update_date: repo[:update_date].to_date
+					)
+				else
+					repository = Repository.find_by(:owner => username, :name => repo[:name])
+					Repository.update( repository.id, {
+						name: repo[:name],
+						description: repo[:description],
+						language: repo[:language],
+						owner: repo[:owner],
+						avatar: repo[:avatar],
+						full_name: user_data[:name],
+						location: user_data[:location],
+						company: user_data[:company],
+						blog: user_data[:blog],
+						homepage: repo[:homepage],
+						start_date: repo[:start_date].to_date,
+						update_date: repo[:update_date].to_date
+						}
+					)
+				end
+			end
+		end
+		fetched_repo_data = Repository.where(:owner => username)
 		inject_repo_data = fetched_repo_data.inject(Array.new) { |array, repo| array << { name: repo.name, description: repo.description, language: repo.language, owner: repo.owner, avatar: repo.avatar, full_name: repo.full_name, location: repo.location, company: repo.company, blog: repo.blog, homepage: repo.homepage, start_date: repo.start_date, update_date: repo.update_date } }
 		inject_repo_data.sort_by { |date| date[:update_date] }.reverse
 	end
