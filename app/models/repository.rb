@@ -15,6 +15,7 @@ class Repository < ActiveRecord::Base
   		parsed_repositories = repositories.inject(Array.new) { |array, repo| array << { name: repo[:name], description: repo[:description], language: repo[:language], owner: repo[:owner][:login], avatar: repo[:owner][:gravatar_id], homepage: repo[:homepage], start_date: repo[:created_at], update_date: repo[:updated_at] } }
 		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
 		parsed_repositories.each { |thumb| if thumb[:homepage] == nil || thumb[:homepage] == "" then thumb[:homepage] = "not_available" end }
+		parsed_repositories.sort_by { |date| date[:update_date] }.reverse
 	end
 
 	def self.get_full_user_data(client, username, github_access_token)
@@ -27,7 +28,8 @@ class Repository < ActiveRecord::Base
 
 	def self.get_cached_repos(username)
 		fetched_repo_data = Repository.where("owner = '#{username}'")
-		fetched_repo_data.inject(Array.new) { |array, repo| array << { name: repo.name, description: repo.description, language: repo.language, owner: repo.owner, avatar: repo.avatar, full_name: repo.full_name, location: repo.location, company: repo.company, blog: repo.blog, homepage: repo.homepage, start_date: repo.start_date, update_date: repo.update_date } }
+		inject_repo_data = fetched_repo_data.inject(Array.new) { |array, repo| array << { name: repo.name, description: repo.description, language: repo.language, owner: repo.owner, avatar: repo.avatar, full_name: repo.full_name, location: repo.location, company: repo.company, blog: repo.blog, homepage: repo.homepage, start_date: repo.start_date, update_date: repo.update_date } }
+		inject_repo_data.sort_by { |date| date[:update_date] }.reverse
 	end
 
 	def self.sort_repos(repositories)
