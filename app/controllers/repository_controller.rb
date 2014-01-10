@@ -3,18 +3,16 @@ class RepositoryController < ApplicationController
 	def index
 		@current_user = User.find_by github_access_token: session[:github_access_token]
 		client = Repository.new_request(session[:github_access_token])
+		@full_user_data = Repository.get_full_user_data(client, params[:user_name], session[:github_access_token])
 
 		if User.search_users(params[:user_name], session[:github_access_token]).fetch("users").empty? == true
 			flash[:alert] = "The user you searched for doesn't seem to exist. You might want to try searching by name."
 			redirect_to root_path
 		else
-			@user = User.show_login(session[:github_access_token])
-
 			if Repository.check_cache(params[:user_name]) == true
 				@repositories = Repository.get_cached_repos(params[:user_name])
 			else
-				full_user_data = Repository.get_full_user_data(params[:user_name], session[:github_access_token])
-				@repositories = Repository.get_repos(params[:user_name], session[:github_access_token])
+				@repositories = Repository.get_repos(client, params[:user_name], session[:github_access_token])
 				@repositories.each { |fetched_repository| Repository.create(name: fetched_repository[:name], description: fetched_repository[:description], language: fetched_repository[:language], owner: fetched_repository[:owner], avatar: fetched_repository[:avatar], full_name: full_user_data[:name], location: full_user_data[:location], company: full_user_data[:company], blog: full_user_data[:blog], homepage: fetched_repository[:homepage], start_date: fetched_repository[:start_date].to_date, update_date: fetched_repository[:update_date].to_date) }
 			end
 
@@ -26,7 +24,6 @@ class RepositoryController < ApplicationController
 			colors = ["#1b5167", "#226682", "#297b9d", "#3091b8", "#3ea3cc", "#59b0d3", "#74bdda", "#8ec9e2", "#a9d6e9", "#c4e3f0", "#dff0f7"]
 			@pie_colors = colors.take(@pie_data.size)
 		end
-
 	end
 
 	def detail

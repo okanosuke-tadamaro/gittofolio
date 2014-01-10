@@ -7,20 +7,18 @@ class Repository < ActiveRecord::Base
 	end
 
 	def self.new_request(github_access_token)
-		client = Octokit::Client.new(access_token: github_access_token)
+		Octokit::Client.new(access_token: github_access_token)
 	end
 
-	def self.get_repos(username, github_access_token)
-		client = Octokit::Client.new(access_token: github_access_token)
+	def self.get_repos(client, username, github_access_token)
   		repositories = client.repositories(username)
   		parsed_repositories = repositories.inject(Array.new) { |array, repo| array << { name: repo[:name], description: repo[:description], language: repo[:language], owner: repo[:owner][:login], avatar: repo[:owner][:gravatar_id], homepage: repo[:homepage], start_date: repo[:created_at], update_date: repo[:updated_at] } }
 		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
 		parsed_repositories.each { |thumb| if thumb[:homepage] == nil || thumb[:homepage] == "" then thumb[:homepage] = "not_available" end }
 	end
 
-	def self.get_full_user_data(username, github_access_token)
-		client = Octokit::Client.new(access_token: github_access_token)
-		user_attributes = client.user(username)
+	def self.get_full_user_data(client, username, github_access_token)
+		client.user(username)
 	end
 
 	def self.get_basic_data(username)

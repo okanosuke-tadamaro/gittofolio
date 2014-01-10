@@ -3,12 +3,28 @@
 	<div class="row user_window">
 		<div class="small-3 large-3 columns user_avatar">
 			<div class="avatar_box shadow"><%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300", :class => "avatar") %></div>
+			<div class="stat_box shadow">
+				<ul class="small-block-grid-2 stats text-center">
+					<li><span><%= @full_user_data.followers %></span><br>followers</li>
+					<li><span><%= @full_user_data.following %></span><br>following</li>
+				</ul>
+			</div>
 		</div>
 		<div class="small-9 large-9 columns">
 			<div class="row collapse">
 				<div class="small-12 columns">
+					<h6><i class="fa fa-info-circle"></i>General Information</h6>
 					<div class="info_box shadow">
-
+						<ul>
+							<li><i class="fa fa-map-marker"></i><%= if @location != nil then @location else "Location not available" end %></li>
+							<li><i class="fa fa-building-o"></i><%= if @full_user_data.company != nil then @full_user_data.company else "Company not available" end %></li>
+							<li><i class="fa fa-envelope"></i><%= if @full_user_data.email != nil then @full_user_data.email else "Email not available" end %></li>
+						</ul>
+						<ul>
+							<li><i class="fa fa-github"></i><a href="http://www.github.com/<%= params[:user_name] %>" target="_blank">Github</a></li>
+							<li><i class="fa fa-twitter"></i>Twitter</li>
+							<li><i class="fa fa-facebook"></i>Facebook</li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -34,14 +50,11 @@
 			<div class="border_bottom"><h6><i class="fa fa-leaf"></i>Repositories</h6></div>
 			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
 				<% @repositories.each do |filter| %>
+					<% if filter[:homepage] != "not_available" %>
 						<li>
 							<div class="each_repo shadow">
 								<a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>'>
-									<% if filter[:homepage] != "not_available" then %>
-										<img src="<%= "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=300" %>">
-									<% else %>
-										<%= image_tag("index_placeholder.png", :width => 300) %>
-									<% end %>
+									<img src="<%= "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=300" %>">
 								</a>
 								<p>
 									<i class="fa fa-github"></i><%= if filter[:name].size > 16 then filter[:name][0,16] + "..." else filter[:name] end %><br />
@@ -49,9 +62,29 @@
 								</p>
 							</div>
 						</li>
+					<% end %>
 				<% end %>
 			</ul>
+		</div>
+	</div>
 
+	<div class="row top_padding">
+		<div class="small-12 columns">
+			<div class="border_bottom"><h6><i class="fa fa-leaf"></i>Repositories</h6></div>
+			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
+				<% @repositories.each do |filter| %>
+					<% if filter[:homepage] == "not_available" %>
+						<li>
+							<div class="each_repo shadow">
+								<p>
+									<i class="fa fa-github"></i><%= if filter[:name].size > 16 then filter[:name][0,16] + "..." else filter[:name] end %><br />
+									<span class="updated_at"><i class="fa fa-calendar"></i><%= l filter[:update_date], format: :long %></span>
+								</p>
+							</div>
+						</li>
+					<% end %>
+				<% end %>
+			</ul>
 		</div>
 	</div>
 

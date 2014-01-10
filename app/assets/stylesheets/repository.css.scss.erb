@@ -14,14 +14,26 @@
 	letter-spacing: 3px;
 }
 
+.stats {
+	span { font-size: 30px; line-height: 30px; color: #333; }
+	font-size: 12px;
+	color: gray;
+	padding: 15px 15px 0 15px;
+}
+
 .user_window {
 	.user_avatar{
 		.avatar_box { padding: 5px; background-color: #f9f9f9; }
+		.stat_box { padding: 5px; background-color: #f9f9f9; margin-top: 10px; }
 	}
 	.line_chart, .pie_chart { margin: 0; }
 	.info_box {
-		height: 50px;
+		ul {
+			li { display: inline-block; margin-right: 15px; }
+			margin: 0; font-size: 14px; list-style-type: none;
+		}
 		background-color: rgba(255,255,255,0.5);
+		padding: 15px;
 	}
 }
 
