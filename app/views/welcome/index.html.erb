@@ -6,21 +6,21 @@
 				<p class="alert"><%= alert %></p>
 				<div class="slogan"></div>
 				<div class="text-left intro">
-					<h5><i class="fa fa-asterisk"></i>Turn your Github projects into a portfolio</h5>
+					<h6><i class="fa fa-asterisk"></i>Turn your Github projects into a portfolio</h6>
 					<hr />
 					<p>It's a real pain when you have to think about making a portfolio for your awesome projects. Especially when you want to spend time on your portfolio pieces rather than the portfolio itself. Gittofolio will turn your Github projects into a displayable, nicely layed out portfolio. All you have to do is sign in with Github and that's it! Or, if you want to look at other people's projects, Gittofolio will make it easier to navigate through information with an organized front-end.</p>
 				</div>
-				<a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['GITHUB_CLIENT_ID'] %>" class="button expand">Log in with Github</a>
+				<a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['GITHUB_CLIENT_ID'] %>" class="button expand">Sign-in with Github</a>
 			</div>
 		<% else %>
 			<div class="logged_in">
 				<p class="notice"><%= notice %></p>
 				<p class="alert"><%= alert %></p>
-				<div class="panel callout">
+				<div class="search_box">
 					<p class="direction">Enter a username or full name to start your search</p>
 					<%= form_tag search_path, method: "get" do %>
 						<%= text_field_tag :q, params[:q] %>
-						<%= submit_tag("Show Me") %>
+						<%= submit_tag("Show Me", :class => "button") %>
 					<% end %>
 				</div>
 			</div>

@@ -1,17 +1,20 @@
-<div class="small-12 columns">
-	<h3>Search Results</h3>
+<div class="small-12 columns search">
+	<h6><i class="fa fa-search"></i>Search Results</h6>
+	<hr />
 	<ul class="small-block-grid-3 medium-block-grid-4 large-block-grid-5">
 		<% @users["users"].each do |result| %>
 		
-			<li class="each_result">
-				<a href="<%= "/#{result["username"]}" %>">
-					<img src="http://www.gravatar.com/avatar/<%= result["gravatar_id"] %>?s=200">
-					<div class="each_result_text">
-						<p class="each_resilt_username"><%= result["username"] %></p>
-						<p class="each_resilt_fullname"><%= result["fullname"] %></p>
-						<p class="each_resilt_location"><%= result["location"] %></p>
-					</div>
-				</a>
+			<li>
+				<div class="each_result shadow">
+					<a href="<%= "/#{result["username"]}" %>">
+						<img src="http://www.gravatar.com/avatar/<%= result["gravatar_id"] %>?s=200">
+						<div class="each_result_text">
+							<p class="each_resilt_username"><%= result["username"] %></p>
+							<p class="each_resilt_fullname"><%= result["fullname"] %></p>
+							<p class="each_resilt_location"><%= result["location"] %></p>
+						</div>
+					</a>
+				</div>
 			</li>
 		
 		<% end %>
