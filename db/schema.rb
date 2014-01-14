@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20131030184902) do
     t.string   "company"
     t.string   "blog"
     t.string   "homepage"
+    t.boolean  "fork"
     t.date     "start_date"
     t.date     "update_date"
     t.datetime "created_at"

@@ -1,11 +1,13 @@
 <div class="small-12 columns">
 		
 		<% if session[:github_access_token] == nil %>
-			<div class="welcome">
+			<div class="welcome text-center">
 				<p class="notice"><%= notice %></p>
 				<p class="alert"><%= alert %></p>
-				<h3>Because my eyes get tired looking at Github</h3>
-				<a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['GITHUB_CLIENT_ID'] %>" class="login_button">Log in with Github</a>
+				<%= image_tag("logo.png", width: "400") %>
+				<h4>Because my eyes get tired looking at Github</h4>
+				<p>A better way to show off your Github projects.</p>
+				<a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['GITHUB_CLIENT_ID'] %>" class="button">Log in with Github</a>
 			</div>
 		<% else %>
 			<div class="logged_in">

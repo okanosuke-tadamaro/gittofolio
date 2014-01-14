@@ -12,7 +12,7 @@ class Repository < ActiveRecord::Base
 
 	def self.get_repos(client, username)
   		repositories = client.repositories(username)
-  		parsed_repositories = repositories.inject(Array.new) { |array, repo| array << { name: repo[:name], description: repo[:description], language: repo[:language], owner: repo[:owner][:login], avatar: repo[:owner][:gravatar_id], homepage: repo[:homepage], start_date: repo[:created_at], update_date: repo[:updated_at] } }
+  		parsed_repositories = repositories.inject(Array.new) { |array, repo| array << { name: repo[:name], description: repo[:description], language: repo[:language], owner: repo[:owner][:login], avatar: repo[:owner][:gravatar_id], homepage: repo[:homepage], fork: repo[:fork], start_date: repo[:created_at], update_date: repo[:updated_at] } }
 		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
 		parsed_repositories.each { |thumb| if thumb[:homepage] == nil || thumb[:homepage] == "" then thumb[:homepage] = "not_available" end }
 		parsed_repositories.sort_by { |date| date[:update_date] }.reverse
@@ -45,6 +45,7 @@ class Repository < ActiveRecord::Base
 						company: user_data[:company],
 						blog: user_data[:blog],
 						homepage: repo[:homepage],
+						fork: repo[:fork],
 						start_date: repo[:start_date].to_date,
 						update_date: repo[:update_date].to_date
 					)															
@@ -61,6 +62,7 @@ class Repository < ActiveRecord::Base
 						company: user_data[:company],
 						blog: user_data[:blog],
 						homepage: repo[:homepage],
+						fork: repo[:fork],
 						start_date: repo[:start_date].to_date,
 						update_date: repo[:update_date].to_date
 						}

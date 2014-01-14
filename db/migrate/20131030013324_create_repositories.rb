@@ -11,6 +11,7 @@ class CreateRepositories < ActiveRecord::Migration
       t.string :company
       t.string :blog
       t.string :homepage
+      t.boolean :fork
       t.date :start_date
       t.date :update_date
 
