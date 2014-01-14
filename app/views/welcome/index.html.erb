@@ -4,10 +4,13 @@
 			<div class="welcome text-center">
 				<p class="notice"><%= notice %></p>
 				<p class="alert"><%= alert %></p>
-				<%= image_tag("logo.png", width: "400") %>
-				<h4>Because my eyes get tired looking at Github</h4>
-				<p>A better way to show off your Github projects.</p>
-				<a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['GITHUB_CLIENT_ID'] %>" class="button">Log in with Github</a>
+				<div class="slogan"></div>
+				<div class="text-left intro">
+					<h5><i class="fa fa-asterisk"></i>Turn your Github projects into a portfolio</h5>
+					<hr />
+					<p>It's a real pain when you have to think about making a portfolio for your awesome projects. Especially when you want to spend time on your portfolio pieces rather than the portfolio itself. Gittofolio will turn your Github projects into a displayable, nicely layed out portfolio. All you have to do is sign in with Github and that's it! Or, if you want to look at other people's projects, Gittofolio will make it easier to navigate through information with an organized front-end.</p>
+				</div>
+				<a href="https://github.com/login/oauth/authorize?client_id=<%= ENV['GITHUB_CLIENT_ID'] %>" class="button expand">Log in with Github</a>
 			</div>
 		<% else %>
 			<div class="logged_in">

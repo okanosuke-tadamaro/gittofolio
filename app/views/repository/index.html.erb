@@ -75,7 +75,7 @@
 						<li>
 							<div class="each_repo shadow" style="border-right: solid 5px <%= @panel_label.select { |color| color.first == filter[:language] }.first.last %>">
 								<p>
-									<i class="fa fa-github"></i><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>'><%= if filter[:name].size > 16 then filter[:name][0,16] + "..." else filter[:name] end %></a><br />
+									<i class="fa fa-github"></i><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>'><%= if filter[:name].size > 15 then filter[:name][0,15] + "..." else filter[:name] end %></a><br />
 									<span class="updated_at"><i class="fa fa-calendar"></i><%= l filter[:update_date], format: :long %></span>
 								</p>
 							</div>
