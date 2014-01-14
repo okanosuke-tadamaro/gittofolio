@@ -29,6 +29,9 @@ class Repository < ActiveRecord::Base
 	def self.get_cached_repos(client, user_data, username)
 		if user_data[:updated_at].to_date > Repository.where(:owner => username).sort_by { |date| date.update_date }.reverse.first.update_date
 			repositories = Repository.get_repos(client, username)
+			Repository.where(:owner => username).each do |repo|
+				if repositories.any? {|check| check[:name] == repo.name } == false then Repository.destroy(repo.id) end
+			end
 			repositories.each do |repo|
 				if Repository.where(:owner => username, :name => repo[:name]).exists? == nil
 					Repository.create(
@@ -44,7 +47,7 @@ class Repository < ActiveRecord::Base
 						homepage: repo[:homepage],
 						start_date: repo[:start_date].to_date,
 						update_date: repo[:update_date].to_date
-					)
+					)															
 				else
 					repository = Repository.find_by(:owner => username, :name => repo[:name])
 					Repository.update( repository.id, {

@@ -50,7 +50,7 @@
             <% if @current_user != nil %>
               <% if params[:controller] == 'repository' %>
                 <li><%= link_to "Home", root_url %></li>
-                <li><%= link_to "My Projects", "/#{params[:user_name]}" %></li>
+                <li><%= link_to "Projects", "/#{params[:user_name]}" %></li>
                 <li><a href="#">Contact</a></li>
               <% end %>
               <li class="has-dropdown">
