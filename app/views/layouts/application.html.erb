@@ -34,7 +34,7 @@
               <h1 class="logo"><a href="<%= root_url %>">Gittofolio</a></h1>
             <% elsif params[:controller] == 'repository' %>
               <% if @full_name != nil then %>
-                <h1 class="h1_user logo"><%= @full_name.split(" ").first %><span class="change_color"><%= @full_name.split(" ").last %></span><small> on Gittofolio</small></h1>
+                <h1 class="h1_user logo"><%= @full_name.split(" ").first %><span class="change_color"><%= @full_name.split(" ").last %></span><small class="on_gittofolio"> on Gittofolio</small></h1>
               <% else %>
                 <h1 class="h1_user logo"><%= params[:user_name] %><small> on Gittofolio</small></h1>
               <% end %>
