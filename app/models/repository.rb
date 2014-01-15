@@ -71,7 +71,7 @@ class Repository < ActiveRecord::Base
 			end
 		end
 		fetched_repo_data = Repository.where(:owner => username)
-		inject_repo_data = fetched_repo_data.inject(Array.new) { |array, repo| array << { name: repo.name, description: repo.description, language: repo.language, owner: repo.owner, avatar: repo.avatar, full_name: repo.full_name, location: repo.location, company: repo.company, blog: repo.blog, homepage: repo.homepage, start_date: repo.start_date, update_date: repo.update_date } }
+		inject_repo_data = fetched_repo_data.inject(Array.new) { |array, repo| array << { name: repo.name, description: repo.description, language: repo.language, owner: repo.owner, avatar: repo.avatar, full_name: repo.full_name, location: repo.location, company: repo.company, blog: repo.blog, homepage: repo.homepage, fork: repo.fork, start_date: repo.start_date, update_date: repo.update_date } }
 		inject_repo_data.sort_by { |date| date[:update_date] }.reverse
 	end
 
