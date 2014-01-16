@@ -713,11 +713,11 @@ $body-font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", Helvetica, 
 // $reveal-overlay-bg-old: #000;
 
 // We use these to control the style of the modal itself.
-// $reveal-modal-bg: #fff;
+$reveal-modal-bg: #f9f9f9;
 // $reveal-position-top: 50px;
 // $reveal-default-width: 80%;
 // $reveal-modal-padding: rem-calc(20);
-// $reveal-box-shadow: 0 0 10px rgba(#000,.4);
+$reveal-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 
 // We use these to style the reveal close button
 // $reveal-close-font-size: rem-calc(22);
