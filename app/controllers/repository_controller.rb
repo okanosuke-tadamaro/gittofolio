@@ -13,7 +13,21 @@ class RepositoryController < ApplicationController
 				@repositories = Repository.get_cached_repos(client, @full_user_data, params[:user_name])
 			else
 				@repositories = Repository.get_repos(client, params[:user_name])
-				@repositories.each { |fetched_repository| Repository.create(name: fetched_repository[:name], description: fetched_repository[:description], language: fetched_repository[:language], owner: fetched_repository[:owner], avatar: fetched_repository[:avatar], full_name: @full_user_data[:name], location: @full_user_data[:location], company: @full_user_data[:company], blog: @full_user_data[:blog], homepage: fetched_repository[:homepage], fork: fetched_repository[:fork], start_date: fetched_repository[:start_date].to_date, update_date: fetched_repository[:update_date].to_date) }
+				@repositories.each { |fetched_repository| Repository.create(
+					name: fetched_repository[:name],
+					description: fetched_repository[:description],
+					language: fetched_repository[:language],
+					owner: fetched_repository[:owner],
+					avatar: fetched_repository[:avatar],
+					full_name: @full_user_data[:name],
+					location: @full_user_data[:location],
+					company: @full_user_data[:company],
+					blog: @full_user_data[:blog],
+					homepage: fetched_repository[:homepage],
+					fork: fetched_repository[:fork],
+					start_date: fetched_repository[:start_date].to_date,
+					update_date: fetched_repository[:update_date].to_date
+					) }
 			end
 
 			@full_name = Repository.get_basic_data(params[:user_name]).full_name
