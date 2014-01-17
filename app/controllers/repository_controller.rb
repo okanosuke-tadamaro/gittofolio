@@ -40,6 +40,7 @@ class RepositoryController < ApplicationController
 		@full_name = Repository.get_basic_data(params[:user_name])[:full_name]
 		@homepage = Repository.get_homepage(params[:repo_name])
 
+
 		if params[:repo_directory] != nil
 			@breadcrumb = params[:repo_directory].split('/')
 		else

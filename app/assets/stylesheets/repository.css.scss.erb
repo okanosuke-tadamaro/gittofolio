@@ -5,7 +5,7 @@
 .border_bottom { border-bottom: solid 1px lightgray; margin-bottom: 20px; }
 .yield { h1, h2, h3, h4, h5, h6 { padding: 5px 5px 5px 5px; margin-bottom: 0; font-weight: 400; } }
 .gray { color: gray; }
-pre { font-family: 'Source Code Pro'; font-size: 14px; }
+pre { font-family: 'Source Code Pro'; font-size: 14px; word-wrap: break-word; }
 
 /*------ logo ------*/
 .h1_user {
@@ -48,7 +48,12 @@ pre { font-family: 'Source Code Pro'; font-size: 14px; }
 	}
 	.fork { float: right; font-size: 12px; color: gray; margin-top: 5px; }
 	background-color: #f9f9f9;
+	-webkit-transition:all .5s;
 	padding: 5px;
+}
+
+.each_repo:hover {
+	background-color: white;
 }
 
 .modal_right {

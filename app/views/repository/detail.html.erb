@@ -3,6 +3,10 @@
 
 		<div class="border_bottom"><h6 class="repo_name"><i class="fa fa-github"></i><%= params[:repo_name] %></h3></div>
 
+		<% if @homepage[:homepage] != "not_available" %>
+			<div class="basic_box shadow"><img class="screenshot" src="http://s.wordpress.com/mshots/v1/<%= "#{@homepage[:homepage].to_s}" %>?w=1200"></div>
+		<% end %>
+
 		<ul class="breadcrumbs">
 			<li><%= link_to "#{params[:repo_name]}", "/#{params[:user_name]}/#{params[:repo_name]}" %></li>
 			<% @breadcrumb.each do |crumb| %>
@@ -13,10 +17,6 @@
 				<% end %>
 			<% end %>
 		</ul>
-
-		<% if @homepage[:homepage] != "not_available" %>
-			<div class="basic_box shadow"><img class="screenshot" src="http://s.wordpress.com/mshots/v1/<%= "#{@homepage[:homepage].to_s}" %>?w=1200"></div>
-		<% end %>
 
 		<div class="row top_padding">
 			<div class="large-3 columns">
