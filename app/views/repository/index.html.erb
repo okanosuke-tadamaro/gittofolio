@@ -65,7 +65,7 @@
 							<h6 class="gray">Language:</h6>
 							<blockquote><%= filter[:language] %></blockquote>
 							<h6 class="gray">Description:</h6>
-							<blockquote><%= filter[:description] %></blockquote>
+							<blockquote><%= if filter[:description].empty? == false then filter[:description] else "Description not available" end %></blockquote>
 							<div class="text-right"><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></div>
 							<a class="close-reveal-modal">&#215;</a>
 						</div>
@@ -96,7 +96,7 @@
 							<h6 class="gray">Language:</h6>
 							<blockquote><%= filter[:language] %></blockquote>
 							<h6 class="gray">Description:</h6>
-							<blockquote><%= filter[:description] %></blockquote>
+							<blockquote><%= if filter[:description].empty? == false then filter[:description] else "Description not available" end %></blockquote>
 							<div class="text-right"><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></div>
 							<a class="close-reveal-modal">&#215;</a>
 						</div>
