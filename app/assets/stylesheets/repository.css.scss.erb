@@ -4,7 +4,7 @@
 .shadow { box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); }
 .border_bottom { border-bottom: solid 1px lightgray; margin-bottom: 20px; }
 .yield { h1, h2, h3, h4, h5, h6 { padding: 5px 5px 5px 5px; margin-bottom: 0; font-weight: 400; } }
-.gray { color: gray; }
+.gray { color: gray; } .lightblue { color: lightblue; }
 pre { font-family: 'Source Code Pro'; font-size: 14px; word-wrap: break-word; }
 
 /*------ logo ------*/
@@ -34,6 +34,27 @@ pre { font-family: 'Source Code Pro'; font-size: 14px; word-wrap: break-word; }
 		padding: 15px;
 	}
 }
+
+.profile {
+	table {
+		i { width: 25px; }
+		td, i { margin: 0; line-height: 80%; }
+		td:first-child { width: 80px; border-right: solid 1px lightgray; color: gray; }
+		td:last-child { padding-left: 25px; }
+		width: 100%;
+		margin-top: 20px;
+		margin-bottom: 30px;
+		border: none;
+		border-collapse: collapse;
+		background: none;
+	}
+	.profile_pic { width: 200px; }
+	.info_name { border-bottom: solid 1px lightgray; margin: 0; }
+	.line_chart, .pie_chart { margin: 0; }
+	background-color: #f9f9f9;
+	padding: 50px;
+}
+
 
 /*------ bottom section of repository#index ------*/
 .each_repo {

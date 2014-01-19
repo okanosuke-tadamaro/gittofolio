@@ -8,12 +8,10 @@ Gittofolio::Application.routes.draw do
   get '/welcome/signout'
   get 'github/callback' => 'welcome#callback'
 
-  controller :repository do
-    get '/repository' => 'repository#index'
-    get '/:user_name' => "repository#index"
-    get '/:user_name/:repo_name' => "repository#detail"
-    get '/:user_name/:repo_name/*repo_directory' => "repository#detail"
-  end
+  get '/repository' => 'repository#index'
+  get '/:user_name' => "repository#index"
+  get '/:user_name/:repo_name' => "repository#detail"
+  get '/:user_name/:repo_name/*repo_directory' => "repository#detail"
 
   # get 'welcome/signout'
 
