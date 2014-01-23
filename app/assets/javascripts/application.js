@@ -13,9 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require masonry
-//= require jquery.leanModal.min
-//= require jquery.mixitup.min
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
