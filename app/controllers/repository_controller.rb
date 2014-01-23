@@ -9,6 +9,8 @@ class RepositoryController < ApplicationController
 			flash[:alert] = "The user you searched for doesn't seem to exist. You might want to try searching by name."
 			redirect_to root_path
 		else
+			if params[:user_name] != "javascripts"
+
 			if Repository.check_cache(params[:user_name]) == true
 				@repositories = Repository.get_cached_repos(client, @full_user_data, params[:user_name])
 			else
@@ -38,6 +40,8 @@ class RepositoryController < ApplicationController
 			colors = ["#1b5167", "#226682", "#297b9d", "#3091b8", "#3ea3cc", "#59b0d3", "#74bdda", "#8ec9e2", "#a9d6e9", "#c4e3f0", "#dff0f7"]
 			@pie_colors = colors.take(@pie_data.size)
 			@panel_label = @languages.zip(@pie_colors)
+
+			end
 		end
 	end
 
