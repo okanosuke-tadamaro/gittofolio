@@ -3,6 +3,7 @@ Gittofolio::Application.routes.draw do
   resources :repositories
   resources :users
 
+  # get "/javascripts/vendor/modernizr.js" => 
   get "welcome/index"
   root 'welcome#index'
   get '/search' => 'welcome#user_search'
