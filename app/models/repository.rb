@@ -25,6 +25,7 @@ class Repository < ActiveRecord::Base
   			} }
 		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
 		parsed_repositories.each { |thumb| if thumb[:homepage] == nil || thumb[:homepage] == "" then thumb[:homepage] = "not_available" end }
+		parsed_repositories.each { |to_string| if to_string[:description] == nil then to_string[:description] = "" end }
 		parsed_repositories.sort_by { |date| date[:update_date] }.reverse
 	end
 
