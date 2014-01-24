@@ -32,7 +32,7 @@ class WelcomeController < ApplicationController
     session[:github_access_token] = parsed_response["access_token"]
 
     flash[:notice] = "You're signed in!"
-  	redirect_to root_url #"/#{user.login}"
+  	redirect_to "/#{user.login}"
   end
 
   def signout
