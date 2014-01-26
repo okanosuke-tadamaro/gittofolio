@@ -11,7 +11,7 @@
 						<div class="large-9 columns">
 							<p class="info_name"><i class="fa fa-user"></i>
 								<% if @full_name != nil then %>
-                					<%= @full_name.split(" ").first %> <span class="lightblue"><%= @full_name.split(" ").last %></span>
+                					<%= @full_name.split(" ").first %> <span class="darkblue"><%= @full_name.split(" ").last %></span>
               					<% else %>
                 					<%= params[:user_name] %>
               					<% end %>
@@ -107,7 +107,10 @@
 							<blockquote><%= filter[:language] %></blockquote>
 							<h6 class="gray">Description:</h6>
 							<blockquote><%= if filter[:description].empty? == false then filter[:description] else "Description not available" end %></blockquote>
-							<div class="text-right"><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></div>
+							<ul class="button-group right">
+								<li><a href="<%= "http://github.com/" + "#{params[:user_name]}/#{filter[:name]}" %>" target="_blank" class="button tiny">View on Github</a></li>
+								<li><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></li>
+							</ul>
 							<a class="close-reveal-modal">&#215;</a>
 						</div>
 					<% end %>
@@ -138,7 +141,10 @@
 							<blockquote><%= filter[:language] %></blockquote>
 							<h6 class="gray">Description:</h6>
 							<blockquote><%= if filter[:description].empty? == false then filter[:description] else "Description not available" end %></blockquote>
-							<div class="text-right"><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></div>
+							<ul class="button-group right">
+								<li><a href="<%= "http://github.com/" + "#{params[:user_name]}/#{filter[:name]}" %>" target="_blank" class="button tiny">View on Github</a></li>
+								<li><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></li>
+							</ul>
 							<a class="close-reveal-modal">&#215;</a>
 						</div>
 					<% end %>
