@@ -1,61 +1,16 @@
-<div class="row">
-	<div class="small-12 columns">
+<div class="small-12 columns">
+	
+	<ul class="inline-list right repo_date">
+		<li>Created: <%= @repo.first.start_date %></li>
+		<li>Updated: <%= @repo.first.update_date %></li>
+	</ul>
+	<div class="border_bottom"><h6><i class="fa fa-github"></i><%= params[:repo_name] %></h6></div>
+	<% if @homepage != "not_available" %>
+		<img src="http://s.wordpress.com/mshots/v1/<%= @homepage %>?w=1000">
+	<% end %>
+	<div class="row">
+		<div class="large-4 columns">
 
-		<div class="border_bottom"><h6 class="repo_name"><i class="fa fa-github"></i><%= params[:repo_name] %></h3></div>
-
-		<% if @homepage[:homepage] != "not_available" %>
-			<div class="basic_box shadow"><img class="screenshot" src="http://s.wordpress.com/mshots/v1/<%= "#{@homepage[:homepage].to_s}" %>?w=1200"></div>
-		<% end %>
-
-		<ul class="breadcrumbs">
-			<li><%= link_to "#{params[:repo_name]}", "/#{params[:user_name]}/#{params[:repo_name]}" %></li>
-			<% @breadcrumb.each do |crumb| %>
-				<% if "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("/") }#files" != "/#{params[:user_name]}/#{params[:repo_name]}/#{params[:repo_directory]}#files" %>
-					<li><%= link_to "#{crumb}", "/#{params[:user_name]}/#{params[:repo_name]}/#{ @breadcrumb.take_while { |a| @breadcrumb.index(a) != @breadcrumb.index(crumb)+1 }.join("/") }#files" %></li>
-				<% else %>
-					<li><%= crumb %></li>
-				<% end %>
-			<% end %>
-		</ul>
-
-		<div class="row top_padding">
-			<div class="large-3 columns">
-				
-				<h6>File List</h6>
-				<ul class="basic_box shadow file_box" id="files">
-					<% @data.each do |file| %>
-						<% if file[:type] == "file" then %>
-							<li><i class="fa fa-file"></i><a href="#" data-reveal-id="<%= file[:name].downcase.gsub('.','') %>"><%= file[:name] %></a></li>
-						<% else %>
-							<li><i class="fa fa-folder"></i><a href="<%= "/#{params[:user_name]}/#{params[:repo_name]}/#{file[:path]}" %>#files"><%= file[:name] %></a></li>
-						<% end %>
-					<% end %>
-				</ul>
-
-			</div>
-			<div class="large-9 columns">
-
-				<h6>ReadMe</h6>
-				<div class="display_readme">
-					<% @data.each do |readme| %>
-						<% if readme[:name].downcase.include?("readme") %>
-							<div class="basic_box shadow display_readme"><%=raw GitHub::Markup.render(readme[:name], Base64.decode64(readme.rels[:self].get.data[:content])) %></div>
-						<% end %>
-					<% end %>
-				</div>
-
-			</div>
 		</div>
-
 	</div>
 </div>
-
-<% @data.each do |file| %>
-	<% if file[:type] == "file" then %>
-		<div id="<%= file[:name].downcase.gsub('.','') %>" class="reveal-modal medium" data-reveal>
-			<div class="border_bottom"><h6><i class="fa fa-file"></i><%= file[:name] %></h6></div>
-			<pre><%= Base64.decode64(file.rels[:self].get.data[:content]) %></pre>
-			<a class="close-reveal-modal">&#215;</a>
-		</div>
-	<% end %>
-<% end %>

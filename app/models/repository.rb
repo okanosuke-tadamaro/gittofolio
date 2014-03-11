@@ -1,4 +1,6 @@
 class Repository < ActiveRecord::Base
+	belongs_to :users
+	has_many :details
 	
 	def self.check_cache(username)
 		if Repository.exists?(owner: username).class == Fixnum
@@ -130,8 +132,13 @@ class Repository < ActiveRecord::Base
 		bundled_data = language.zip(colors)
 	end
 
+	def self.get_single_repo(username, repo)
+		Repository.where(:owner => username, :name => repo)
+	end
+
 	def self.get_homepage(repo_name)
-		homepage = Repository.find_by name: repo_name
+		repo = homepage = Repository.find_by name: repo_name
+		repo.homepage
 	end
 
 	def self.get_repo_content(username, repo, github_access_token)

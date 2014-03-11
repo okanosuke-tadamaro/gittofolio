@@ -1,7 +1,9 @@
 Gittofolio::Application.routes.draw do
   
-  resources :repositories
-  resources :users
+  resources :users do
+    resources :repositories
+    resources :details
+  end
 
   get "welcome/index"
   root 'welcome#index'
@@ -9,9 +11,10 @@ Gittofolio::Application.routes.draw do
   get '/welcome/signout'
   get 'github/callback' => 'welcome#callback'
 
+  get '/account/:current_user' => 'welcome#settings'
   get '/repository' => 'repository#index'
-  get '/:user_name' => "repository#index"
-  get '/:user_name/:repo_name' => "repository#detail"
+  get '/:user_name' => "repository#index", :as => "repo"
+  get '/:user_name/:repo_name' => "repository#detail", :as => "each_repo"
   get '/:user_name/:repo_name/*repo_directory' => "repository#detail"
 
   # get 'welcome/signout'

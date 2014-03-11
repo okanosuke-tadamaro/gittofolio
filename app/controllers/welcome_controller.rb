@@ -3,6 +3,12 @@ class WelcomeController < ApplicationController
     @current_user = User.find_by github_access_token: session[:github_access_token]
   end
 
+  def settings
+    @current_user = User.find_by github_access_token: session[:github_access_token]
+    @details = Detail.where(:user_name => @current_user.login)
+    @repo_name_list = Repository.where(:owner => @current_user.login).inject([]) { |array, repo| array << repo.name }.each_with_index.map { |x,i| [x, i+1] }
+  end
+
   def user_search
     @current_user = User.find_by github_access_token: session[:github_access_token]
     @users = User.search_users(params[:q], session[:github_access_token])
@@ -11,7 +17,7 @@ class WelcomeController < ApplicationController
       redirect_to root_path
     elsif @users.fetch("users").empty? == true
       flash[:notice] = "The user you searched for doesn't seem to exist. Try searching again using a different term."
-      redirect_to root_path  
+      redirect_to root_path
     else
       @users["users"].each { |replace| if replace["fullname"] == " " or replace["fullname"] == nil then replace["fullname"] = "Name Not Available" end }
       @users["users"].each { |replace| if replace["location"] == nil or replace["location"] == "" then replace["location"] = "Location Not Available" end }
