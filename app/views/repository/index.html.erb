@@ -11,7 +11,7 @@
 						<div class="large-9 columns">
 							<h6 class="info_name"><i class="fa fa-user"></i>
 								<% if @full_name != nil then %>
-                					<%= @full_name.split(" ").first %> <span class="darkblue"><%= @full_name.split(" ").last %></span>
+                					<%= @full_name.split(" ").first %> <span class="green"><%= @full_name.split(" ").last %></span>
               					<% else %>
                 					<%= params[:user_name] %>
               					<% end %>
@@ -66,7 +66,7 @@
 								<div class="large-6 columns">
 									<h6 class="info_name"><i class="fa fa-fire"></i>Recent Activity</h6>
 									<ul data-pie-id="line_chart" class="line_chart">
-										<%= line_chart(@line_chart, :id => "line_chart", :height => "190px", :library => {:backgroundColor => "#fdfdfd", :chartArea => {:width => "90%"}, :vAxis => {:textStyle => {:fontSize => 10}, :textPosition => "in"}, :hAxis => {:textStyle => {:fontSize => 10}, :format => 'M/d'}}) %>
+                    <%= line_chart(@line_chart, :id => "line_chart", :height => "190px", :library => {:backgroundColor => "#fdfdfd", :colors => ["#4ebc43"],  :chartArea => {:width => "90%"}, :vAxis => {:textStyle => {:fontSize => 10}, :textPosition => "in"}, :hAxis => {:textStyle => {:fontSize => 10}, :format => 'M/d'}}) %>
 									</ul>
 								</div>
 								<div class="large-6 columns">
