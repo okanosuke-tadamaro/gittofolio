@@ -19,20 +19,22 @@ class WelcomeController < ApplicationController
   end
 
   def callback
-    response = RestClient.post("https://github.com/login/oauth/access_token", {client_id: ENV['GITHUB_CLIENT_ID'], client_secret: ENV['GITHUB_CLIENT_SECRET'], code: params["code"]}, { accept: :json })
-  	parsed_response = JSON.parse(response)
-    client = Octokit::Client.new :access_token => parsed_response["access_token"]
-    user = client.user
-    user.login
+  	response = User.get_response(params["code"])
+    client = User.new_client(response["access_token"])
+    session[:github_access_token] = response["access_token"]
 
-    if User.exists?(login: user.login) == nil
-      User.create(name: user.name, login: user.login, location: user.location, email: user.email, github_access_token: parsed_response["access_token"])
+    if User.exists?(login: client.login) == nil
+      User.create(
+        name: client.name,
+        login: client.login,
+        location: client.location,
+        email: client.email,
+        github_access_token: response["access_token"]
+        )
     end
 
-    session[:github_access_token] = parsed_response["access_token"]
-
     flash[:notice] = "You're signed in!"
-  	redirect_to "/#{user.login}"
+  	redirect_to "/#{client.login}"
   end
 
   def signout
