@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
 
+	def self.get_oauth_link
+		"https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_CLIENT_ID']}"
+	end
+
 	def self.get_response(code_param)
 		JSON.parse(RestClient.post("https://github.com/login/oauth/access_token", {client_id: ENV['GITHUB_CLIENT_ID'], client_secret: ENV['GITHUB_CLIENT_SECRET'], code: code_param}, { accept: :json }))
 	end

@@ -1,6 +1,10 @@
 class WelcomeController < ApplicationController
+  
+  def welcome
+    @oauth_link = User.get_oauth_link
+  end
+
   def index
-    @current_user = User.find_by github_access_token: session[:github_access_token]
   end
 
   def user_search
@@ -42,4 +46,5 @@ class WelcomeController < ApplicationController
     flash[:notice] = "You've successfully signed out. Thanks for using Gittofolio!"
     redirect_to root_path
   end
+
 end
