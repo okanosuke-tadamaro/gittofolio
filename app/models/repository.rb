@@ -1,40 +1,30 @@
 class Repository < ActiveRecord::Base
 	
 	def self.check_cache(username)
-		if Repository.exists?(owner: username).class == Fixnum
-			return true
-		end
+		true if Repository.exists?(owner: username)
 	end
 
-	def self.new_request(github_access_token)
-		Octokit::Client.new(access_token: github_access_token)
+	def self.get_repo_data(client, username)
+		client.user(username)
 	end
 
 	def self.get_repos(client, username)
-  		repositories = client.repositories(username)
-  		parsed_repositories = repositories.inject(Array.new) { |array, repo| array << {
-  			name: repo[:name],
-  			description: repo[:description],
-  			language: repo[:language],
-  			owner: repo[:owner][:login],
-  			avatar: repo[:owner][:gravatar_id],
-  			homepage: repo[:homepage],
-  			fork: repo[:fork],
-  			start_date: repo[:created_at],
-  			update_date: repo[:updated_at]
-  			} }
+  	repositories = client.repositories(username)
+  	parsed_repositories = repositories.inject(Array.new) { |array, repo| array << {
+			name: 				repo[:name],
+			description: 	repo[:description],
+			language: 		repo[:language],
+			owner: 				repo[:owner][:login],
+			avatar: 			repo[:owner][:gravatar_id],
+			homepage: 		repo[:homepage],
+			fork: 				repo[:fork],
+			start_date: 	repo[:created_at],
+			update_date: 	repo[:updated_at]
+			} }
 		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
 		parsed_repositories.each { |thumb| if thumb[:homepage] == nil || thumb[:homepage] == "" then thumb[:homepage] = "not_available" end }
 		parsed_repositories.each { |to_string| if to_string[:description] == nil then to_string[:description] = "" end }
 		parsed_repositories.sort_by { |date| date[:update_date] }.reverse
-	end
-
-	def self.get_full_user_data(client, username, github_access_token)
-		client.user(username)
-	end
-
-	def self.get_basic_data(username)
-		Repository.find_by owner: username
 	end
 
 	def self.get_cached_repos(client, user_data, username)
@@ -46,36 +36,36 @@ class Repository < ActiveRecord::Base
 			repositories.each do |repo|
 				if Repository.where(:owner => username, :name => repo[:name]).exists? == nil
 					Repository.create(
-						name: repo[:name],
-						description: repo[:description],
-						language: repo[:language],
-						owner: repo[:owner],
-						avatar: repo[:avatar],
-						full_name: user_data[:name],
-						location: user_data[:location],
-						company: user_data[:company],
-						blog: user_data[:blog],
-						homepage: repo[:homepage],
-						fork: repo[:fork],
-						start_date: repo[:start_date].to_date,
-						update_date: repo[:update_date].to_date
+						name: 				repo[:name],
+						description: 	repo[:description],
+						language: 		repo[:language],
+						owner: 				repo[:owner],
+						avatar: 			repo[:avatar],
+						full_name: 		user_data[:name],
+						location: 		user_data[:location],
+						company: 			user_data[:company],
+						blog: 				user_data[:blog],
+						homepage: 		repo[:homepage],
+						fork: 				repo[:fork],
+						start_date: 	repo[:start_date].to_date,
+						update_date: 	repo[:update_date].to_date
 					)															
 				else
 					repository = Repository.find_by(:owner => username, :name => repo[:name])
 					Repository.update( repository.id, {
-						name: repo[:name],
-						description: repo[:description],
-						language: repo[:language],
-						owner: repo[:owner],
-						avatar: repo[:avatar],
-						full_name: user_data[:name],
-						location: user_data[:location],
-						company: user_data[:company],
-						blog: user_data[:blog],
-						homepage: repo[:homepage],
-						fork: repo[:fork],
-						start_date: repo[:start_date].to_date,
-						update_date: repo[:update_date].to_date
+						name: 				repo[:name],
+						description: 	repo[:description],
+						language: 		repo[:language],
+						owner: 				repo[:owner],
+						avatar: 			repo[:avatar],
+						full_name: 		user_data[:name],
+						location: 		user_data[:location],
+						company: 			user_data[:company],
+						blog: 				user_data[:blog],
+						homepage: 		repo[:homepage],
+						fork: 				repo[:fork],
+						start_date: 	repo[:start_date].to_date,
+						update_date: 	repo[:update_date].to_date
 						}
 					)
 				end
@@ -83,19 +73,19 @@ class Repository < ActiveRecord::Base
 		end
 		fetched_repo_data = Repository.where(:owner => username)
 		inject_repo_data = fetched_repo_data.inject(Array.new) { |array, repo| array << {
-			name: repo.name,
-			description: repo.description,
-			language: repo.language,
-			owner: repo.owner,
-			avatar: repo.avatar,
-			full_name: repo.full_name,
-			location: repo.location,
-			company: repo.company,
-			blog: repo.blog,
-			homepage: repo.homepage,
-			fork: repo.fork,
-			start_date: repo.start_date,
-			update_date: repo.update_date
+			name: 				repo.name,
+			description: 	repo.description,
+			language: 		repo.language,
+			owner: 				repo.owner,
+			avatar: 			repo.avatar,
+			full_name: 		repo.full_name,
+			location: 		repo.location,
+			company: 			repo.company,
+			blog: 				repo.blog,
+			homepage: 		repo.homepage,
+			fork: 				repo.fork,
+			start_date: 	repo.start_date,
+			update_date: 	repo.update_date
 			} }
 		inject_repo_data.sort_by { |date| date[:update_date] }.reverse
 	end
@@ -121,8 +111,6 @@ class Repository < ActiveRecord::Base
 		value_list = values.map { |value| value[:language] }
 		counts = value_list.inject(Hash.new(0)) {|hash,language| hash[language] += 1; hash}
 		ordered_counts = Hash[counts.sort_by {|k,v| v}.reverse]
-		# color_data = ['#1abc9c','#f1c40f','#3498db','#e74c3c','#2c3e50','#bdc3c7','#e67e22','#2ecc71','#ecf0f1','#8e44ad']
-		# pie_data = ordered_counts.values.map {|data| "{" + "value: #{data}, color: '#{color_data.delete_at(rand(color_data.length))}'" + "}"}
 	end
 
 	def self.get_pie_label(data,language)

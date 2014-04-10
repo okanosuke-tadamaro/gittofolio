@@ -26,21 +26,21 @@
 										</tr>
 										<tr>
 											<td>Work</td>
-											<td><%= if @full_user_data.company != nil then @full_user_data.company else "Company not available" end %></td>
+											<td><%= if @repo_data.company != nil then @repo_data.company else "Company not available" end %></td>
 										</tr>
 										<tr>
 											<td>Email</td>
-											<td><%= if @full_user_data.email != nil then @full_user_data.email else "Email not available" end %></td>
+											<td><%= if @repo_data.email != nil then @repo_data.email else "Email not available" end %></td>
 										</tr>
 									</table>
 									<table>
 										<tr>
 											<td>Followers</td>
-											<td><%= @full_user_data.followers %></td>
+											<td><%= @repo_data.followers %></td>
 										</tr>
 										<tr>
 											<td>Following</td>
-											<td><%= @full_user_data.following %></td>
+											<td><%= @repo_data.following %></td>
 										</tr>
 									</table>
 								</div>

@@ -8,10 +8,14 @@ class ApplicationController < ActionController::Base
 
   def current_user
   	if session[:github_access_token]
-  		return User.find_by(github_access_token: session[:github_access_token])
+  		User.find_by(github_access_token: session[:github_access_token])
   	else
-  		return nil
+  		nil
   	end
+  end
+
+  def client
+  	Octokit::Client.new(access_token: session[:github_access_token])
   end
 
 end
