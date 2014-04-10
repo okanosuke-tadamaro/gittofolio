@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
 	def self.get_oauth_link
-		"https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_CLIENT_ID']}"
+		return "https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_CLIENT_ID']}"
 	end
 
 	def self.get_response(code_param)

@@ -1,5 +1,7 @@
 class RepositoryController < ApplicationController
 
+	before_action :signed_in?
+
 	def index
 		@repo_data = Repository.get_repo_data(client, params[:user_name])
 

@@ -4,11 +4,13 @@
 .shadow { box-shadow: 0 0 1px rgba(0, 0, 0, 0.1); }
 .border_bottom { border-bottom: solid 1px lightgray; margin-bottom: 20px; }
 .yield { h1, h2, h3, h4, h5, h6 { padding: 5px 5px 5px 5px; margin-bottom: 0; font-weight: 400; } }
-.gray { color: gray; } .darkblue { color: darkblue; }
+.gray { color: gray; } .darkblue { color: darkblue; } .color { color: aqua; }
 pre { font-family: 'Source Code Pro'; font-size: 14px; word-wrap: break-word; }
-
+h1, h2, h3, h4, h5, h6 { font-family: 'Source Sans Pro'; }
+i { margin-right: 7px; }
 
 /*------ logo ------*/
+.logo { letter-spacing: 3px; text-transform: uppercase; background: url("<%= asset_path 'logo_bg.png' %>"); background-size: cover; background-position: center; text-shadow: 0px 1px 3px #000; }
 .h1_user {
 	.on_gittofolio { color: white; }
 	.change_color { color: aqua; }
@@ -21,6 +23,8 @@ pre { font-family: 'Source Code Pro'; font-size: 14px; word-wrap: break-word; }
 
 /*------ top section of repository#index ------*/
 .profile {
+	background-color: #f9f9f9;
+	padding: 50px;
 	table {
 		i { width: 25px; }
 		td, i { margin: 0; line-height: 80%; }
@@ -43,8 +47,6 @@ pre { font-family: 'Source Code Pro'; font-size: 14px; word-wrap: break-word; }
 	}
 	.info_name { border-bottom: solid 1px lightgray; margin: 0; }
 	.line_chart, .pie_chart { margin: 0; }
-	background-color: #f9f9f9;
-	padding: 50px;
 }
 
 

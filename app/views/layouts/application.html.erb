@@ -11,44 +11,27 @@
   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= javascript_include_tag "/assets/modernizr.js" %>
   <%= csrf_meta_tags %>
-
-  <style type="text/css">
-  h1, h2, h3, h4, h5, h6 { font-family: 'Source Sans Pro'; }
-  i { margin-right: 7px; }
-  .logo { letter-spacing: 3px; text-transform: uppercase; background: url("<%= asset_path 'logo_bg.png' %>"); background-size: cover; background-position: center; text-shadow: 0px 1px 3px #000; }
-  .color { color: aqua; }
-  </style>
 </head>
 
 <body>
+
   <div class="fixed">
     <nav class="top-bar" data-topbar data-options="is_hover: false">
       <ul class="title-area">
         <li class="name">
-
-          <% if params[:controller] == 'welcome' %>
-          <h1 class="logo"><a href="<%= root_url %>">Gittofolio</a></h1>
-          <% elsif params[:controller] == 'repository' %>
-            <% if @full_name != nil then %>
-            <h1 class="h1_user logo"><%= @full_name.split(" ").first %><span class="change_color"><%= @full_name.split(" ").last %></span><small class="on_gittofolio"> on Gittofolio</small></h1>
-            <% else %>
-            <h1 class="h1_user logo"><%= params[:user_name] %><small class="on_gittofolio"> on Gittofolio</small></h1>
-            <% end %>
-          <% end %>
-
+          <h1><a href="#">Gittofolio</a></h1>
         </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
       </ul>
 
       <section class="top-bar-section">
         <ul class="right">
+          <li><a href="/<%= current_user.login %>"><i class="fa fa-tasks"></i>My Wall</a></li>
           <% if current_user %>
             <li class="has-dropdown">
-              <a href="#"><i class="fa fa-user"></i><%= current_user.name %></a>
+              <a href="#"><i class="fa fa-user"></i><%= current_user.login %></a>
               <ul class="dropdown">
-                <li><a href=""><i class="fa fa-gear"></i>Account Settings</a></li>
-                <li><a href=""><i class="fa fa-info-circle"></i>About Gittofolio</a></li>
-                <li><a href="/welcome/signout"><i class="fa fa-sign-out"></i>Sign out</a></li>
+                <li><a href="/signout"><i class="fa fa-sign-out"></i>Sign Out</a></li>
               </ul>
             </li>
           <% end %>
@@ -56,6 +39,7 @@
       </section>
     </nav>
   </div>
+  
 
   <div class="row yield top_padding">
     <%= yield %>
