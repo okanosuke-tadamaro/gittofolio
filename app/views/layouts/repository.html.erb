@@ -13,25 +13,10 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body>
-  
-  
-
-  <div class="row yield top_padding">
-    <%= yield %>
-  </div>
-
-  <hr />
+<body>  
 
   <div class="row">
-    <div class="small-12 columns text-right footer">
-      <ul>
-        <li><a href="#">About Gittofolio</a></li>
-        <li><a href="#">How-to Guide</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <p><a href="http://gittofolio.herokuapp.com">Gittofolio</a> by <a href="http://github.com/originalblend337" target="_blank">Tadashi Okazaki</a></p>
-    </div>
+    <%= yield %>
   </div>
 
   <%= javascript_include_tag "application" %>
