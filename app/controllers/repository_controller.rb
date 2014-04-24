@@ -26,8 +26,11 @@ class RepositoryController < ApplicationController
 				) }
 		end
 
+			# USER INFO
 			@full_name = @repositories.first[:full_name]
 			@location = @repositories.first[:location]
+			@github = "http://www.github.com/#{params[:user_name]}"
+
 			@pie_data = Repository.get_pie_data(@repositories)
 			@languages = Repository.sort_repos(@repositories)
 			@line_chart = Repository.get_event_data(params[:user_name], session[:github_access_token])
