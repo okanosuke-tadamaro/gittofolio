@@ -1,3 +1,6 @@
+<%= content_tag(:div, class: "chart-data", data: {line_chart: @line_data}) do %>
+<% end %>
+
 <div class="top-panel">
 	<div class="row">
 		<div class="small-2 columns">
@@ -5,14 +8,14 @@
 				<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300") %>
 			</div>
 		</div>
-		<div class="small-10 columns">
+		<div class="small-3 columns">
 			<div class="top-right-panel">
 				<div class="panel-header">
 					<h3><i class="fa fa-smile-o"></i>
 						<% if @full_name != nil then %>
-							<%= @full_name.split(" ").first %> <span class="last-name"><%= @full_name.split(" ").last %></span>
+						<%= @full_name.split(" ").first %> <span class="last-name"><%= @full_name.split(" ").last %></span>
 						<% else %>
-							<%= params[:user_name] %>
+						<%= params[:user_name] %>
 						<% end %>
 					</h3>
 				</div>
@@ -29,164 +32,175 @@
 				</div>
 			</div>
 		</div>
+		<div class="small-7 columns">
+			<div class="row collapse">
+				<div class="small-6 columns">
+					blah
+					<canvas id="line-chart" width="300" height="300"></canvas>
+				</div>
+				<div class="small-6 columns">
+					blah
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
 <div class="content-wrap">
-<div class="small-12 columns">
+	<div class="small-12 columns">
 
-	<div class="row collapse top_padding">
-		<div class="large-12 columns profile shadow">
-			<div class="row">
-				<div class="large-12 columns">
-					<div class="row">
-						<div class="large-3 columns">
-							<div class="profile_pic"><%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300") %></div>
-						</div>
-						<div class="large-9 columns">
-							<p class="info_name"><i class="fa fa-user"></i>
-								<% if @full_name != nil then %>
-								<%= @full_name.split(" ").first %> <span class="darkblue"><%= @full_name.split(" ").last %></span>
-								<% else %>
-								<%= params[:user_name] %>
-								<% end %>
-							</p>
-							<div class="row">
-
-								<div class="large-6 columns">
-									<table>
-										<tr>
-											<td>Location</td>
-											<td><%= if @location != nil then @location else "Location not available" end %></td>
-										</tr>
-										<tr>
-											<td>Work</td>
-											<td><%= if @repo_data.company != nil then @repo_data.company else "Company not available" end %></td>
-										</tr>
-										<tr>
-											<td>Email</td>
-											<td><%= if @repo_data.email != nil then @repo_data.email else "Email not available" end %></td>
-										</tr>
-									</table>
-									<table>
-										<tr>
-											<td>Followers</td>
-											<td><%= @repo_data.followers %></td>
-										</tr>
-										<tr>
-											<td>Following</td>
-											<td><%= @repo_data.following %></td>
-										</tr>
-									</table>
-								</div>
-								<div class="large-6 columns">
-									<table>
-										<tr>
-											<td>Socialize</td>
-											<td><i class="fa fa-github"></i><a href="http://www.github.com/<%= params[:user_name] %>" target="_blank">Github</a></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td><i class="fa fa-twitter"></i>Twitter</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td><i class="fa fa-facebook"></i>Facebook</td>
-										</tr>
-									</table>
-								</div>
+		<div class="row collapse top_padding">
+			<div class="large-12 columns profile shadow">
+				<div class="row">
+					<div class="large-12 columns">
+						<div class="row">
+							<div class="large-3 columns">
+								<div class="profile_pic"><%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300") %></div>
 							</div>
+							<div class="large-9 columns">
+								<p class="info_name"><i class="fa fa-user"></i>
+									<% if @full_name != nil then %>
+									<%= @full_name.split(" ").first %> <span class="darkblue"><%= @full_name.split(" ").last %></span>
+									<% else %>
+									<%= params[:user_name] %>
+									<% end %>
+								</p>
+								<div class="row">
 
-							<div class="row collapse">
-								<div class="large-6 columns">
-									<p class="info_name"><i class="fa fa-fire"></i>Recent Activity</p>
-									<ul data-pie-id="line_chart" class="line_chart">
-										<%= line_chart(@line_chart, :id => "line_chart", :height => "190px", :library => {:backgroundColor => "#f9f9f9", :chartArea => {:width => "90%"}, :vAxis => {:textStyle => {:fontSize => 10}, :textPosition => "in"}, :hAxis => {:textStyle => {:fontSize => 10}, :format => 'M/d'}}) %>
-									</ul>
+									<div class="large-6 columns">
+										<table>
+											<tr>
+												<td>Location</td>
+												<td><%= if @location != nil then @location else "Location not available" end %></td>
+											</tr>
+											<tr>
+												<td>Work</td>
+												<td><%= if @repo_data.company != nil then @repo_data.company else "Company not available" end %></td>
+											</tr>
+											<tr>
+												<td>Email</td>
+												<td><%= if @repo_data.email != nil then @repo_data.email else "Email not available" end %></td>
+											</tr>
+										</table>
+										<table>
+											<tr>
+												<td>Followers</td>
+												<td><%= @repo_data.followers %></td>
+											</tr>
+											<tr>
+												<td>Following</td>
+												<td><%= @repo_data.following %></td>
+											</tr>
+										</table>
+									</div>
+									<div class="large-6 columns">
+										<table>
+											<tr>
+												<td>Socialize</td>
+												<td><i class="fa fa-github"></i><a href="http://www.github.com/<%= params[:user_name] %>" target="_blank">Github</a></td>
+											</tr>
+											<tr>
+												<td></td>
+												<td><i class="fa fa-twitter"></i>Twitter</td>
+											</tr>
+											<tr>
+												<td></td>
+												<td><i class="fa fa-facebook"></i>Facebook</td>
+											</tr>
+										</table>
+									</div>
 								</div>
-								<div class="large-6 columns">
-									<p class="info_name"><i class="fa fa-bar-chart-o"></i>Language Composition</p>
-									<ul data-pie-id="pie_chart" class="pie_chart">
-										<%= pie_chart(@pie_data, :id => "pie_chart", :height => "190px", :library => {:colors => @pie_colors, :backgroundColor => "#f9f9f9", :chartArea => {:width => "90%"}}) %>
-									</ul>
+
+								<div class="row collapse">
+									<div class="large-6 columns">
+										<p class="info_name"><i class="fa fa-fire"></i>Recent Activity</p>
+										<ul data-pie-id="line_chart" class="line_chart">
+											<%= line_chart(@line_chart, :id => "line_chart", :height => "190px", :library => {:backgroundColor => "#f9f9f9", :chartArea => {:width => "90%"}, :vAxis => {:textStyle => {:fontSize => 10}, :textPosition => "in"}, :hAxis => {:textStyle => {:fontSize => 10}, :format => 'M/d'}}) %>
+										</ul>
+									</div>
+									<div class="large-6 columns">
+										<p class="info_name"><i class="fa fa-bar-chart-o"></i>Language Composition</p>
+										<ul data-pie-id="pie_chart" class="pie_chart">
+											<%= pie_chart(@pie_data, :id => "pie_chart", :height => "190px", :library => {:colors => @pie_colors, :backgroundColor => "#f9f9f9", :chartArea => {:width => "90%"}}) %>
+										</ul>
+									</div>
 								</div>
+
 							</div>
-
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="row top_padding">
-		<div class="small-12 columns top_padding">
-			<div class="border_bottom"><h6><i class="fa fa-leaf"></i>Repositories</h6></div>
-			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
-				<% @repositories.each do |filter| %>
-				<% if filter[:homepage] != "not_available" %>
-				<li><a href="#" data-reveal-id="<%= filter[:name].gsub('.','') %>">
-					<div class="each_repo shadow" style="border-right: solid 5px <%= @panel_label.select { |color| color.first == filter[:language] }.first.last %>">
-						<img src="<%= "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=300" %>">
-						<% if filter[:fork] == true %><i class="fa fa-code-fork fork"></i><% end %>
-						<p>
-							<i class="fa fa-github"></i><%= if filter[:name].size > 26 then filter[:name][0,26] + "..." else filter[:name] end %><br />
-							<span class="updated_at"><i class="fa fa-calendar"></i><%= l filter[:update_date], format: :long %></span>
-						</p>
+		<div class="row top_padding">
+			<div class="small-12 columns top_padding">
+				<div class="border_bottom"><h6><i class="fa fa-leaf"></i>Repositories</h6></div>
+				<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+					<% @repositories.each do |filter| %>
+					<% if filter[:homepage] != "not_available" %>
+					<li><a href="#" data-reveal-id="<%= filter[:name].gsub('.','') %>">
+						<div class="each_repo shadow" style="border-right: solid 5px <%= @panel_label.select { |color| color.first == filter[:language] }.first.last %>">
+							<img src="<%= "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=300" %>">
+							<% if filter[:fork] == true %><i class="fa fa-code-fork fork"></i><% end %>
+							<p>
+								<i class="fa fa-github"></i><%= if filter[:name].size > 26 then filter[:name][0,26] + "..." else filter[:name] end %><br />
+								<span class="updated_at"><i class="fa fa-calendar"></i><%= l filter[:update_date], format: :long %></span>
+							</p>
+						</div>
+					</a></li>
+					<div id="<%= filter[:name].gsub('.','') %>" class="reveal-modal small" data-reveal>
+						<p class="modal_right">Created: <%= l filter[:start_date], format: :short %>&nbsp;&nbsp;&nbsp;Updated: <%= l filter[:update_date], format: :short %></p>
+						<div class="border_bottom"><h6><i class="fa fa-github"></i><%= filter[:name] %></h6></div>
+						<h6 class="gray">Language:</h6>
+						<blockquote><%= filter[:language] %></blockquote>
+						<h6 class="gray">Description:</h6>
+						<blockquote><%= if filter[:description].empty? == false then filter[:description] else "Description not available" end %></blockquote>
+						<ul class="button-group right">
+							<li><a href="<%= "http://github.com/" + "#{params[:user_name]}/#{filter[:name]}" %>" target="_blank" class="button tiny">View on Github</a></li>
+							<li><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></li>
+						</ul>
+						<a class="close-reveal-modal">&#215;</a>
 					</div>
-				</a></li>
-				<div id="<%= filter[:name].gsub('.','') %>" class="reveal-modal small" data-reveal>
-					<p class="modal_right">Created: <%= l filter[:start_date], format: :short %>&nbsp;&nbsp;&nbsp;Updated: <%= l filter[:update_date], format: :short %></p>
-					<div class="border_bottom"><h6><i class="fa fa-github"></i><%= filter[:name] %></h6></div>
-					<h6 class="gray">Language:</h6>
-					<blockquote><%= filter[:language] %></blockquote>
-					<h6 class="gray">Description:</h6>
-					<blockquote><%= if filter[:description].empty? == false then filter[:description] else "Description not available" end %></blockquote>
-					<ul class="button-group right">
-						<li><a href="<%= "http://github.com/" + "#{params[:user_name]}/#{filter[:name]}" %>" target="_blank" class="button tiny">View on Github</a></li>
-						<li><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></li>
-					</ul>
-					<a class="close-reveal-modal">&#215;</a>
-				</div>
-				<% end %>
-				<% end %>
-			</ul>
+					<% end %>
+					<% end %>
+				</ul>
+			</div>
 		</div>
-	</div>
 
-	<div class="row top_padding">
-		<div class="small-12 columns">
-			<div class="border_bottom"><h6><i class="fa fa-leaf"></i>Other Repositories</h6></div>
-			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
-				<% @repositories.each do |filter| %>
-				<% if filter[:homepage] == "not_available" %>
-				<li><a href="#" data-reveal-id="<%= filter[:name].gsub('.','') %>">
-					<div class="each_repo shadow" style="border-right: solid 5px <%= @panel_label.select { |color| color.first == filter[:language] }.first.last %>">
-						<% if filter[:fork] == true %><i class="fa fa-code-fork fork"></i><% end %>
-						<p>
-							<i class="fa fa-github"></i><%= if filter[:name].size > 13 then filter[:name][0,13] + "..." else filter[:name] end %><br />
-							<span class="updated_at"><i class="fa fa-calendar"></i><%= l filter[:update_date], format: :long %></span>
-						</p>
+		<div class="row top_padding">
+			<div class="small-12 columns">
+				<div class="border_bottom"><h6><i class="fa fa-leaf"></i>Other Repositories</h6></div>
+				<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
+					<% @repositories.each do |filter| %>
+					<% if filter[:homepage] == "not_available" %>
+					<li><a href="#" data-reveal-id="<%= filter[:name].gsub('.','') %>">
+						<div class="each_repo shadow" style="border-right: solid 5px <%= @panel_label.select { |color| color.first == filter[:language] }.first.last %>">
+							<% if filter[:fork] == true %><i class="fa fa-code-fork fork"></i><% end %>
+							<p>
+								<i class="fa fa-github"></i><%= if filter[:name].size > 13 then filter[:name][0,13] + "..." else filter[:name] end %><br />
+								<span class="updated_at"><i class="fa fa-calendar"></i><%= l filter[:update_date], format: :long %></span>
+							</p>
+						</div>
+					</a></li>
+					<div id="<%= filter[:name].gsub('.','') %>" class="reveal-modal small" data-reveal>
+						<p class="modal_right">Created: <%= l filter[:start_date], format: :short %>&nbsp;&nbsp;&nbsp;Updated: <%= l filter[:update_date], format: :short %></p>
+						<div class="border_bottom"><h6><i class="fa fa-github"></i><%= filter[:name] %></h6></div>
+						<h6 class="gray">Language:</h6>
+						<blockquote><%= filter[:language] %></blockquote>
+						<h6 class="gray">Description:</h6>
+						<blockquote><%= if filter[:description].empty? == false then filter[:description] else "Description not available" end %></blockquote>
+						<ul class="button-group right">
+							<li><a href="<%= "http://github.com/" + "#{params[:user_name]}/#{filter[:name]}" %>" target="_blank" class="button tiny">View on Github</a></li>
+							<li><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></li>
+						</ul>
+						<a class="close-reveal-modal">&#215;</a>
 					</div>
-				</a></li>
-				<div id="<%= filter[:name].gsub('.','') %>" class="reveal-modal small" data-reveal>
-					<p class="modal_right">Created: <%= l filter[:start_date], format: :short %>&nbsp;&nbsp;&nbsp;Updated: <%= l filter[:update_date], format: :short %></p>
-					<div class="border_bottom"><h6><i class="fa fa-github"></i><%= filter[:name] %></h6></div>
-					<h6 class="gray">Language:</h6>
-					<blockquote><%= filter[:language] %></blockquote>
-					<h6 class="gray">Description:</h6>
-					<blockquote><%= if filter[:description].empty? == false then filter[:description] else "Description not available" end %></blockquote>
-					<ul class="button-group right">
-						<li><a href="<%= "http://github.com/" + "#{params[:user_name]}/#{filter[:name]}" %>" target="_blank" class="button tiny">View on Github</a></li>
-						<li><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></li>
-					</ul>
-					<a class="close-reveal-modal">&#215;</a>
-				</div>
-				<% end %>
-				<% end %>
-			</ul>
+					<% end %>
+					<% end %>
+				</ul>
+			</div>
 		</div>
-	</div>
 
-</div>
+	</div>
 </div>

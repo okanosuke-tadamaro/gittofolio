@@ -1,0 +1,19 @@
+$(document).ready(function() {
+
+	var chartData = $('.chart-data').data();
+	var lineChartData = chartData.lineChart;
+	var lineChart = {
+		labels: lineChartData[0],
+		datasets: [{
+			fillColor: "rgba(151,187,205,0.5)",
+			strokeColor: "rgba(151,187,205,1)",
+			pointColor: "rgba(151,187,205,1)",
+			pointStrokeColor: "#fff",
+			data: lineChartData[1]
+		}]
+	};
+	var lineArea = $('.line-chart').get(0).getContext('2d');
+	console.log(lineArea);
+	new Chart(lineArea).Line(lineChart);
+
+});

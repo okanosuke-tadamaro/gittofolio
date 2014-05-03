@@ -102,9 +102,10 @@ class Repository < ActiveRecord::Base
 	def self.get_event_data(username, github_access_token)
 		event_data = JSON.load(RestClient.get("https://github.com/users/" + username + "/contributions_calendar_data?access_token=" + "#{github_access_token}"))
 		filter_line_chart_data = event_data.select {|x| x[0].to_date >= Date.today - 55.days}
-		dates = filter_line_chart_data.map {|date| date.first.to_date}.in_groups_of(7,false).map {|date| date.last}
+		dates = filter_line_chart_data.map { |date| date.first.to_date }.in_groups_of(7,false).map { |date| date.last.to_s }
 		graph_data = filter_line_chart_data.map {|graph| graph.last}.in_groups_of(7,false).map {|graph| graph.sum}
-		all_data = dates.zip(graph_data)
+		# all_data = dates.zip(graph_data)
+		return [dates, graph_data]
 	end
 
 	def self.get_pie_data(values)
