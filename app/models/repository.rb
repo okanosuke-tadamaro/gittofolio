@@ -99,19 +99,24 @@ class Repository < ActiveRecord::Base
 		languages = language_unordered.push("Other")
 	end
 
-	def self.get_event_data(username, github_access_token)
+	def self.get_linechart_data(username, github_access_token)
 		event_data = JSON.load(RestClient.get("https://github.com/users/" + username + "/contributions_calendar_data?access_token=" + "#{github_access_token}"))
-		filter_line_chart_data = event_data.select {|x| x[0].to_date >= Date.today - 55.days}
-		dates = filter_line_chart_data.map { |date| date.first.to_date }.in_groups_of(7,false).map { |date| date.last.to_s }
+		filter_line_chart_data = event_data.select {|x| x[0].to_date >= (Date.today - 1) - 56.days}
+		# dates = filter_line_chart_data.map { |date| date.first.to_date }.in_groups_of(7,false).map { |date| date.last.to_s }
+		dates = %W(8w 7w 6w 5w 4w 3w 2w 1w 0w)
 		graph_data = filter_line_chart_data.map {|graph| graph.last}.in_groups_of(7,false).map {|graph| graph.sum}
-		# all_data = dates.zip(graph_data)
 		return [dates, graph_data]
 	end
 
-	def self.get_pie_data(values)
+	def self.get_barchart_data(values)
 		value_list = values.map { |value| value[:language] }
 		counts = value_list.inject(Hash.new(0)) {|hash,language| hash[language] += 1; hash}
 		ordered_counts = Hash[counts.sort_by {|k,v| v}.reverse]
+		if ordered_counts.size > 3
+			return [ordered_counts.keys[0..2], ordered_counts.values[0..2]]
+		else
+			return [ordered_counts.keys, ordered_counts.values]
+		end
 	end
 
 	def self.get_pie_label(data,language)

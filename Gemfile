@@ -6,6 +6,7 @@ gem 'rest-client'
 gem 'redcarpet'
 gem 'github-markup'
 gem 'foundation-rails'
+gem 'octokit'
 gem 'chartkick'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
@@ -14,8 +15,6 @@ gem 'jquery-rails'
 # gem 'turbolinks'
 
 gem 'jbuilder', '~> 1.2'
-
-gem 'octokit'
 
 group :production do
 	gem 'rails_12factor'

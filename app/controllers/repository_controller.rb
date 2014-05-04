@@ -31,9 +31,10 @@ class RepositoryController < ApplicationController
 			@location = @repositories.first[:location]
 			@github = "http://www.github.com/#{params[:user_name]}"
 
-			@pie_data = Repository.get_pie_data(@repositories)
+			@bar_data = Repository.get_barchart_data(@repositories)
+			@pie_data = Repository.get_barchart_data(@repositories)
 			@languages = Repository.sort_repos(@repositories)
-			@line_data = Repository.get_event_data(params[:user_name], session[:github_access_token])
+			@line_data = Repository.get_linechart_data(params[:user_name], session[:github_access_token])
 			@line_chart = @line_data.first.zip(@line_data.last)
 			colors = ["#1b5167", "#226682", "#297b9d", "#3091b8", "#3ea3cc", "#59b0d3", "#74bdda", "#8ec9e2", "#a9d6e9", "#c4e3f0", "#dff0f7"]
 			@pie_colors = colors.take(@pie_data.size)
