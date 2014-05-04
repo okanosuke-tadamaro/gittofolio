@@ -9,6 +9,9 @@ class Repository < ActiveRecord::Base
 	end
 
 	def self.get_repos(client, username)
+		#
+		# MAKE NEW REQUEST TO GITHUB TO GET REPOSITORY INFO FOR A CERTAIN USER
+		#
   	repositories = client.repositories(username)
   	parsed_repositories = repositories.inject(Array.new) { |array, repo| array << {
 			name: 				repo[:name],
@@ -28,12 +31,23 @@ class Repository < ActiveRecord::Base
 	end
 
 	def self.get_cached_repos(client, user_data, username)
+		#
+		# UPDATE USER REPOSITORY
+		#
 		if user_data[:updated_at].to_date > Repository.where(:owner => username).sort_by { |date| date.update_date }.reverse.first.update_date
 			repositories = Repository.get_repos(client, username)
+			
+			#
+			# CHECK FOR DELETED REPOS
+			#
 			Repository.where(:owner => username).each do |repo|
-				if repositories.any? {|check| check[:name] == repo.name } == false then Repository.destroy(repo.id) end
+				Repository.destroy(repo.id) if repositories.any? { |check| check[:name] == repo.name } == false
 			end
+
 			repositories.each do |repo|
+				#
+				# CHECK FOR NEW REPOSITORIES
+				#
 				if Repository.where(:owner => username, :name => repo[:name]).exists? == nil
 					Repository.create(
 						name: 				repo[:name],
@@ -49,7 +63,7 @@ class Repository < ActiveRecord::Base
 						fork: 				repo[:fork],
 						start_date: 	repo[:start_date].to_date,
 						update_date: 	repo[:update_date].to_date
-					)															
+					)
 				else
 					repository = Repository.find_by(:owner => username, :name => repo[:name])
 					Repository.update( repository.id, {
@@ -90,7 +104,7 @@ class Repository < ActiveRecord::Base
 		inject_repo_data.sort_by { |date| date[:update_date] }.reverse
 	end
 
-	def self.sort_repos(repositories)
+	def self.get_languages(repositories)
 		language_list = repositories.map { |language| language[:language] }
 		counts = language_list.inject(Hash.new(0)) {|hash,language| hash[language] += 1; hash}
 		ordered_counts = Hash[counts.sort_by {|k,v| v}.reverse]

@@ -29,7 +29,22 @@ function drawBarChart() {
 	new Chart(barArea).Bar(barChart, {scaleFontSize: 10, scaleFontFamily: "'Roboto Condensed'"});
 }
 
+function listLanguages() {
+	var listArea = $('.languages');
+	var languageItems = $('.chart-data').data().languages;
+	for(var i = 0; i < languageItems.length; i++) {
+		var item = $('<li>').addClass(languageItems[i].toLowerCase()).text(languageItems[i]);
+		item.click(sortListOnClick);
+		item.appendTo(listArea);
+	}
+}
+
+function sortListOnClick() {
+	console.log(this);
+}
+
 $(document).ready(function() {
 	drawLineChart();
 	drawBarChart();
+	listLanguages();
 });

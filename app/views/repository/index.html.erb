@@ -1,6 +1,9 @@
-<%= content_tag(:div, class: "chart-data", data: {line_chart: @line_data, bar_chart: @bar_data}) do %>
+<!-- PASS INFORMATION TO JAVASCRIPT -->
+<%= content_tag(:div, class: "chart-data", data: {line_chart: @line_data, bar_chart: @bar_data, languages: @languages}) do %>
 <% end %>
 
+
+<!-- TOP PANEL WITH USER INFORMATION AND GRAPHS -->
 <div class="top-panel">
 	<div class="row">
 		<div class="small-2 columns">
@@ -39,7 +42,7 @@
 					<canvas id="line-chart" height="122"></canvas>
 				</div>
 				<div class="small-6 columns">
-					<h3 class="chart-header barchart-header">Top 3 Languages</h3>
+					<h3 class="chart-header barchart-header">Top Languages</h3>
 					<canvas id="bar-chart" height="122"></canvas>
 				</div>
 			</div>
@@ -47,9 +50,15 @@
 	</div>
 </div>
 
-<div class="content-wrap">
-	<div class="row">
-		<div class="small-12 columns">
+
+<!-- REPOSITORY LIST -->
+<div class="row">
+	<div class="small-12 columns">
+		
+		<ul class="inline-list languages"></ul>
+		<article>
+			<section id="contact"></section>
+			<section id="repository-list">
 			<div><h6><i class="fa fa-leaf"></i>Repositories</h6></div>
 			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 				<% @repositories.each do |filter| %>
@@ -57,7 +66,7 @@
 				<li><a href="#" data-reveal-id="<%= filter[:name].gsub('.','') %>">
 					<div class="each_repo shadow" style="border-right: solid 5px <%= @panel_label.select { |color| color.first == filter[:language] }.first.last %>">
 						<img src="<%= "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=300" %>">
-						<% if filter[:fork] == true %><i class="fa fa-code-fork fork"></i><% end %>
+						<% if filter[:fork] %><i class="fa fa-code-fork fork"></i><% end %>
 						<p>
 							<i class="fa fa-github"></i><%= if filter[:name].size > 26 then filter[:name][0,26] + "..." else filter[:name] end %><br />
 							<span class="updated_at"><i class="fa fa-calendar"></i><%= l filter[:update_date], format: :long %></span>
@@ -80,42 +89,44 @@
 				<% end %>
 				<% end %>
 			</ul>
-		</div>
+			</section>
+			<section id="each-repository"></section>
+		</article>
+
 	</div>
+</div>
 
-		<div class="row top_padding">
-			<div class="small-12 columns">
-				<div class="border_bottom"><h6><i class="fa fa-leaf"></i>Other Repositories</h6></div>
-				<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
-					<% @repositories.each do |filter| %>
-					<% if filter[:homepage] == "not_available" %>
-					<li><a href="#" data-reveal-id="<%= filter[:name].gsub('.','') %>">
-						<div class="each_repo shadow" style="border-right: solid 5px <%= @panel_label.select { |color| color.first == filter[:language] }.first.last %>">
-							<% if filter[:fork] == true %><i class="fa fa-code-fork fork"></i><% end %>
-							<p>
-								<i class="fa fa-github"></i><%= if filter[:name].size > 13 then filter[:name][0,13] + "..." else filter[:name] end %><br />
-								<span class="updated_at"><i class="fa fa-calendar"></i><%= l filter[:update_date], format: :long %></span>
-							</p>
-						</div>
-					</a></li>
-					<div id="<%= filter[:name].gsub('.','') %>" class="reveal-modal small" data-reveal>
-						<p class="modal_right">Created: <%= l filter[:start_date], format: :short %>&nbsp;&nbsp;&nbsp;Updated: <%= l filter[:update_date], format: :short %></p>
-						<div class="border_bottom"><h6><i class="fa fa-github"></i><%= filter[:name] %></h6></div>
-						<h6 class="gray">Language:</h6>
-						<blockquote><%= filter[:language] %></blockquote>
-						<h6 class="gray">Description:</h6>
-						<blockquote><%= if filter[:description].empty? == false then filter[:description] else "Description not available" end %></blockquote>
-						<ul class="button-group right">
-							<li><a href="<%= "http://github.com/" + "#{params[:user_name]}/#{filter[:name]}" %>" target="_blank" class="button tiny">View on Github</a></li>
-							<li><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></li>
-						</ul>
-						<a class="close-reveal-modal">&#215;</a>
+	<div class="row top_padding">
+		<div class="small-12 columns">
+			<div class="border_bottom"><h6><i class="fa fa-leaf"></i>Other Repositories</h6></div>
+			<ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-5">
+				<% @repositories.each do |filter| %>
+				<% if filter[:homepage] == "not_available" %>
+				<li><a href="#" data-reveal-id="<%= filter[:name].gsub('.','') %>">
+					<div class="each_repo shadow" style="border-right: solid 5px <%= @panel_label.select { |color| color.first == filter[:language] }.first.last %>">
+						<% if filter[:fork] == true %><i class="fa fa-code-fork fork"></i><% end %>
+						<p>
+							<i class="fa fa-github"></i><%= if filter[:name].size > 13 then filter[:name][0,13] + "..." else filter[:name] end %><br />
+							<span class="updated_at"><i class="fa fa-calendar"></i><%= l filter[:update_date], format: :long %></span>
+						</p>
 					</div>
-					<% end %>
-					<% end %>
-				</ul>
-			</div>
+				</a></li>
+				<div id="<%= filter[:name].gsub('.','') %>" class="reveal-modal small" data-reveal>
+					<p class="modal_right">Created: <%= l filter[:start_date], format: :short %>&nbsp;&nbsp;&nbsp;Updated: <%= l filter[:update_date], format: :short %></p>
+					<div class="border_bottom"><h6><i class="fa fa-github"></i><%= filter[:name] %></h6></div>
+					<h6 class="gray">Language:</h6>
+					<blockquote><%= filter[:language] %></blockquote>
+					<h6 class="gray">Description:</h6>
+					<blockquote><%= if filter[:description].empty? == false then filter[:description] else "Description not available" end %></blockquote>
+					<ul class="button-group right">
+						<li><a href="<%= "http://github.com/" + "#{params[:user_name]}/#{filter[:name]}" %>" target="_blank" class="button tiny">View on Github</a></li>
+						<li><a href='<%= "/#{params[:user_name]}/#{filter[:name]}" %>' class="button tiny">Details</a></li>
+					</ul>
+					<a class="close-reveal-modal">&#215;</a>
+				</div>
+				<% end %>
+				<% end %>
+			</ul>
 		</div>
-
 	</div>
 </div>
