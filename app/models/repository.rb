@@ -133,6 +133,14 @@ class Repository < ActiveRecord::Base
 		end
 	end
 
+	def self.get_single_repository(client, username, repo_name)
+		languages = client.languages(username + '/' + repo_name) #=> Hash
+		commits = client.commits(username + '/' + repo_name)
+		return {
+			radar_data: {language_labels: languages.to_hash.keys.map { |key| key.to_s }, language_values: languages.to_hash.values}
+		}
+	end
+
 	def self.get_pie_label(data,language)
 		colors = data.map { |color| color.scan(/(?<=#)(?<!^)(\h{6}|\h{3})/).first.first }
 		bundled_data = language.zip(colors)

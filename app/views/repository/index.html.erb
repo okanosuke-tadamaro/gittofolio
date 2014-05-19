@@ -50,60 +50,76 @@
 	</div>
 </div>
 
-<!-- LANGUAGE LIST -->
 <div class="row">
-	<div class="small-12 columns">
-		<ul class="inline-list languages"></ul>
-	</div>
-</div>
+<div class="small-12 columns">
+<div class="content-panel">
 
-<!-- REPOSITORY LIST -->
-<div class="row">
-	<div class="small-12 columns">
-		
-		<% if @imaged_repositories.any? %>
-			<ul class="small-block-grid-4 repository-wrap">
-				<% @imaged_repositories.each do |repository| %>
-					<li>
+	<div class="repo-list-container">
+		<!-- LANGUAGE LIST -->
+		<div class="row collapse">
+			<div class="small-12 columns">
+				<ul class="inline-list languages"></ul>
+			</div>
+		</div>
+
+		<!-- REPOSITORY LIST -->
+		<div class="row collapse">
+			<div class="small-12 columns">
+
+				<% if @imaged_repositories.any? %>
+				<ul class="small-block-grid-4 repository-wrap">
+					<% @imaged_repositories.each do |repository| %>
+					<li class="item">
 						<div class="each-imaged-repository">
 							<img src="<%= "http://s.wordpress.com/mshots/v1/#{repository[:homepage].to_s}?w=300" %>">
 							<h3><i class="fa fa-github-alt"></i><%= repository[:name] %></h3>
 							<div class="clear"></div>
-							<p><i class="fa fa-calendar"></i><%= repository[:update_date] %></p>
+							<p class="updated"><i class="fa fa-calendar"></i><%= repository[:update_date] %></p>
+							<p class="language"><%= repository[:language] %></p>
+							<div class="clear"></div>
 						</div>
 					</li>
+					<% end %>
+				</ul>
 				<% end %>
-			</ul>
-		<% end %>
 
-		<% if @regular_repositories.any? %>
-			<ul class="small-block-grid-4 repository-wrap">
-				<% @regular_repositories.each do |repository| %>
-					<li>
+				<% if @regular_repositories.any? %>
+				<ul class="small-block-grid-4 repository-wrap">
+					<% @regular_repositories.each do |repository| %>
+					<li class="item">
 						<div class="each-regular-repository">
 							<h3><i class="fa fa-github-alt"></i><%= repository[:name] %></h3>
 							<div class="clear"></div>
-							<p><i class="fa fa-calendar"></i><%= repository[:update_date] %></p>
+							<p class="updated"><i class="fa fa-calendar"></i><%= repository[:update_date] %></p>
+							<p class="language"><%= repository[:language] %></p>
+							<div class="clear"></div>
 						</div>
 					</li>
+					<% end %>
+				</ul>
 				<% end %>
-			</ul>
-		<% end %>
 
-		<% if @forked_repositories.any? %>
-			<ul class="small-block-grid-4 repository-wrap">
-				<% @forked_repositories.each do |repository| %>
-					<li>
+				<% if @forked_repositories.any? %>
+				<ul class="small-block-grid-4 repository-wrap">
+					<% @forked_repositories.each do |repository| %>
+					<li class="item">
 						<div class="each-forked-repository">
 							<h3><i class="fa fa-github-alt"></i><%= repository[:name] %></h3>
 							<p class="fork-icon"><i class="fa fa-code-fork"></i></p>
 							<div class="clear"></div>
-							<p><i class="fa fa-calendar"></i><%= repository[:update_date] %></p>
+							<p class="updated"><i class="fa fa-calendar"></i><%= repository[:update_date] %></p>
+							<p class="language"><%= repository[:language] %></p>
+							<div class="clear"></div>
 						</div>
 					</li>
+					<% end %>
+				</ul>
 				<% end %>
-			</ul>
-		<% end %>
 
+			</div>
+		</div>
 	</div>
+
+</div>
+</div>	
 </div>
