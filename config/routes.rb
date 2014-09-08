@@ -3,7 +3,7 @@ Gittofolio::Application.routes.draw do
   resources :repositories
   resources :users
 
-  get 'github/callback' => 'welcome#callback'
+  get '/github/callback' => 'welcome#callback'
   get '/signout' => "welcome#destroy"
   get "welcome/index"
   get '/search' => 'welcome#user_search'
