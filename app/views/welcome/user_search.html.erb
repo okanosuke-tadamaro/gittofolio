@@ -1,21 +1,22 @@
-<div class="row">
-	<div class="row-content">
-		<div class="column twelve search_results">
-			<h3 class="search_resulits_h3">Search Results</h3>
-				<div class="show_results">
-					<% @users["users"].each do |result| %>
-						<a href="<%= "/#{result["username"]}" %>">
-							<div class="each_result">
-								<img src="http://www.gravatar.com/avatar/<%= result["gravatar_id"] %>?s=196" class="result_avatar">
-								<div class="result_text">
-									<p><%= result["username"] %></p>
-									<p><%= result["fullname"] %></p>
-									<p><%= result["location"] %></p>
-								</div>
-							</div>
-						</a>
-					<% end %>
+<div class="small-12 columns search">
+	<h6><i class="fa fa-search"></i>Search Results</h6>
+	<hr />
+	<ul class="small-block-grid-3 medium-block-grid-4 large-block-grid-5">
+		<% @users["users"].each do |result| %>
+		
+			<li>
+				<div class="each_result shadow">
+					<a href="<%= "/#{result["username"]}" %>">
+						<img src="http://www.gravatar.com/avatar/<%= result["gravatar_id"] %>?s=200">
+						<div class="each_result_text">
+							<p class="each_resilt_username"><%= result["username"] %></p>
+							<p class="each_resilt_fullname"><%= result["fullname"] %></p>
+							<p class="each_resilt_location"><%= result["location"] %></p>
+						</div>
+					</a>
 				</div>
-		</div>
-	</div>
+			</li>
+		
+		<% end %>
+	</ul>
 </div>

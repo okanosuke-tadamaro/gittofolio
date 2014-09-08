@@ -1,61 +1,125 @@
-<div class="row user_window">
-	<div class="row-content">
-		<div class="column four">
-			<div class="new_content">
-				<p>Some new content here....soon</p>
+<!-- PASS INFORMATION TO JAVASCRIPT -->
+<%= content_tag(:div, class: "chart-data", data: {line_chart: @line_data, bar_chart: @bar_data, languages: @languages}) do %>
+<% end %>
+
+
+<!-- TOP PANEL WITH USER INFORMATION AND GRAPHS -->
+<div class="top-panel">
+	<div class="row">
+		<div class="small-2 columns">
+			<div class="top-left-panel">
+				<%= image_tag("http://www.gravatar.com/avatar/#{@regular_repositories.first[:avatar]}?s=300") %>
 			</div>
 		</div>
-		<div class="column third">
-			<%= image_tag("http://www.gravatar.com/avatar/#{@repositories.first[:avatar]}?s=300", :class => "avatar") %>
+		<div class="small-3 columns">
+			<div class="top-right-panel">
+				<div class="panel-header">
+					<h3><i class="fa fa-smile-o"></i>
+						<% if @full_name != nil then %>
+						<%= @full_name.split(" ").first %> <span class="last-name"><%= @full_name.split(" ").last %></span>
+						<% else %>
+						<%= params[:user_name] %>
+						<% end %>
+					</h3>
+				</div>
+				<div class="panel-content">
+					<p><i class="fa fa-flag"></i><span class="text"><%= @occupation || "occupation not yet set" %></span></p>
+					<p><i class="fa fa-envelope"></i><span class="text"><%= @repo_data.email || "email unavailable" %></span></p>
+					<p><i class="fa fa-briefcase"></i><span class="text"><%= @repo_data.company || "company unavailable" %></span></p>
+					<p><i class="fa fa-globe"></i><span class="text"><%= @location || "location unavailable" %></span></p>
+				</div>
+				<div class="panel-footer">
+					<p><i class="fa fa-github"></i><span class="text"><%= link_to "GitHub", @github %></span></p>
+					<p><i class="fa fa-linkedin-square"></i><span class="text">LinkedIn</span></p>
+					<p><i class="fa fa-twitter"></i><span class="text">Twitter</span></p>
+				</div>
+			</div>
 		</div>
-		<div class="column four last">
-			<div class="pie_wrap">
-			<canvas id="languagepie" class="language_pie" width="300" height="300"></canvas>
-			
-			<ul class="color_hoge">
-				<% @label.each do |label| %>
-					<%=raw '<li style="background-color:#' + "#{label.last}" + ';">' + "#{label.first}" + '</li>' %>
-				<% end %>
-			</ul>
+		<div class="small-7 columns">
+			<div class="row">
+				<div class="small-6 columns">
+					<h3 class="chart-header linechart-header">Recent Activity</h3>
+					<canvas id="line-chart" height="122"></canvas>
+				</div>
+				<div class="small-6 columns">
+					<h3 class="chart-header barchart-header">Top Languages</h3>
+					<canvas id="bar-chart" height="122"></canvas>
+				</div>
+			</div>
 		</div>
-		</div>
-		<div class="clear"></div>
 	</div>
 </div>
 
 <div class="row">
-	<div class="row-content">
-		<div class="column twelve main_content">
+<div class="small-12 columns">
+<div class="content-panel">
 
-			<ul class="filterControl">
-				<li class="filter" data-filter="all">Show All</li>
-				<% @languages.each do |control| %>
-					<%=raw '<li class="filter" data-filter="' + "#{control.downcase.gsub('#','')}" + '">' + "#{control}" + '</li>' %>
+	<div class="repo-list-container">
+		<!-- LANGUAGE LIST -->
+		<div class="row collapse">
+			<div class="small-12 columns">
+				<ul class="inline-list languages"></ul>
+			</div>
+		</div>
+
+		<!-- REPOSITORY LIST -->
+		<div class="row collapse">
+			<div class="small-12 columns">
+
+				<% if @imaged_repositories.any? %>
+				<ul class="small-block-grid-4 repository-wrap">
+					<% @imaged_repositories.each do |repository| %>
+					<li class="item">
+						<div class="each-imaged-repository">
+							<img src="<%= "http://s.wordpress.com/mshots/v1/#{repository[:homepage].to_s}?w=300" %>">
+							<h3><i class="fa fa-github-alt"></i><%= repository[:name] %></h3>
+							<div class="clear"></div>
+							<p class="updated"><i class="fa fa-calendar"></i><%= repository[:update_date] %></p>
+							<p class="language"><%= repository[:language] %></p>
+							<div class="clear"></div>
+						</div>
+					</li>
+					<% end %>
+				</ul>
 				<% end %>
-			</ul>
 
-			<ul id="filterGrid">
-				<% @repositories.each do |filter| %>
-						<%=raw '<li class="mix ' + "#{filter[:language].downcase.gsub('#','')}" + '">' %>
-							<%=raw '<a href="' + "/#{params[:user_name]}/#{filter[:name]}" + '">' %>
-								<% if filter[:homepage] != "not_available" then %>
-									<%=raw '<img src="' + "http://s.wordpress.com/mshots/v1/#{filter[:homepage].to_s}?w=196" + '">' %>
-								<% elsif %>
-									<div class="thumbalt" style="background-color: #<%= @label.select { |data| data.include?(filter[:language]) }.last.last %>;"><%= filter[:language] %></div>
-								<% else %>
-									<%= image_tag("index_placeholder.png") %>
-								<% end %>
-								<h4><%= "#{filter[:name]}" %></h4>
-							<%=raw '</a>' %>
-						<%=raw '</li>' %>
+				<% if @regular_repositories.any? %>
+				<ul class="small-block-grid-4 repository-wrap">
+					<% @regular_repositories.each do |repository| %>
+					<li class="item">
+						<div class="each-regular-repository">
+							<h3><i class="fa fa-github-alt"></i><%= repository[:name] %></h3>
+							<div class="clear"></div>
+							<p class="updated"><i class="fa fa-calendar"></i><%= repository[:update_date] %></p>
+							<p class="language"><%= repository[:language] %></p>
+							<div class="clear"></div>
+						</div>
+					</li>
+					<% end %>
+				</ul>
 				<% end %>
-			</ul>
 
+				<% if @forked_repositories.any? %>
+				<ul class="small-block-grid-4 repository-wrap">
+					<% @forked_repositories.each do |repository| %>
+					<li class="item">
+						<div class="each-forked-repository">
+							<h3><i class="fa fa-github-alt"></i><%= repository[:name] %></h3>
+							<p class="fork-icon"><i class="fa fa-code-fork"></i></p>
+							<div class="clear"></div>
+							<p class="updated"><i class="fa fa-calendar"></i><%= repository[:update_date] %></p>
+							<p class="language"><%= repository[:language] %></p>
+							<div class="clear"></div>
+						</div>
+					</li>
+					<% end %>
+				</ul>
+				<% end %>
+
+			</div>
 		</div>
 	</div>
-</div>
 
-<%= javascript_tag do %>
-	var data = <%=raw @pie_data.each { |data| puts data }.to_s.gsub('"', '') %>;
-	var myDoughnut = new Chart(document.getElementById("languagepie").getContext("2d")).Doughnut(data);
-<% end %>
+</div>
+</div>	
+</div>
