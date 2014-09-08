@@ -1,5 +1,5 @@
 class Repository < ActiveRecord::Base
-	
+
 	def self.check_cache(username)
 		true if Repository.exists?(owner: username)
 	end
@@ -114,12 +114,24 @@ class Repository < ActiveRecord::Base
 	end
 
 	def self.get_linechart_data(username, github_access_token)
-		event_data = JSON.load(RestClient.get("https://github.com/users/" + username + "/contributions_calendar_data?access_token=" + "#{github_access_token}"))
-		filter_line_chart_data = event_data.select {|x| x[0].to_date >= (Date.today - 1) - 56.days}
-		# dates = filter_line_chart_data.map { |date| date.first.to_date }.in_groups_of(7,false).map { |date| date.last.to_s }
-		dates = %W(8w 7w 6w 5w 4w 3w 2w 1w 0w)
-		graph_data = filter_line_chart_data.map {|graph| graph.last}.in_groups_of(7,false).map {|graph| graph.sum}
-		return [dates, graph_data]
+		## CONTRIBUTIONS_CALENDAR_DATA ENDPOINT RESPONDING 404
+		# event_data = JSON.load(RestClient.get("https://github.com/users/" + username + "/contributions_calendar_data?access_token=" + "#{github_access_token}"))
+		# filter_line_chart_data = event_data.select {|x| x[0].to_date >= (Date.today - 1) - 56.days}
+		# # dates = filter_line_chart_data.map { |date| date.first.to_date }.in_groups_of(7,false).map { |date| date.last.to_s }
+		# dates = %W(8w 7w 6w 5w 4w 3w 2w 1w 0w)
+		# graph_data = filter_line_chart_data.map {|graph| graph.last}.in_groups_of(7,false).map {|graph| graph.sum}
+
+		event_data = JSON.load(RestClient.get('https://api.github.com/users/' + username + '/events?access_token=' + github_access_token))
+		return_data = {}
+		event_data.each do |repo|
+			date = repo['created_at'].to_date.to_s
+			if return_data[date].nil?
+				return_data[date] = 1
+			else
+				return_data[date] += 1
+			end
+		end
+		return [return_data.keys, return_data.values]
 	end
 
 	def self.get_barchart_data(values)
