@@ -28,6 +28,7 @@ group :development, :test do
   gem 'pry'
 	gem 'dotenv-rails'
 	gem 'sqlite3'
+	gem 'quiet_assets'
 end
 
 group :doc do

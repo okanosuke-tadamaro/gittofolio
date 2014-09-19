@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131030184902) do
+ActiveRecord::Schema.define(version: 20140917141601) do
+
+  create_table "details", force: true do |t|
+    t.string   "user_name"
+    t.string   "repo_name"
+    t.string   "header"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "details", ["user_id"], name: "index_details_on_user_id"
 
   create_table "repositories", force: true do |t|
     t.string   "name"
@@ -40,5 +52,15 @@ ActiveRecord::Schema.define(version: 20131030184902) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "websites", force: true do |t|
+    t.string   "url"
+    t.integer  "call_count"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "websites", ["user_id"], name: "index_websites_on_user_id"
 
 end

@@ -1,0 +1,39 @@
+<div class="row settings-header">
+	<div class="large-12 columns">
+		<h3><%= current_user.name %></h3>
+	</div>
+</div>
+
+<div class="row">
+	<div class="large-12 columns">
+		<h4>Registered websites</h4>
+		<div class="add-website-block">
+			<%= form_for @website do |f| %>
+			<div class="row collapse">
+				<div class="small-10 columns"><%= f.text_field :url, :placeholder => 'Enter your website url here. (example: http://sample.com/)' %></div>
+				<div class="small-2 columns"><%= f.submit 'Add website', :class => 'button postfix' %></div>
+			</div>
+			<% end %>
+		</div>
+		<table width="100%">
+			<tr>
+				<th>Website URL</th>
+				<th>Call Count</th>
+				<th>Updated at</th>
+			</tr>
+			<% if @websites.any? %>
+				<% @websites.each do |site| %>
+					<tr>
+						<td><%= site.url %></td>
+						<td><%= site.call_count || '0' %></td>
+						<td><%= site.updated_at.to_date %></td>
+					</tr>
+				<% end %>
+			<% else %>
+				<tr>
+					<td colspan="3">You have no registered websites.</td>
+				</tr>
+			<% end %>
+		</table>
+	</div>
+</div>

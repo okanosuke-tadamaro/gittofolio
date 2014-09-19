@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+	has_many :websites
+
 	def self.get_oauth_link
 		return "https://github.com/login/oauth/authorize?client_id=#{ENV['GITHUB_CLIENT_ID']}"
 	end

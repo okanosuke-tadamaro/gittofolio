@@ -1,12 +1,17 @@
 Gittofolio::Application.routes.draw do
   
+  get "users/show"
   resources :repositories
   resources :users
+  resources :websites, :only => [:create]
 
   get '/github/callback' => 'welcome#callback'
   get '/signout' => "welcome#destroy"
   get "welcome/index"
   get '/search' => 'welcome#user_search'
+  
+  get '/api/activity' => 'api#activity'
+  get '/:user_name/settings' => 'users#show'
 
   get '/repository' => 'repository#index'
   get '/detail' => 'repository#detail'

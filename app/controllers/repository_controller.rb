@@ -1,6 +1,6 @@
 class RepositoryController < ApplicationController
 
-	before_action :signed_in?
+	before_action :signed_in?, :except => [:activity]
 
 	def index
 		@repo_data = Repository.get_repo_data(client, params[:user_name])
@@ -47,42 +47,10 @@ class RepositoryController < ApplicationController
 	end
 
 	def detail
-
 		@repository = Repository.get_single_repository(client, params[:username], params[:repo_name])
 		respond_to do |format|
 			format.json { render json: @repository.to_json }
 		end
-		# require 'github/markup'
-
-		# if params[:format] != nil
-		# 	params[:repo_name] = "#{params[:repo_name]}.#{params[:format]}"
-		# end	
-
-		# @user = User.show_login(session[:github_access_token])
-		# @full_name = Repository.get_basic_data(params[:user_name])[:full_name]
-		# @homepage = Repository.get_homepage(params[:repo_name])
-
-
-		# if params[:repo_directory] != nil
-		# 	@breadcrumb = params[:repo_directory].split('/')
-		# else
-		# 	@breadcrumb = []
-		# end
-
-		# @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
-
-		# @data = if params[:repo_directory] == nil then
-		# 	Repository.get_repo_content(params[:user_name], params[:repo_name], session[:github_access_token])
-		# else
-		# 	Repository.get_repo_directory(params[:user_name], params[:repo_name], params[:repo_directory], session[:github_access_token])
-		# end
-
-		# @data.each do |readme|
-		# 	if readme[:name].downcase.include?("readme")
-		# 		@readme_name = readme[:name]
-		# 		@readme_content = Base64.decode64(readme.rels[:self].get.data[:content])
-		# 	end
-		# end
 	end
 
 end

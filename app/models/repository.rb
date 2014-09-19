@@ -131,7 +131,7 @@ class Repository < ActiveRecord::Base
 				return_data[date] += 1
 			end
 		end
-		return [return_data.keys, return_data.values]
+		return [return_data.keys.map { |date| date[5..9].gsub('-','/') }.reverse, return_data.values.reverse]
 	end
 
 	def self.get_barchart_data(values)
