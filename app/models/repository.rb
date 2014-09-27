@@ -114,13 +114,7 @@ class Repository < ActiveRecord::Base
 	end
 
 	def self.get_linechart_data(username, github_access_token)
-		## CONTRIBUTIONS_CALENDAR_DATA ENDPOINT RESPONDING 404
-		# event_data = JSON.load(RestClient.get("https://github.com/users/" + username + "/contributions_calendar_data?access_token=" + "#{github_access_token}"))
-		# filter_line_chart_data = event_data.select {|x| x[0].to_date >= (Date.today - 1) - 56.days}
-		# # dates = filter_line_chart_data.map { |date| date.first.to_date }.in_groups_of(7,false).map { |date| date.last.to_s }
-		# dates = %W(8w 7w 6w 5w 4w 3w 2w 1w 0w)
-		# graph_data = filter_line_chart_data.map {|graph| graph.last}.in_groups_of(7,false).map {|graph| graph.sum}
-
+		dates = (2.weeks.ago.to_date .. Date.yesterday).map { |date| date.to_s }
 		event_data = JSON.load(RestClient.get('https://api.github.com/users/' + username + '/events?access_token=' + github_access_token))
 		return_data = {}
 		event_data.each do |repo|
