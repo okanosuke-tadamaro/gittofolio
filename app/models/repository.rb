@@ -115,17 +115,9 @@ class Repository < ActiveRecord::Base
 
 	def self.get_linechart_data(username, github_access_token)
 		dates = (2.weeks.ago.to_date .. Date.yesterday).map { |date| date.to_s }
-		event_data = JSON.load(RestClient.get('https://api.github.com/users/' + username + '/events?access_token=' + github_access_token))
-		return_data = {}
-		event_data.each do |repo|
-			date = repo['created_at'].to_date.to_s
-			if return_data[date].nil?
-				return_data[date] = 1
-			else
-				return_data[date] += 1
-			end
-		end
-		return [return_data.keys.map { |date| date[5..9].gsub('-','/') }.reverse, return_data.values.reverse]
+		event_data = JSON.load(RestClient.get('https://api.github.com/users/' + username + '/events?per_page=50&access_token=' + github_access_token)).map { |repo| repo['created_at'].to_date.to_s }
+		return_data = dates.inject([]) { |arr, date| arr << event_data.count { |repo_date| repo_date == date } }
+		return [dates.map { |date| date[5..9].gsub('-','/') }, return_data]
 	end
 
 	def self.get_barchart_data(values)
