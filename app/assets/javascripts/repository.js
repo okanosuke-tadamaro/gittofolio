@@ -91,16 +91,19 @@ function getSingleRepo() {
 
 $(document).ready(function() {
 
-	drawLineChart();
-	drawBarChart();
-	listLanguages();
+	var currentPage = $('#page');
+	if (currentPage.data('controller') === 'repository') {
+		drawLineChart();
+		drawBarChart();
+		listLanguages();
 
-	$('.item div').hover(function() {
-		$(this).animate({'transform': 'rotate(15deg)'}, 200);
-	}, function() {
-		$(this).animate({'transform': 'rotate(0deg)'}, 100);
-	});
+		$('.item div').hover(function() {
+			$(this).animate({'transform': 'rotate(15deg)'}, 200);
+		}, function() {
+			$(this).animate({'transform': 'rotate(0deg)'}, 100);
+		});
 
-	$('.item div').click(getSingleRepo);
+		$('.item div').click(getSingleRepo);
+	}
 
 });

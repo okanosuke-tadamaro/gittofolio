@@ -113,6 +113,12 @@ class Repository < ActiveRecord::Base
 		languages = language_unordered.push("Other")
 	end
 
+	# GET A REPOSITORY'S LANGUAGE LIST
+	def get_repo_language(username, repo, github_access_token)
+		
+	end
+
+	# GET USER'S ACTIVITY FOR THE PAST 2 WEEKS
 	def self.get_linechart_data(username, github_access_token)
 		dates = (2.weeks.ago.to_date .. Date.yesterday).map { |date| date.to_s }
 		event_data = JSON.load(RestClient.get('https://api.github.com/users/' + username + '/events?per_page=50&access_token=' + github_access_token)).map { |repo| repo['created_at'].to_date.to_s }

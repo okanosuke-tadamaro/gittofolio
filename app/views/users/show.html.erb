@@ -1,10 +1,5 @@
-<div class="row settings-header">
-	<div class="large-12 columns">
-		<h3><%= current_user.name %></h3>
-	</div>
-</div>
-
-<div class="row">
+<div class="row m-top-30">
+	
 	<div class="large-12 columns">
 		<h4>Registered websites</h4>
 		<div class="add-website-block">
@@ -36,4 +31,23 @@
 			<% end %>
 		</table>
 	</div>
+
+	<div class="large-12 columns">
+		<h4>Configure your repositories</h4>
+		<table width="100%">
+		<tr>
+			<th>Name</th>
+			<th>Updated on</th>
+			<th>Display Status</th>
+		</tr>
+		<% @repositories.each do |repository| %>
+			<tr>
+				<td><%= repository.name %></td>
+				<td><%= repository.update_date %></td>
+				<td><%= repository.display %></td>
+			</tr>
+		<% end %>
+		</table>
+	</div>
+
 </div>
