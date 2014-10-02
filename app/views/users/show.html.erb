@@ -1,7 +1,8 @@
 <div class="row m-top-30">
 	
+	<!-- WEBSITES -->
 	<div class="large-12 columns">
-		<h4>Registered websites</h4>
+		<h4 class="settings-header">Registered websites</h4>
 		<div class="add-website-block">
 			<%= form_for @website do |f| %>
 			<div class="row collapse">
@@ -11,42 +12,56 @@
 			<% end %>
 		</div>
 		<table width="100%">
-			<tr>
-				<th>Website URL</th>
-				<th>Call Count</th>
-				<th>Updated at</th>
-			</tr>
+			<thead>
+				<tr>
+					<th width="70%">URL</th>
+					<th width="10%" class="text-center">Calls</th>
+					<th width="20%" class="text-center">Updated</th>
+				</tr>
+			</thead>
+			<tbody>
 			<% if @websites.any? %>
 				<% @websites.each do |site| %>
 					<tr>
-						<td><%= site.url %></td>
-						<td><%= site.call_count || '0' %></td>
-						<td><%= site.updated_at.to_date %></td>
+						<td width="70%"><%= site.url %></td>
+						<td width="10%" class="text-center"><%= site.call_count || '0' %></td>
+						<td width="20%" class="text-center"><%= site.updated_at.to_date %></td>
 					</tr>
 				<% end %>
 			<% else %>
 				<tr>
-					<td colspan="3">You have no registered websites.</td>
+					<td colspan="3" class="text-center">You have no registered websites.</td>
 				</tr>
 			<% end %>
+			</tbody>
 		</table>
 	</div>
 
+	<!-- REPOS -->
 	<div class="large-12 columns">
-		<h4>Configure your repositories</h4>
+		<h4 class="settings-header">Configure your repositories</h4>
 		<table width="100%">
-		<tr>
-			<th>Name</th>
-			<th>Updated on</th>
-			<th>Display Status</th>
-		</tr>
-		<% @repositories.each do |repository| %>
-			<tr>
-				<td><%= repository.name %></td>
-				<td><%= repository.update_date %></td>
-				<td><%= repository.display %></td>
-			</tr>
-		<% end %>
+			<thead>
+				<tr>
+					<th>Repository</th>
+					<th class="text-center">Display</th>
+					<th class="text-center">Updated</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% @repositories.each do |repository| %>
+				<tr>
+					<td width="70%"><%= repository.name %></td>
+					<td width="10%" class="text-center">
+						<div class="switch tiny display-switch">
+						  <input id="<%= repository.id %>" type="checkbox" <%= 'checked' if repository.display %> name="display-switch">
+						  <label for="<%= repository.id %>"></label>	
+						</div>
+					</td>
+					<td width="20%" class="text-center"><%= repository.update_date %></td>
+				</tr>
+			<% end %>
+			</tbody>
 		</table>
 	</div>
 

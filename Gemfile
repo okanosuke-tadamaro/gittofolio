@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.1.6'
 gem 'json'
 gem 'rest-client'
 gem 'redcarpet'
@@ -33,5 +33,3 @@ end
 group :doc do
   gem 'sdoc', require: false
 end
-
-ruby "2.1.2"
