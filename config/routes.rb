@@ -1,6 +1,5 @@
 Gittofolio::Application.routes.draw do
   
-  get "users/show"
   resources :repositories
   resources :users
   resources :websites, :only => [:create]
@@ -9,6 +8,7 @@ Gittofolio::Application.routes.draw do
   get '/signout' => "welcome#destroy"
   get "welcome/index"
   get '/search' => 'welcome#user_search'
+  get '/update_display/:repo_id' => 'repository#update_display'
   
   get '/api/activity' => 'api#activity'
   get '/:user_name/settings' => 'users#show'

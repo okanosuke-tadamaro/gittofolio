@@ -53,4 +53,23 @@ class RepositoryController < ApplicationController
 		end
 	end
 
+	def update_display
+		respond_to do |format|
+			format.html {}
+			format.json {
+				repository = Repository.find(params[:repo_id])
+				if repository.owner == current_user.login
+					repository.display = params[:display]
+					if repository.save
+						render json: { status: true, repo: repository }.to_json
+					else
+						render json: { status: false, repo: repository }.to_json
+					end
+				else
+					render json: { status: false, repo: repository }.to_json
+				end
+			}
+		end
+	end
+
 end
