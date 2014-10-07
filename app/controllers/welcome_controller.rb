@@ -27,7 +27,7 @@ class WelcomeController < ApplicationController
     client = User.new_client(response["access_token"])
     session[:github_access_token] = response["access_token"]
 
-    if User.exists?(login: client.login) == nil
+    if !User.exists?(login: client.login)
       User.create(
         name: client.name,
         login: client.login,
