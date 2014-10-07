@@ -14,6 +14,10 @@ class ApiController < ApplicationController
 		render json: {status: true, data: return_data}.to_json
 	end
 
+	def repositories
+		
+	end
+
 	private
 
 	  def define_access_control_headers

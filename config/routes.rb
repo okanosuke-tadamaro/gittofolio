@@ -11,6 +11,7 @@ Gittofolio::Application.routes.draw do
   get '/update_display/:repo_id' => 'repository#update_display'
   
   get '/api/activity' => 'api#activity'
+  get '/api/repositories' => 'api#repositories'
   get '/:user_name/settings' => 'users#show'
 
   get '/repository' => 'repository#index'
