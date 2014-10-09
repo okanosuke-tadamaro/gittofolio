@@ -3,15 +3,23 @@ class RepositoryController < ApplicationController
 	before_action :signed_in?
 
 	def index
-		@repo_data = Repository.get_user_info(client, params[:user_name])
+		@user_data = Repository.get_user_info(client, params[:user_name])
 		user = !User.exists?(login: params[:user_name]) ? User.create_user(@repo_data) : User.find_by(login: params[:user_name])
 
-		if current_user.repositories.any?
-			repositories = Repository.get_cached_repos(client, @repo_data, params[:user_name])
+		repositories = Repository.get_repos(client, user.login)
+		if user.repositories.any?
+			repositories = Repository.get_cached_repos(client, @user_data, user, repositories)
 		else
-			repositories = Repository.get_repos(client, params[:user_name])
 			repositories.each do |repo|
-
+				user.repositories.create(
+					name: repo[:name],
+					description: repo[:description],
+					language: repo[:language],
+					homepage: repo[:homepage],
+					fork: repo[:fork],
+					start_date: repo[:start_date].to_date,
+					update_date: repo[:update_date].to_date
+				)
 			end
 		end
 

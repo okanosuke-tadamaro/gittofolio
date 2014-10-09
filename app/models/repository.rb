@@ -30,20 +30,15 @@ class Repository < ActiveRecord::Base
 		parsed_repositories.sort_by { |date| date[:update_date] }.reverse
 	end
 
-	def self.get_cached_repos(client, user_data, username)
+	def self.get_cached_repos(client, user_data, user, repositories)
 		# UPDATE USER REPOSITORY
-		if user_data[:updated_at].to_date > Repository.where(:owner => username).sort_by { |date| date.update_date }.reverse.first.update_date
-			#FETCH REPO INFO FROM GITHUB
-			repositories = Repository.get_repos(client, username)
-			
-			# CHECK FOR DELETED REPOS
-			Repository.where(:owner => username).each do |repo|
-				Repository.destroy(repo.id) if !repositories.any? { |check| check[:name] == repo.name }
-			end
+		if user_data[:updated_at].to_date > user.repositories.sort_by { |sort| sort.update_date }.reverse.first.update_date
+			# HANDLE DELETED REPOS
+			user.repositories.each { |repo| Repository.destroy(repo.id) if !repositories.any? { |new_repo| new_repo[:name] == repo.name } }
 
 			repositories.each do |repo|
 				# CHECK FOR NEW REPOSITORIES & UPDATE EXISTING REPOS
-				if Repository.where(owner: username, name: repo[:name]).any?
+				if Repository.where(owner: user.login, name: repo[:name]).any?
 					Repository.create(
 						name: 				repo[:name],
 						description: 	repo[:description],
@@ -60,7 +55,7 @@ class Repository < ActiveRecord::Base
 						update_date: 	repo[:update_date].to_date
 					)
 				else
-					repository = Repository.find_by(:owner => username, :name => repo[:name])
+					repository = Repository.find_by(:owner => user.login, :name => repo[:name])
 					Repository.update( repository.id, {
 						name: 				repo[:name],
 						description: 	repo[:description],
@@ -81,7 +76,7 @@ class Repository < ActiveRecord::Base
 			end
 		end
 
-		fetched_repo_data = Repository.where(:owner => username)
+		fetched_repo_data = Repository.where(:owner => user.login)
 		inject_repo_data = fetched_repo_data.inject(Array.new) { |array, repo| array << {
 			name: 				repo.name,
 			description: 	repo.description,
