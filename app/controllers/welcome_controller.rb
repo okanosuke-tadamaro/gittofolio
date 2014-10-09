@@ -4,8 +4,7 @@ class WelcomeController < ApplicationController
     @oauth_link = User.get_oauth_link
   end
 
-  def index
-  end
+  def index ; end
 
   def user_search
     @current_user = User.find_by github_access_token: session[:github_access_token]
@@ -24,21 +23,27 @@ class WelcomeController < ApplicationController
 
   def callback
   	response = User.get_response(params["code"])
-    client = User.new_client(response["access_token"])
     session[:github_access_token] = response["access_token"]
+    client_info = client.user
 
-    if !User.exists?(login: client.login)
+    if !User.exists?(login: client_info.login)
       User.create(
-        name: client.name,
-        login: client.login,
-        location: client.location,
-        email: client.email,
+        name: client_info.name,
+        login: client_info.login,
+        email: client_info.email,
+        avatar: client_info.avatar_url,
+        company: client_info.company,
+        location: client_info.location,
+        blog: client_info.blog,
         github_access_token: response["access_token"]
-        )
+      )
+    elsif User.exists?(login: client_info.login) && User.find_by(login: client_info.login).github_access_token.nil?
+      user = User.find_by(login: client_info.login)
+      user.update(github_access_token: session[:github_access_token])
     end
 
     flash[:notice] = "You're signed in!"
-  	redirect_to "/#{client.login}"
+  	redirect_to "/#{client.login}/settings"
   end
 
   def signout

@@ -15,7 +15,10 @@ class ApiController < ApplicationController
 	end
 
 	def repositories
-		
+		if User.exists?(login: params[:user])
+			repositories = Repository.where(owner: params[:user], display: true)
+		end
+		render json: repositories.to_json
 	end
 
 	private

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+	has_many :repositories
 	has_many :websites
 
 	def self.get_oauth_link
@@ -8,10 +9,6 @@ class User < ActiveRecord::Base
 
 	def self.get_response(code_param)
 		JSON.parse(RestClient.post("https://github.com/login/oauth/access_token", {client_id: ENV['GITHUB_CLIENT_ID'], client_secret: ENV['GITHUB_CLIENT_SECRET'], code: code_param}, { accept: :json }))
-	end
-
-	def self.new_client(access_token)
-		Octokit::Client.new(:access_token => access_token).user
 	end
 
 	def self.show_login(github_access_token)
@@ -24,6 +21,18 @@ class User < ActiveRecord::Base
 		else
 			"invalid_term"
 		end
+	end
+
+	def self.create_user(github_data)
+		User.create(
+      name: github_data.name,
+      login: github_data.login,
+      email: github_data.email,
+      avatar: github_data.avatar_url,
+      company: github_data.company,
+      location: github_data.location,
+      blog: github_data.blog
+    )
 	end
 
 end

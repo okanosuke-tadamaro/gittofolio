@@ -1,9 +1,19 @@
 class RepositoryController < ApplicationController
 
-	before_action :signed_in?, :except => [:activity]
+	before_action :signed_in?
 
 	def index
-		@repo_data = Repository.get_repo_data(client, params[:user_name])
+		@repo_data = Repository.get_user_info(client, params[:user_name])
+		user = !User.exists?(login: params[:user_name]) ? User.create_user(@repo_data) : User.find_by(login: params[:user_name])
+
+		if current_user.repositories.any?
+			repositories = Repository.get_cached_repos(client, @repo_data, params[:user_name])
+		else
+			repositories = Repository.get_repos(client, params[:user_name])
+			repositories.each do |repo|
+
+			end
+		end
 
 		if Repository.check_cache(params[:user_name])
 			repositories = Repository.get_cached_repos(client, @repo_data, params[:user_name])

@@ -18,25 +18,26 @@ ActiveRecord::Schema.define(version: 20141001150459) do
     t.text     "description"
     t.string   "language"
     t.string   "owner"
-    t.string   "avatar"
-    t.string   "full_name"
-    t.string   "location"
-    t.string   "company"
-    t.string   "blog"
     t.string   "homepage"
     t.boolean  "fork"
     t.date     "start_date"
     t.date     "update_date"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "display",     default: false
   end
 
+  add_index "repositories", ["user_id"], name: "index_repositories_on_user_id"
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "login"
     t.string   "email"
+    t.string   "avatar"
+    t.string   "company"
     t.string   "location"
+    t.string   "blog"
     t.string   "github_access_token"
     t.datetime "created_at"
     t.datetime "updated_at"

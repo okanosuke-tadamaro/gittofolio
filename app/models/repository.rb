@@ -1,29 +1,29 @@
 class Repository < ActiveRecord::Base
 
+	belongs_to :user
+
 	def self.check_cache(username)
-		true if Repository.exists?(owner: username)
+		Repository.exists?(owner: username)
 	end
 
-	def self.get_repo_data(client, username)
+	def self.get_user_info(client, username)
 		client.user(username)
 	end
 
 	def self.get_repos(client, username)
-		#
 		# MAKE NEW REQUEST TO GITHUB TO GET REPOSITORY INFO FOR A CERTAIN USER
-		#
   	repositories = client.repositories(username)
-  	parsed_repositories = repositories.inject(Array.new) { |array, repo| array << {
-			name: 				repo[:name],
-			description: 	repo[:description],
-			language: 		repo[:language],
-			owner: 				repo[:owner][:login],
-			avatar: 			repo[:owner][:gravatar_id],
-			homepage: 		repo[:homepage],
-			fork: 				repo[:fork],
-			start_date: 	repo[:created_at],
-			update_date: 	repo[:updated_at]
-			} }
+  	parsed_repositories = repositories.inject(Array.new) do |array, repo|
+  		array << {
+				name: 				repo[:name],
+				description: 	repo[:description],
+				language: 		repo[:language],
+				homepage: 		repo[:homepage],
+				fork: 				repo[:fork],
+				start_date: 	repo[:created_at],
+				update_date: 	repo[:updated_at]
+			}
+		end
 		parsed_repositories.each { |replace| if replace[:language] == nil then replace[:language] = "Other" end }
 		parsed_repositories.each { |thumb| if thumb[:homepage] == nil || thumb[:homepage] == "" then thumb[:homepage] = "not_available" end }
 		parsed_repositories.each { |to_string| if to_string[:description] == nil then to_string[:description] = "" end }
@@ -31,24 +31,19 @@ class Repository < ActiveRecord::Base
 	end
 
 	def self.get_cached_repos(client, user_data, username)
-		#
 		# UPDATE USER REPOSITORY
-		#
 		if user_data[:updated_at].to_date > Repository.where(:owner => username).sort_by { |date| date.update_date }.reverse.first.update_date
+			#FETCH REPO INFO FROM GITHUB
 			repositories = Repository.get_repos(client, username)
 			
-			#
 			# CHECK FOR DELETED REPOS
-			#
 			Repository.where(:owner => username).each do |repo|
-				Repository.destroy(repo.id) if repositories.any? { |check| check[:name] == repo.name } == false
+				Repository.destroy(repo.id) if !repositories.any? { |check| check[:name] == repo.name }
 			end
 
 			repositories.each do |repo|
-				#
-				# CHECK FOR NEW REPOSITORIES
-				#
-				if Repository.where(:owner => username, :name => repo[:name]).exists? == nil
+				# CHECK FOR NEW REPOSITORIES & UPDATE EXISTING REPOS
+				if Repository.where(owner: username, name: repo[:name]).any?
 					Repository.create(
 						name: 				repo[:name],
 						description: 	repo[:description],
@@ -85,6 +80,7 @@ class Repository < ActiveRecord::Base
 				end
 			end
 		end
+
 		fetched_repo_data = Repository.where(:owner => username)
 		inject_repo_data = fetched_repo_data.inject(Array.new) { |array, repo| array << {
 			name: 				repo.name,
