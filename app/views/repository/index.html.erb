@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="small-2 columns">
 			<div class="top-left-panel">
-				<%= image_tag("http://www.gravatar.com/avatar/#{@regular_repositories.first[:avatar]}?s=300") %>
+				<%= image_tag(@user.avatar) %>
 			</div>
 		</div>
 		<div class="small-3 columns">
@@ -24,8 +24,8 @@
 				</div>
 				<div class="panel-content">
 					<p><i class="fa fa-flag"></i><span class="text"><%= @occupation || "occupation not yet set" %></span></p>
-					<p><i class="fa fa-envelope"></i><span class="text"><%= @repo_data.email || "email unavailable" %></span></p>
-					<p><i class="fa fa-briefcase"></i><span class="text"><%= @repo_data.company || "company unavailable" %></span></p>
+					<p><i class="fa fa-envelope"></i><span class="text"><%= @user_data.email || "email unavailable" %></span></p>
+					<p><i class="fa fa-briefcase"></i><span class="text"><%= @user_data.company || "company unavailable" %></span></p>
 					<p><i class="fa fa-globe"></i><span class="text"><%= @location || "location unavailable" %></span></p>
 				</div>
 				<div class="panel-footer">

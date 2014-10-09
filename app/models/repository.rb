@@ -38,60 +38,44 @@ class Repository < ActiveRecord::Base
 
 			repositories.each do |repo|
 				# CHECK FOR NEW REPOSITORIES & UPDATE EXISTING REPOS
-				if Repository.where(owner: user.login, name: repo[:name]).any?
-					Repository.create(
+        if !user.repositories.exists?(name: repo[:name])
+					user.repositories.create(
 						name: 				repo[:name],
 						description: 	repo[:description],
 						language: 		repo[:language],
-						owner: 				repo[:owner],
-						avatar: 			repo[:avatar],
-						full_name: 		user_data[:name],
-						location: 		user_data[:location],
-						company: 			user_data[:company],
-						blog: 				user_data[:blog],
 						homepage: 		repo[:homepage],
 						fork: 				repo[:fork],
 						start_date: 	repo[:start_date].to_date,
 						update_date: 	repo[:update_date].to_date
 					)
 				else
-					repository = Repository.find_by(:owner => user.login, :name => repo[:name])
+          repository = user.repositories.find_by(name: repo[:name])
 					Repository.update( repository.id, {
 						name: 				repo[:name],
 						description: 	repo[:description],
 						language: 		repo[:language],
-						owner: 				repo[:owner],
-						avatar: 			repo[:avatar],
-						full_name: 		user_data[:name],
-						location: 		user_data[:location],
-						company: 			user_data[:company],
-						blog: 				user_data[:blog],
 						homepage: 		repo[:homepage],
 						fork: 				repo[:fork],
 						start_date: 	repo[:start_date].to_date,
 						update_date: 	repo[:update_date].to_date
-						}
+					  }
 					)
 				end
 			end
 		end
 
-		fetched_repo_data = Repository.where(:owner => user.login)
-		inject_repo_data = fetched_repo_data.inject(Array.new) { |array, repo| array << {
-			name: 				repo.name,
-			description: 	repo.description,
-			language: 		repo.language,
-			owner: 				repo.owner,
-			avatar: 			repo.avatar,
-			full_name: 		repo.full_name,
-			location: 		repo.location,
-			company: 			repo.company,
-			blog: 				repo.blog,
-			homepage: 		repo.homepage,
-			fork: 				repo.fork,
-			start_date: 	repo.start_date,
-			update_date: 	repo.update_date
-			} }
+		fetched_repo_data = user.repositories
+		inject_repo_data = fetched_repo_data.inject([]) do |array, repo|
+      array << {
+			  name: 				repo.name,
+			  description: 	repo.description,
+			  language: 		repo.language,
+			  homepage: 		repo.homepage,
+			  fork: 				repo.fork,
+			  start_date: 	repo.start_date,
+			  update_date: 	repo.update_date
+			}
+    end
 		inject_repo_data.sort_by { |date| date[:update_date] }.reverse
 	end
 
