@@ -7,7 +7,7 @@ class ApiController < ApplicationController
 		if User.exists?(login: params[:user])
 			user = User.find_by(login: params[:user])
 			if user.websites.exists?(url: request.env['REMOTE_HOST']) || true
-				repositories = Repository.where(owner: params[:user])
+        repositories = user.repositories
 				return_data = Repository.get_linechart_data(user.login, user.github_access_token)
 			end
 		end

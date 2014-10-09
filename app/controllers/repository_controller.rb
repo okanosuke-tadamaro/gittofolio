@@ -56,7 +56,7 @@ class RepositoryController < ApplicationController
 			format.html {}
 			format.json {
 				repository = Repository.find(params[:repo_id])
-				if repository.user == current_user.login
+				if repository.user.login == current_user.login
 					repository.display = params[:display]
 					if repository.save
 						render json: { status: true, repo: repository }.to_json

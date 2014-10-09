@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def show
   	@website = current_user.websites.new
   	@websites = current_user.websites
-  	@repositories = Repository.where(owner: current_user.login)
+  	@repositories = current_user.repositories
   end
 
 end
