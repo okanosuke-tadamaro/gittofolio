@@ -6,6 +6,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def check_user_existence
+    if !User.exists?(login: params[:user])
+      render json: { status: false, msg: 'The requested user does not exists in our database' }
+    end
+  end
+
   def check_user
     redirect_to "/#{params[:user_name]}" if params[:user_name] != current_user.login
   end
