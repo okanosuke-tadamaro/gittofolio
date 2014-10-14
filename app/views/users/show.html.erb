@@ -49,18 +49,26 @@
 				<tr>
 					<th>Repository</th>
 					<th class="text-center">Display</th>
+					<th class="text-center">Image</th>
 					<th class="text-center">Updated</th>
 				</tr>
 			</thead>
 			<tbody>
 			<% @repositories.each do |repository| %>
 				<tr>
-					<td width="70%"><%= repository.name %></td>
+					<td width="60%"><%= repository.name %></td>
 					<td width="10%" class="text-center">
 						<div class="switch tiny display-switch">
 						  <input id="<%= repository.id %>" type="checkbox" <%= 'checked' if repository.display %> name="display-switch">
 						  <label for="<%= repository.id %>"></label>	
 						</div>
+					</td>
+					<td width="10%" class="text-center">
+						<% if repository.screenshots.any? %>
+							<span id="image-ok">OK</span>
+						<% else %>
+							<a href="">Add</a>
+						<% end %>
 					</td>
 					<td width="20%" class="text-center"><%= repository.update_date %></td>
 				</tr>

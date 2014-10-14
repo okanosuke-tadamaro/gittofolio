@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   	@website = current_user.websites.new
   	@websites = current_user.websites
   	@repositories = current_user.repositories
+  	
   end
 
 end

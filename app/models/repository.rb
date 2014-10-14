@@ -1,6 +1,7 @@
 class Repository < ActiveRecord::Base
 
 	belongs_to :user
+	has_many :screenshots
 
 	def self.check_cache(username)
 		Repository.exists?(owner: username)
@@ -140,7 +141,7 @@ class Repository < ActiveRecord::Base
 	end
 
   def self.construct_return_data(api_client, repositories)
-    
+
   end
 
 end
