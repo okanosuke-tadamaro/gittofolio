@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001150459) do
+ActiveRecord::Schema.define(version: 20141014184722) do
 
   create_table "repositories", force: true do |t|
     t.string   "name"
@@ -29,6 +29,19 @@ ActiveRecord::Schema.define(version: 20141001150459) do
   end
 
   add_index "repositories", ["user_id"], name: "index_repositories_on_user_id"
+
+  create_table "screenshots", force: true do |t|
+    t.string   "original_url"
+    t.integer  "repository_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "screenshots", ["repository_id"], name: "index_screenshots_on_repository_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

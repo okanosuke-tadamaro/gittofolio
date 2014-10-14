@@ -139,7 +139,7 @@ class Repository < ActiveRecord::Base
 		data = client.contents("#{username}/#{repo}", :path => directory)
 	end
 
-  def self.construct_return_data(repositories)
+  def self.construct_return_data(api_client, repositories)
     
   end
 
