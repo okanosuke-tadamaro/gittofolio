@@ -13,7 +13,7 @@
 		<div class="small-3 columns">
 			<div class="top-right-panel">
 				<div class="panel-header">
-					<h3><i class="fa fa-smile-o"></i>
+					<h3><i class="fa fa-user"></i>
 						<% if @full_name != nil then %>
 						<%= @full_name.split(" ").first %> <span class="last-name"><%= @full_name.split(" ").last %></span>
 						<% else %>
@@ -22,7 +22,6 @@
 					</h3>
 				</div>
 				<div class="panel-content">
-					<p><i class="fa fa-flag"></i><span class="text"><%= @occupation || "occupation not yet set" %></span></p>
 					<p><i class="fa fa-envelope"></i><span class="text"><%= @user_data.email || "email unavailable" %></span></p>
 					<p><i class="fa fa-briefcase"></i><span class="text"><%= @user_data.company || "company unavailable" %></span></p>
 					<p><i class="fa fa-globe"></i><span class="text"><%= @location || "location unavailable" %></span></p>
@@ -68,7 +67,7 @@
 				<% if @imaged_repositories.any? %>
 				<ul class="small-block-grid-4 repository-wrap">
 					<% @imaged_repositories.each do |repository| %>
-					
+					<%= link_to "/#{current_user.login}/#{repository.repo_id}" do %>
 					<li class="item">
 						<div class="each-imaged-repository">
 							<img src="<%= "http://s.wordpress.com/mshots/v1/#{repository[:homepage].to_s}?w=300" %>">
@@ -79,6 +78,7 @@
 							<div class="clear"></div>
 						</div>
 					</li>
+					<% end %>
 					<% end %>
 				</ul>
 				<% end %>
