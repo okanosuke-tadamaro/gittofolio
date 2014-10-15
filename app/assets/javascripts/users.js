@@ -21,12 +21,21 @@ function updateDisplayStatus(id, status) {
 	});
 }
 
+function uploadImage(e) {
+	// var repoId = $(e.target).data('repoid');
+	// $.ajax({
+	// 	url: '/'
+	// });
+	// debugger;
+}
+
 $(document).ready(function() {
 
 	var currentPage = $('#page');
 	if (currentPage.data('controller') === 'users') {
 
 		$('.switch').on('click', 'label', toggleCheckBox);
+		// $('.button.uploadss').click(uploadImage);
 	
 	}
 

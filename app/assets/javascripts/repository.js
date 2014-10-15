@@ -47,17 +47,6 @@ function drawRadarChart(radarData) {
 	new Chart(radarArea).Radar(radarChart, {scaleOverlay: false});
 }
 
-//LIST LANGUAGES UNDER TOP PANEL
-function listLanguages() {
-	var listArea = $('.languages');
-	var languageItems = $('.chart-data').data().languages;
-	for(var i = 0; i < languageItems.length; i++) {
-		var item = $('<li>').addClass(languageItems[i].toLowerCase()).text(languageItems[i]);
-		item.click(sortListOnClick);
-		item.appendTo(listArea);
-	}
-}
-
 //SORT REPO ITEMS ON CLICK
 function sortListOnClick() {
 	var language = $(this).text();
@@ -95,15 +84,12 @@ $(document).ready(function() {
 	if (currentPage.data('controller') === 'repository') {
 		drawLineChart();
 		drawBarChart();
-		listLanguages();
 
 		$('.item div').hover(function() {
 			$(this).animate({'transform': 'rotate(15deg)'}, 200);
 		}, function() {
 			$(this).animate({'transform': 'rotate(0deg)'}, 100);
 		});
-
-		$('.item div').click(getSingleRepo);
 	}
 
 });

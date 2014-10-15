@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20141014184722) do
   add_index "repositories", ["user_id"], name: "index_repositories_on_user_id"
 
   create_table "screenshots", force: true do |t|
-    t.string   "original_url"
     t.integer  "repository_id"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -6,7 +6,7 @@
 
 	<!-- WEBSITES -->
 	<div class="large-12 columns">
-		<h4 class="settings-header">Registered websites</h4>
+		<h4 class="settings-header">Your websites</h4>
 		<div class="add-website-block">
 			<%= form_for @website do |f| %>
 			<div class="row collapse">
@@ -43,7 +43,8 @@
 
 	<!-- REPOS -->
 	<div class="large-12 columns">
-		<h4 class="settings-header">Choose which repositories to show</h4>
+		<h4 class="settings-header">Configure your repositories</h4>
+		<p class="panel m-bottom-15">This section allows you to choose which repositories to return when <code>/api/repositories</code> endpoint is called from your website. Each repository is currently allowed one screenshot to be uploaded (saved to Amazon S3), where the image url will be returned in the response of the API call.</p>
 		<table width="100%">
 			<thead>
 				<tr>
@@ -67,7 +68,15 @@
 						<% if repository.screenshots.any? %>
 							<span id="image-ok">OK</span>
 						<% else %>
-							<a href="">Add</a>
+							<a href="#" data-reveal-id="add-ss-modal-<%= repository.id %>">Add</a>
+							<div id="add-ss-modal-<%= repository.id %>" class="reveal-modal tiny" data-reveal>
+							  <h3>Add screenshot for <%= repository.name %></h3>
+							  <%= form_for repository.screenshots.new do |f| %>
+							  	<%= f.file_field :image %>
+							  	<%= f.submit 'Upload Screenshot', :class => 'button tiny' %>
+							  <% end %>
+							  <a class="close-reveal-modal">&#215;</a>
+							</div>
 						<% end %>
 					</td>
 					<td width="20%" class="text-center"><%= repository.update_date %></td>
