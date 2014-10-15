@@ -13,6 +13,7 @@ class RepositoryController < ApplicationController
 		else
 			repositories.each do |repo|
 				@user.repositories.create(
+					repo_id: repo[:repo_id].to_i,
 					name: repo[:name],
 					description: repo[:description],
 					language: repo[:language],

@@ -43,7 +43,7 @@ class WelcomeController < ApplicationController
     end
 
     flash[:notice] = "You're signed in!"
-  	redirect_to "/#{client.login}/settings"
+  	redirect_to "/#{client.login}"
   end
 
   def signout

@@ -16,6 +16,7 @@ class Repository < ActiveRecord::Base
   	repositories = client.repositories(username)
   	parsed_repositories = repositories.inject(Array.new) do |array, repo|
   		array << {
+  			repo_id: 			repo[:id],
 				name: 				repo[:name],
 				description: 	repo[:description],
 				language: 		repo[:language],
@@ -41,6 +42,7 @@ class Repository < ActiveRecord::Base
 				# CHECK FOR NEW REPOSITORIES & UPDATE EXISTING REPOS
         if !user.repositories.exists?(name: repo[:name])
 					user.repositories.create(
+						repo_id: 			repo[:id],
 						name: 				repo[:name],
 						description: 	repo[:description],
 						language: 		repo[:language],
@@ -52,6 +54,7 @@ class Repository < ActiveRecord::Base
 				else
           repository = user.repositories.find_by(name: repo[:name])
 					Repository.update( repository.id, {
+						repo_id: 			repo[:id],
 						name: 				repo[:name],
 						description: 	repo[:description],
 						language: 		repo[:language],
@@ -68,6 +71,7 @@ class Repository < ActiveRecord::Base
 		fetched_repo_data = user.repositories
 		inject_repo_data = fetched_repo_data.inject([]) do |array, repo|
       array << {
+      	repo_id: 			repo.repo_id,
 			  name: 				repo.name,
 			  description: 	repo.description,
 			  language: 		repo.language,

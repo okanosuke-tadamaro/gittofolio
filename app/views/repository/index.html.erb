@@ -68,6 +68,7 @@
 				<% if @imaged_repositories.any? %>
 				<ul class="small-block-grid-4 repository-wrap">
 					<% @imaged_repositories.each do |repository| %>
+					
 					<li class="item">
 						<div class="each-imaged-repository">
 							<img src="<%= "http://s.wordpress.com/mshots/v1/#{repository[:homepage].to_s}?w=300" %>">

@@ -47,21 +47,6 @@ function drawRadarChart(radarData) {
 	new Chart(radarArea).Radar(radarChart, {scaleOverlay: false});
 }
 
-//SORT REPO ITEMS ON CLICK
-function sortListOnClick() {
-	var language = $(this).text();
-	var repositoryLists = $('.repository-wrap');
-	$.each(repositoryLists, function(index, value) {
-		var listItems = $(this).find('li');
-		$.each(listItems, function(index, value) {
-			var itemLanguage = $(this).find('.language').text();
-			if(language !== itemLanguage) {
-				$(this).fadeOut('fast');
-			}
-		});
-	});
-}
-
 //AJAX REQUEST TO GET SINGLE REPO INFO
 function getSingleRepo() {
 	var userName = window.location.pathname.split('/')[1];
