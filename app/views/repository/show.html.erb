@@ -1,0 +1,45 @@
+<!-- TOP PANEL WITH USER INFORMATION AND GRAPHS -->
+<div class="top-panel">
+	<div class="row">
+		<div class="small-2 columns">
+			<div class="top-left-panel">
+				<%= image_tag(@user.avatar) %>
+			</div>
+		</div>
+		<div class="small-3 columns">
+			<div class="top-right-panel">
+				<div class="panel-header">
+					<h3><i class="fa fa-user"></i>
+						<% if @user.name != nil then %>
+						<%= @user.name.split(" ").first %> <span class="last-name"><%= @user.name.split(" ").last %></span>
+						<% else %>
+						<%= params[:user_name] %>
+						<% end %>
+					</h3>
+				</div>
+				<div class="panel-content">
+					<p><i class="fa fa-envelope"></i><span class="text"><%= @user.email || "email unavailable" %></span></p>
+					<p><i class="fa fa-briefcase"></i><span class="text"><%= @user.company || "company unavailable" %></span></p>
+					<p><i class="fa fa-globe"></i><span class="text"><%= @user.location || "location unavailable" %></span></p>
+				</div>
+				<div class="panel-footer">
+					<p><i class="fa fa-github"></i><span class="text"><%= link_to "GitHub", @github %></span></p>
+					<p><i class="fa fa-linkedin-square"></i><span class="text">LinkedIn</span></p>
+					<p><i class="fa fa-twitter"></i><span class="text">Twitter</span></p>
+				</div>
+			</div>
+		</div>
+		<div class="small-7 columns">
+			<div class="row">
+				<div class="small-6 columns">
+					<h3 class="chart-header linechart-header">Recent Activity</h3>
+					<canvas id="line-chart" height="122"></canvas>
+				</div>
+				<div class="small-6 columns">
+					<h3 class="chart-header barchart-header">Top Languages</h3>
+					<canvas id="bar-chart" height="122"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

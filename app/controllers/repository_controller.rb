@@ -45,11 +45,9 @@ class RepositoryController < ApplicationController
 		@panel_label = @languages.zip(@pie_colors)
 	end
 
-	def detail
-		@repository = Repository.get_single_repository(client, params[:username], params[:repo_name])
-		respond_to do |format|
-			format.json { render json: @repository.to_json }
-		end
+	def show
+		@repository = Repository.find_by(repo_id: params[:repo_id])
+		@user = @repository.user
 	end
 
 	def update_display
