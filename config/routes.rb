@@ -1,11 +1,9 @@
 Gittofolio::Application.routes.draw do
   
-  resources :users do
-    resources :repositories do
-      resources :screenshots, :only => [:create]
-    end
-    resources :websites, :only => [:create]
-  end
+  resources :users
+  resources :repositories
+  resources :screenshots, :only => [:create]
+  resources :websites, :only => [:create]
 
   get '/github/callback' => 'welcome#callback'
   get '/signout' => "welcome#destroy"

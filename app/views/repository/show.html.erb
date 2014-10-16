@@ -44,15 +44,25 @@
 	</div>
 </div>
 
+<div class="content-panel">
 <div class="row">
-	<div class="large-12 columns">
-		<div class="content-panel">
-			<div class="panel">
+	<div class="large-6 columns">
+
+			<label>Last Updated on:</label>
+			<p><%= @repository.update_date %></p>
+
 			<%= form_for @repository do |f| %>
 				<%= f.label :description %>
-				<%= f.textarea :description %>
+				<%= f.text_area :description, :class => 'repo-textarea' %>
+				<%= f.submit 'Update Description', :class => 'button tiny' %>
 			<% end %>
-			</div>
-		</div>
+
+			<%= form_for @screenshot do |f| %>
+				<%= f.label :image %>
+				<%= f.file_field :image %>
+				<%= f.submit 'Upload Screenshot', :class => 'button tiny' %>
+			<% end %>
+			
 	</div>
+</div>
 </div>

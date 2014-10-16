@@ -47,6 +47,7 @@ class RepositoryController < ApplicationController
 
 	def show
 		@repository = Repository.find_by(repo_id: params[:repo_id])
+		@screenshot = @repository.screenshots.new
 		@user = @repository.user
 	end
 
