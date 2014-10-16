@@ -43,3 +43,16 @@
 		</div>
 	</div>
 </div>
+
+<div class="row">
+	<div class="large-12 columns">
+		<div class="content-panel">
+			<div class="panel">
+			<%= form_for @repository do |f| %>
+				<%= f.label :description %>
+				<%= f.textarea :description %>
+			<% end %>
+			</div>
+		</div>
+	</div>
+</div>
