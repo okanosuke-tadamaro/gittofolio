@@ -46,13 +46,14 @@
 
 <div class="content-panel">
 <div class="row">
-	<div class="large-6 columns">
+	<div class="large-12 columns">
 
 			<label>Last Updated on:</label>
 			<p><%= @repository.update_date %></p>
 
 			<%= form_for @repository do |f| %>
-				<%= f.label :description %>
+				<h5>Description</h5>
+				<p>By default, the description of your project is pulled from GitHub. Editting the description here will not override GitHub's description, but will be persisted in Gittofolio's database for what is returned in the API call.</p>
 				<%= f.text_area :description, :class => 'repo-textarea' %>
 				<%= f.submit 'Update Description', :class => 'button tiny' %>
 			<% end %>

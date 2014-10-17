@@ -32,7 +32,6 @@ function drawBarChart() {
 
 //DRAW RADAR CHART ON DETAIL VIEW
 function drawRadarChart(radarData) {
-	debugger;
 	var radarArea = $('#radar-chart').get(0).getContext('2d');
 	var radarChart = {
 		labels: radarData.language_labels,
@@ -66,7 +65,7 @@ function getSingleRepo() {
 $(document).ready(function() {
 
 	var currentPage = $('#page');
-	if (currentPage.data('controller') === 'repository') {
+	if (currentPage.data('controller') === 'repository' && currentPage.data('action') === 'index') {
 		drawLineChart();
 		drawBarChart();
 

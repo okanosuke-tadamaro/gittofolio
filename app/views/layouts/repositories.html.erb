@@ -14,9 +14,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
   <div id="page" data-controller="<%= params[:controller] %>" data-action="<%= params[:action] %>">
     <%= yield %>
   </div>
+  
   <%= javascript_include_tag "application" %>
 </body>
 </html>

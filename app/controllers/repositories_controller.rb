@@ -1,4 +1,4 @@
-class RepositoryController < ApplicationController
+class RepositoriesController < ApplicationController
 
 	before_action :signed_in?
 
@@ -51,6 +51,12 @@ class RepositoryController < ApplicationController
 		@user = @repository.user
 	end
 
+	def update
+		@repository = Repository.find_by(repo_id: params[:repo_id])
+		@repository.update(repo_params)
+		redirect_to "/#{current_user.login}/#{@repository.repo_id}"
+	end
+
 	def update_display
 		respond_to do |format|
 			format.html {}
@@ -68,6 +74,12 @@ class RepositoryController < ApplicationController
 				end
 			}
 		end
+	end
+
+	private
+
+	def repo_params
+		params.require(:repository).permit(:description)
 	end
 
 end
