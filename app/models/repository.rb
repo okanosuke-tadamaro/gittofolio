@@ -54,6 +54,7 @@ class Repository < ActiveRecord::Base
 				else
           repository = user.repositories.find_by(name: repo[:name])
 					Repository.update( repository.id, {
+						repo_id: 			repo[:id].to_i,
 						name: 				repo[:name],
 						description: 	repo[:description],
 						language: 		repo[:language],
