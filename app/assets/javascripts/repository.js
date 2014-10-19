@@ -65,7 +65,7 @@ function getSingleRepo() {
 $(document).ready(function() {
 
 	var currentPage = $('#page');
-	if (currentPage.data('controller') === 'repository' && currentPage.data('action') === 'index') {
+	if (currentPage.data('controller') === 'repositories' && currentPage.data('action') === 'index') {
 		drawLineChart();
 		drawBarChart();
 

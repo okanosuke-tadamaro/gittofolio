@@ -48,8 +48,7 @@
 <div class="row">
 	<div class="large-12 columns">
 
-			<label>Last Updated on:</label>
-			<p><%= @repository.update_date %></p>
+			<h2><%= @repository.name %><small>Last Updated: <%= @repository.update_date %></small></h2>
 
 			<%= form_tag("/#{params[:user_name]}/#{params[:repo_id]}", method: 'put') do %>
 				<h5>Description</h5>
