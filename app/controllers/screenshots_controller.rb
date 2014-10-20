@@ -2,9 +2,18 @@ class ScreenshotsController < ApplicationController
 
 	def create
 		@screenshot = Screenshot.new(screenshot_params)
+		@repository = @screenshot.repository_id
 		if @screenshot.save
-			redirect_to "/<%= current_user.login %>/settings"
+			redirect_to "/#{current_user.login}/#{@repository.repo_id}"
 		end
+	end
+
+	def update
+		
+	end
+
+	def destroy
+		
 	end
 
 	private

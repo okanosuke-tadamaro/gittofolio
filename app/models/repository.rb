@@ -54,7 +54,6 @@ class Repository < ActiveRecord::Base
 				else
           repository = user.repositories.find_by(name: repo[:name])
 					Repository.update( repository.id, {
-						repo_id: 			repo[:id].to_i,
 						name: 				repo[:name],
 						description: 	repo[:description],
 						language: 		repo[:language],
@@ -145,7 +144,14 @@ class Repository < ActiveRecord::Base
 	end
 
   def self.construct_return_data(api_client, repositories)
-
+  	return repositories.map do |repo|
+  		{
+  			name: repo.name.humanize,
+  			description: repo.description,
+  			image_url: repo.screenshots.any? ? repo.screenshots.first.image.url : 'http://placehold.it/1280x800',
+  			updated_on: repo.update_date
+  		}
+  	end
   end
 
 end

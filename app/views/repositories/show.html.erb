@@ -48,20 +48,30 @@
 <div class="row">
 	<div class="large-12 columns">
 
-			<h2><%= @repository.name %><small>Last Updated: <%= @repository.update_date %></small></h2>
+			<h2 class="show"><%= @repository.name %><small>Last Updated: <%= @repository.update_date %></small></h2>
 
+			<div class="panel">
 			<%= form_tag("/#{params[:user_name]}/#{params[:repo_id]}", method: 'put') do %>
 				<h5>Description</h5>
-				<p>By default, the description of your project is pulled from GitHub. Editting the description here will not override GitHub's description, but will be persisted in Gittofolio's database for what is returned in the API call.</p>
+				<p class="m-bottom-15">By default, the description of your project is pulled from GitHub. Editting the description here will not override GitHub's description, but will be persisted in Gittofolio's database for what is returned in the API call.</p>
 				<%= text_area_tag :description, @repository.description, :class => 'repo-textarea' %>
 				<%= submit_tag 'Update Description', :class => 'button tiny' %>
 			<% end %>
+			</div>
 
-			<%= form_for @screenshot do |f| %>
-				<%= f.label :image %>
-				<%= f.file_field :image %>
-				<%= f.submit 'Upload Screenshot', :class => 'button tiny' %>
+			<div class="panel">
+			<% if @repository.screenshots.any? %>
+				<%= image_tag(@repository.screenshots.first.image.url) %>
+			<% else %>
+				<%= form_for @screenshot do |f| %>
+					<h5>Project Image</h5>
+					<p class="m-bottom-15">As of now, each repository can have one image (screenshot). The image chosen here will be uploaded to Amazon S3 and will be returned an image url in the response.</p>
+					<%= f.file_field :image %>
+					<%= f.hidden_field :repository_id, :value => @repository.id %>
+					<%= f.submit 'Upload Screenshot', :class => 'button tiny' %>
+				<% end %>
 			<% end %>
+			</div>
 			
 	</div>
 </div>

@@ -609,9 +609,9 @@ $primary-color: rgba(151,187,205, 1);
 // $include-html-panel-classes: $include-html-classes;
 
 // We use these to control the background and border styles
-// $panel-bg: darken(#fff, 5%);
+$panel-bg: darken(#fff, 1%);
 // $panel-border-style: solid;
-// $panel-border-size: 1px;
+$panel-border-size: 1px;
 
 // We use this % to control how much we darken things on hover
 // $panel-function-factor: 10%;

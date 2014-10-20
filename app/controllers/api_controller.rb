@@ -16,7 +16,7 @@ class ApiController < ApplicationController
     user = User.find_by(login: params[:user])
     repositories = user.repositories.where(display: true)
     repositories = Repository.construct_return_data(api_client, repositories)
-    render json: repositories.to_json
+    render json: { status: true, data: repositories }.to_json
   end
 
   private
