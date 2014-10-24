@@ -154,4 +154,8 @@ class Repository < ActiveRecord::Base
   	end
   end
 
+	def has_screenshot?
+		Screenshot.exists?(repository_id: self.id)
+	end
+
 end

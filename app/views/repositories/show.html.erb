@@ -60,7 +60,7 @@
 			</div>
 
 			<div class="panel">
-			<% if @repository.screenshots.any? %>
+			<% if @repository.has_screenshot? %>
 				<%= image_tag(@repository.screenshots.first.image.url) %>
 			<% else %>
 				<%= form_for @screenshot do |f| %>
