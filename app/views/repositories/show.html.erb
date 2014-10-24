@@ -11,9 +11,9 @@
 				<div class="panel-header">
 					<h3><i class="fa fa-user"></i>
 						<% if @user.name != nil then %>
-						<%= @user.name.split(" ").first %> <span class="last-name"><%= @user.name.split(" ").last %></span>
+							<%= @user.name.split(" ").first %> <span class="last-name"><%= @user.name.split(" ").last %></span>
 						<% else %>
-						<%= params[:user_name] %>
+							<%= params[:user_name] %>
 						<% end %>
 					</h3>
 				</div>
@@ -48,7 +48,16 @@
 <div class="row">
 	<div class="large-12 columns">
 
-			<h2 class="show"><%= @repository.name %><small>Last Updated: <%= @repository.update_date %></small></h2>
+		<div class="title-bar">
+			<h2 class="show left"><%= @repository.name %><small>Last Updated: <%= @repository.update_date %></small></h2>
+			<div class="switch tiny display-switch right">
+				<span>Display Status:</span>
+			  <input id="exampleRadioSwitch1" type="checkbox" <%= 'checked' if @repository.display %>>
+			  <label for="exampleRadioSwitch1"></label>
+			</div>
+			<div class="clear"></div>
+		</div>
+				
 
 			<div class="panel">
 			<%= form_tag("/#{params[:user_name]}/#{params[:repo_id]}", method: 'put') do %>

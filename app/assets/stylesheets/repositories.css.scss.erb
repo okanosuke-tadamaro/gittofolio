@@ -86,12 +86,27 @@ $panel-padding: 20px;
 	.fork-icon { float: right; }
 }
 
-.show {
-	small {
-		margin-left: 20px;
-		color: gray;
-		font-size: 18px;
-		text-transform: uppercase;
+.title-bar {
+	height: 50px;
+	overflow: hidden;
+	.show {
+		padding: 0;
+		margin: 0;
+		small {
+			margin-left: 20px;
+			color: gray;
+			font-size: 18px;
+			text-transform: uppercase;
+		}
+	}
+	.display-switch {
+		position: relative;
+		top: 15px;
+		span {
+			position: relative;
+			top: -7px;
+			right: 5px;
+		}
 	}
 }
 
@@ -100,23 +115,10 @@ $panel-padding: 20px;
 	height: 80px;
 }
 
-
 .user-header {
 	text-transform: uppercase;
 	font-weight: bold;
 	color: #000;
 	margin-bottom: 40px;
 }
-.settings-header {
-	text-transform: uppercase;
-	font-weight: bold;
-	color: #333;
-}
 
-.add-website-block {  }
-
-th { text-transform: uppercase; }
-.display-switch {
-  height: 24px;
-	overflow: hidden;
-}
