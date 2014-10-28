@@ -46,34 +46,43 @@ function drawRadarChart(radarData) {
 	new Chart(radarArea).Radar(radarChart, {scaleOverlay: false});
 }
 
-//AJAX REQUEST TO GET SINGLE REPO INFO
-function getSingleRepo() {
-	var userName = window.location.pathname.split('/')[1];
+function toggleCheckBox() {
+	var repoId = $(e.target).attr('for');
+	var box = $('#' + repoId);
+	if (!box.prop('checked')) {
+		updateDisplayStatus(repoId, true);
+	} else {
+		updateDisplayStatus(repoId, false);
+	}
+}
+
+function updateDisplayStatus(id, status) {
 	$.ajax({
-		url: '/detail',
+		url: '/update_display/' + id,
 		method: 'get',
 		dataType: 'json',
-		data: {username: userName, repo_name: $(this).find('h3').text()}
+		data: { display: status }
 	}).done(function(data) {
-		var radarArea = $('<canvas>').attr('id', 'radar-chart').attr('height', '522');
-		$('.repo-list-container').toggle('slide', 500);
-		$('.content-panel').append(radarArea);
-		drawRadarChart(data.radar_data);
+		
 	});
 }
 
 $(document).ready(function() {
 
 	var currentPage = $('#page');
+
 	if (currentPage.data('controller') === 'repositories' && currentPage.data('action') === 'index') {
 		drawLineChart();
 		drawBarChart();
-
 		$('.item div').hover(function() {
 			$(this).animate({'transform': 'rotate(15deg)'}, 200);
 		}, function() {
 			$(this).animate({'transform': 'rotate(0deg)'}, 100);
 		});
+	}
+
+	if (currentPage.data('controller') === 'repositories' && currentPage.data('action') === 'show') {
+		$('.switch').on('click', 'label', toggleCheckBox);
 	}
 
 });

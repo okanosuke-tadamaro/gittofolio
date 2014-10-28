@@ -52,8 +52,8 @@
 			<h2 class="show left"><%= @repository.name %><small>Last Updated: <%= @repository.update_date %></small></h2>
 			<div class="switch tiny display-switch right">
 				<span>Display Status:</span>
-			  <input id="exampleRadioSwitch1" type="checkbox" <%= 'checked' if @repository.display %>>
-			  <label for="exampleRadioSwitch1"></label>
+			  <input id="<%= @repository.id %>" type="checkbox" <%= 'checked' if @repository.display %>>
+			  <label for="<%= @repository.id %>"></label>
 			</div>
 			<div class="clear"></div>
 		</div>
