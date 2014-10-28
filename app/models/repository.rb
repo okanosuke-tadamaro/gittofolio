@@ -55,7 +55,6 @@ class Repository < ActiveRecord::Base
           repository = user.repositories.find_by(name: repo[:name])
 					Repository.update( repository.id, {
 						name: 				repo[:name],
-						description: 	repo[:description],
 						language: 		repo[:language],
 						homepage: 		repo[:homepage],
 						fork: 				repo[:fork],
@@ -149,7 +148,8 @@ class Repository < ActiveRecord::Base
   			name: repo.name.humanize,
   			description: repo.description,
   			image_url: repo.screenshots.any? ? repo.screenshots.first.image.url : 'http://placehold.it/1280x800',
-  			updated_on: repo.update_date
+  			updated_on: repo.update_date,
+  			github_url: "http://github.com/#{repo.user.login}/#{repo.name}"
   		}
   	end
   end
