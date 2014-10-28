@@ -45,20 +45,25 @@
 </div>
 
 <div class="content-panel">
-<div class="row">
-	<div class="large-12 columns">
 
-		<div class="title-bar">
-			<h2 class="show left"><%= @repository.name %><small>Last Updated: <%= @repository.update_date %></small></h2>
-			<div class="switch tiny display-switch right">
-				<span>Display Status:</span>
-			  <input id="<%= @repository.id %>" type="checkbox" <%= 'checked' if @repository.display %>>
-			  <label for="<%= @repository.id %>"></label>
+	<div class="title-bg">
+		<div class="row">
+			<div class="large-12 columns">
+				<div class="title-bar">
+					<h2 class="show left"><%= @repository.name %><small>Last Updated: <%= @repository.update_date %></small></h2>
+					<div class="switch tiny display-switch right">
+						<span>Display Status:</span>
+					  <input id="<%= @repository.id %>" type="checkbox" <%= 'checked' if @repository.display %>>
+					  <label for="<%= @repository.id %>"></label>
+					</div>
+					<div class="clear"></div>
+				</div>
 			</div>
-			<div class="clear"></div>
 		</div>
-				
+	</div>
 
+	<div class="row">
+		<div class="large-12 columns">
 			<div class="panel">
 			<%= form_tag("/#{params[:user_name]}/#{params[:repo_id]}", method: 'put') do %>
 				<h5>Description</h5>
@@ -81,7 +86,7 @@
 				<% end %>
 			<% end %>
 			</div>
-			
+		</div>
 	</div>
-</div>
+
 </div>
