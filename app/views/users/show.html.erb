@@ -7,12 +7,12 @@
 			<h5><%= @user.name || @user.login %></h5>
 			<p>Projects: <%= @user.repositories.size %></p>
 			<p>Active Projects: <%= @user.active_repositories.size %></p>
-			<p>Registered Websites: <%= @user.websites.size %></p>
+			<p>Registered Websites: <%= @user.registered_websites.size %></p>
 		</div>
 	</div>
 	<div class="medium-9 columns">
 		<div class="block">
-			<h4>Registered Websites</h4>
+			<h4>Registered Websites<small> ( <a href="#" data-reveal-id="newWebsite">Add new website</a> )</small></h4>
 			<table width="100%">
 				<tbody>
 					<tr>
@@ -20,7 +20,7 @@
 						<th width="20%">Calls</th>
 						<th width="20%">Last Request</th>
 					</tr>
-					<% if @user.websites.any? %>
+					<% if @user.registered_websites.any? %>
 						<% @user.websites.each do |site| %>
 							<tr>
 								<td><%= site.url %></td>
@@ -62,4 +62,21 @@
 			</table>
 		</div>
 	</div>
+</div>
+
+<div id="newWebsite" class="reveal-modal" data-reveal>
+	<h4>Register a new website</h4>
+	<%= form_for @website do |f| %>
+		<div class="row collapse">
+			<div class="small-2 columns">
+				<span class="prefix">http://</span>
+			</div>
+			<div class="small-8 columns">
+				<%= f.text_field :url %>
+			</div>
+			<div class="small-2 columns">
+				<%= f.submit 'Add', class: 'button postfix' %>
+			</div>
+		</div>
+	<% end %>
 </div>

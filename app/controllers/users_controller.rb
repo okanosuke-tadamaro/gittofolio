@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def show
   	@user = current_user
+  	@website = @user.websites.new
   end
 
 end

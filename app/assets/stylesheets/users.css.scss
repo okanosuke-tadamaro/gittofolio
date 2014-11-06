@@ -1,4 +1,8 @@
 .block {
+	h4 {
+		border-bottom: solid 1px lightgray;
+		margin-bottom: 10px;
+	}
 	table {
 		tbody {
 			tr {
@@ -7,5 +11,12 @@
 				}
 			}
 		}
+	}
+}
+
+.reveal-modal {
+	h4 {
+		border-bottom: solid 1px lightgray;
+		margin-bottom: 10px;
 	}
 }

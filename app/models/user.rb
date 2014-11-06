@@ -43,4 +43,8 @@ class User < ActiveRecord::Base
 		self.repositories.where(display: false)
 	end
 
+	def registered_websites
+		self.websites.where.not(id: nil)
+	end
+
 end
