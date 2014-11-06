@@ -35,4 +35,12 @@ class User < ActiveRecord::Base
     )
 	end
 
+	def active_repositories
+		self.repositories.where(display: true)
+	end
+
+	def inactive_repositories
+		self.repositories.where(display: false)
+	end
+
 end

@@ -6,7 +6,7 @@ Gittofolio::Application.routes.draw do
   get '/api/activity' => 'api#activity'
   get '/api/repositories' => 'api#repositories'
 
-  get '/:user_name' => "repositories#index"
+  get '/:user_name' => "users#show"
   get '/update_display/:repo_id' => 'repositories#update_display'
   get '/:user_name/:repo_id' => "repositories#show"
   put '/:user_name/:repo_id' => 'repositories#update'

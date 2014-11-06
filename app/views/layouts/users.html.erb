@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= content_for?(:title) ? yield(:title) : "gittofolio" %></title>
   <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:700|Roboto+Condensed' rel='stylesheet' type='text/css'>
-  <link href="//fonts.googleapis.com/css?family=Source+Sans Pro:200italic,200,300italic,300,400italic,400,600italic,600,700italic,700,900italic,900" rel="stylesheet" type="text/css">
-  <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "/assets/modernizr.js" %>
@@ -17,6 +15,7 @@
   <div id="page" data-controller="<%= params[:controller] %>" data-action="<%= params[:action] %>">
     <%= yield %>
   </div>
+
   <%= javascript_include_tag "application" %>
 </body>
 </html>
