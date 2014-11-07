@@ -21,11 +21,11 @@
 						<th width="20%">Last Request</th>
 					</tr>
 					<% if @user.registered_websites.any? %>
-						<% @user.websites.each do |site| %>
+						<% @user.registered_websites.each do |site| %>
 							<tr>
 								<td><%= site.url %></td>
 								<td><%= site.call_count || '0' %></td>
-								<td><%= site.updated_at.to_s %></td>
+								<td><%= site.updated_at.to_date %></td>
 							</tr>
 						<% end %>
 					<% else %>
