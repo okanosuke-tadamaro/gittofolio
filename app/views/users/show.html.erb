@@ -30,7 +30,7 @@
 						<% end %>
 					<% else %>
 						<tr>
-							<td colspan="3">You have no registered websites</td>
+							<td colspan="3" class="text-center">You have no registered websites</td>
 						</tr>
 					<% end %>
 				</tbody>
@@ -48,7 +48,7 @@
 						<th class="text-center">Updated</th>
 					</tr>
 					<% if @user.repositories.any? %>
-						<% @user.repositories.each do |repo| %>
+						<% @repos.each do |repo| %>
 							<tr>
 								<td class="<%= 'highlight' if repo.display %>"><%= repo.name %></td>
 								<td class="text-center"><%= repo.display ? 'Yes' : 'No' %></td>

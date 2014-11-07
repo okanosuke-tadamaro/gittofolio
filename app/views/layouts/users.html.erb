@@ -30,8 +30,12 @@
           <li class="has-dropdown">
             <a href="#"><%= current_user ? current_user.login : 'Guest' %></a>
             <ul class="dropdown">
-              <li><a href="#">First link in dropdown</a></li>
-              <li class="active"><a href="#">Active link in dropdown</a></li>
+              <% if current_user %>
+                <li><%= link_to 'Dashboard', root_path %></li>
+                <li><%= link_to 'Sign out', '' %></li>
+              <% else %>
+                <li></li>
+              <% end %>
             </ul>
           </li>
         </ul>

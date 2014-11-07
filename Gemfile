@@ -16,11 +16,11 @@ gem 'jbuilder', '~> 1.2'
 gem 'paperclip', '~> 4.2'
 gem 'fastimage'
 gem 'aws-sdk'
-gem 'thin'
 
 group :production do
 	gem 'rails_12factor'
 	gem 'pg'
+	gem 'unicorn'
 end
 
 group :development, :test do
