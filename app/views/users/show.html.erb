@@ -50,7 +50,7 @@
 					<% if @user.repositories.any? %>
 						<% @repos.each do |repo| %>
 							<tr>
-								<td class="<%= 'highlight' if repo.display %>"><%= repo.name %></td>
+								<td class="<%= 'highlight' if repo.display %>"><a href="#" data-reveal-id="repoModal_<%= repo.repo_id %>"><%= repo.name %></a></td>
 								<td class="text-center"><%= repo.display ? 'Yes' : 'No' %></td>
 								<td class="text-center"><%= repo.screenshots.any? ? 'Yes' : 'No' %></td>
 								<td class="text-center"><%= repo.description.present? ? 'Yes' : 'No' %></td>
@@ -63,6 +63,22 @@
 		</div>
 	</div>
 </div>
+
+<% @repos.each do |repo| %>
+<div id="repoModal_<%= repo.repo_id %>" class="reveal-modal" data-reveal>
+	<h4>Edit <%= repo.name %></h4>
+	<%= form_for repo do |f| %>
+		<%= f.label :description %>
+		<%= f.text_area :description %>
+		<%= f.fields_for :screenshots do |r| %>
+			<%= r.label 'Screenshot' %>
+			<%= r.file_field :image %>
+			<%= r.hidden_field :repository_id, :value => repo.id %>
+		<% end %>
+		<%= f.submit 'Update ' + repo.name, :class => 'button expand small' %>
+	<% end %>
+</div>
+<% end %>
 
 <div id="newWebsite" class="reveal-modal" data-reveal>
 	<h4>Register a new website</h4>

@@ -13,6 +13,7 @@ Gittofolio::Application.routes.draw do
   
   resources :screenshots, :only => [:create]
   resources :websites, :only => [:create]
+  resources :repositories, :only => [:update]
 
   get "welcome/index"
   get '/search' => 'welcome#user_search'

@@ -54,7 +54,7 @@ class RepositoriesController < ApplicationController
 	def update
 		@repository = Repository.find_by(repo_id: params[:repo_id])
 		@repository.update(repo_params)
-		redirect_to "/#{current_user.login}/#{@repository.repo_id}", :notice => "successfully updated description"
+		redirect_to "/#{current_user.login}", :notice => "successfully updated description"
 	end
 
 	def update_display
