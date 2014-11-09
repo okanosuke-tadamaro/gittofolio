@@ -2,6 +2,7 @@ class Repository < ActiveRecord::Base
 
 	belongs_to :user
 	has_many :screenshots
+	has_many :skills
 
 	def self.check_cache(username)
 		Repository.exists?(owner: username)

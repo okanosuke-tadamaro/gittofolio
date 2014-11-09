@@ -73,7 +73,7 @@
 			<%= f.label :name %>
 			<%= f.text_field :name, disabled: true %>
 			<%= f.label :description %>
-			<%= f.text_area :description %>
+			<%= f.text_area :description, class: 'modal-description' %>
 		</div>
 		<div class="medium-6 columns">
 			<%= f.fields_for :screenshots do |r| %>
