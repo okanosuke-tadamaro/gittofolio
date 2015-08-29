@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014184722) do
+ActiveRecord::Schema.define(version: 20141109033942) do
 
   create_table "repositories", force: true do |t|
     t.integer  "repo_id"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 20141014184722) do
   end
 
   add_index "screenshots", ["repository_id"], name: "index_screenshots_on_repository_id"
+
+  create_table "skills", force: true do |t|
+    t.string   "name"
+    t.integer  "repository_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "skills", ["repository_id"], name: "index_skills_on_repository_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

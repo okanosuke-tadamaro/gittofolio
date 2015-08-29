@@ -6,13 +6,13 @@
   <title><%= content_for?(:title) ? yield(:title) : "gittofolio" %></title>
   <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:700|Roboto+Condensed' rel='stylesheet' type='text/css'>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "/assets/modernizr.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <div class="fixed">
+  <div class="fixed contain-to-grid">
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
         <li class="name">

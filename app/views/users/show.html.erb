@@ -12,7 +12,7 @@
 	</div>
 	<div class="medium-9 columns">
 		<div class="block">
-			<h4>Registered Websites<small> ( <a href="#" data-reveal-id="newWebsite">Add new website</a> )</small></h4>
+			<h4>Registered Websites<small> ( <a href="#" data-reveal-id="newWebsite">Add website</a> )</small></h4>
 			<table width="100%">
 				<tbody>
 					<tr>
@@ -57,6 +57,10 @@
 								<td class="text-center"><%= repo.update_date %></td>
 							</tr>
 						<% end %>
+					<% else %>
+						<tr>
+							<td colspan="5" class="text-center">Looks like you don't have any projects yet.</td>
+						</tr>
 					<% end %>
 				</tbody>
 			</table>
